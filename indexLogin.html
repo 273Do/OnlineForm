@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="京都橘大学生限定の掲示板サイトです．" />
+    <link rel="stylesheet" href="styleLogin.css" />
+    <link rel="stylesheet" href="./lib/sweetalert2Dark.css" />
+    <link rel="icon" href="./img/favicon.ico" />
+    <title>京都橘大学生掲示板</title>
+  </head>
+  <body>
+    <section id="headerSpace"></section>
+    <header>
+      <div class="mainTitle">
+        <img src="./img/OnlineForm.png" alt="siteImg" id="logo" />
+        <h1>京都橘大学生 掲示板</h1>
+      </div>
+      <nav>
+        <ul>
+          <div class="navIcon">
+            <li>Usage</li>
+            <ion-icon size="small" name="help-circle-outline"></ion-icon>
+          </div>
+          <div class="navIcon" id="infoIcon" onclick="info0()">
+            <li>Info</li>
+            <ion-icon size="small" name="information-circle-outline"></ion-icon>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <div id="page0">
+      <section id="loginTitle">
+        <ul id="loginDetail">
+          <h2>Welcome</h2>
+          <li id="subTitle">Please use university email.</li>
+        </ul>
+      </section>
+      <section id="loginArea">
+        <div id="mainLoginArea">
+          <!-- ログイン -->
+          <div id="login">
+            <div id="registerIcon">
+              <ion-icon name="person-add-outline" aria-hidden="true"></ion-icon>
+              <!-- <ion-button aria-label="Favorite">
+                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+              </ion-button> -->
+            </div>
+            <div class="viewOnly">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <h2>Login</h2>
+            <form action="#">
+              <div class="input-box">
+                <span class="icon">
+                  <ion-icon name="mail"></ion-icon>
+                </span>
+                <input class="email" type="email" required />
+                <label>Email</label>
+              </div>
+              <div class="input-box">
+                <span class="icon">
+                  <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" required />
+                <label>Password</label>
+              </div>
+              <button type="submit" class="btn">Login</button>
+            </form>
+          </div>
+          <!-- 登録 -->
+          <div id="register">
+            <div id="loginIcon">
+              <ion-icon name="log-in-outline"></ion-icon>
+            </div>
+            <div class="viewOnly">
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <h2>Registration</h2>
+            <form action="#">
+              <div class="input-box">
+                <span class="icon">
+                  <ion-icon name="person"></ion-icon>
+                </span>
+                <input class="username" type="text" required />
+                <label>Username</label>
+              </div>
+              <div class="input-box">
+                <span class="icon">
+                  <ion-icon name="mail"></ion-icon>
+                </span>
+                <input class="email" type="email" required />
+                <label>Email</label>
+              </div>
+              <div class="input-box">
+                <span class="icon">
+                  <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" required />
+                <label>Password</label>
+              </div>
+              <button type="submit" class="btn">Register</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <p>&copy;2023 A, B</p>
+      <div id="footerIcon">
+        <ion-button aria-label="Favorite" id="themeIcon">
+          <ion-icon name="color-palette-outline"></ion-icon>
+        </ion-button>
+        <ion-button aria-label="Favorite" id="developerIcon">
+          <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </div>
+    </footer>
+
+    <!-- Page2からPage1に遷移する時のアイコン -->
+    <!-- <ion-icon name="chatbox-outline"></ion-icon> -->
+    <!-- スレッド作成アイコン -->
+    <!-- <ion-icon name="create-outline"></ion-icon> -->
+    <!-- スレッド検索アイコン -->
+    <!-- <ion-icon name="search-outline"></ion-icon> -->
+    <!-- タグ検索アイコン -->
+    <!-- <ion-icon name="pricetags-outline"></ion-icon> -->
+
+    <script src="scriptLogin.js"></script>
+    <script src="scriptCommon.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="./lib/sweetalert2.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      ScrollReveal({
+        reset: false,
+        duration: 1800,
+      });
+      ScrollReveal().reveal("#loginTitle", {
+        delay: 200,
+        origin: "left",
+        distance: "40px",
+        afterReveal: function () {
+          // ScrollReveal().destroy();
+          console.log("アニメーション終了");
+        },
+      });
+      ScrollReveal().reveal("#mainLoginArea", {
+        delay: 200,
+        origin: "right",
+        distance: "40px",
+      });
+      ScrollReveal().reveal(
+        " header nav ul ,header > div,footer p,#footerIcon",
+        {
+          delay: 250,
+          origin: "bottom",
+          distance: "10px",
+          interval: 150,
+        }
+      );
+    </script>
+  </body>
+</html>

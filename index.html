@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="京都橘大学生限定の掲示板サイトです．" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./lib/sweetalert2Dark.css" />
+    <link rel="icon" href="./img/favicon.ico" />
+    <title>京都橘大学生掲示板</title>
+  </head>
+
+  <body>
+    <section id="headerSpace"></section>
+    <header>
+      <div class="mainTitle">
+        <img src="./img/OnlineForm.png" alt="siteImg" id="logo" />
+        <h1>京都橘大学生 掲示板</h1>
+      </div>
+      <nav>
+        <ul>
+          <div class="navIcon">
+            <li>Usage</li>
+            <ion-icon size="small" name="help-circle-outline"></ion-icon>
+          </div>
+          <div class="navIcon" id="infoIcon" onclick="info0()">
+            <li>Info</li>
+            <ion-icon size="small" name="information-circle-outline"></ion-icon>
+          </div>
+          <div class="navIcon" id="Account">
+            <li>Account</li>
+            <ion-icon size="small" name="person-outline"></ion-icon>
+          </div>
+          <div class="navIcon" id="Logout">
+            <li>Logout</li>
+            <ion-icon size="small" name="log-out-outline"></ion-icon>
+          </div>
+        </ul>
+      </nav>
+    </header>
+    <div id="mainPage">
+      <div id="page1">
+        <section id="threadTitle">
+          <ul id="threadDetail">
+            <li id="title"></li>
+            <!--スレッドタイトル-->
+          </ul>
+          <ul>
+            <li id="maker"></li>
+            <!--スレッド制作者-->
+            <li id="facultyEtc"></li>
+            <!--スレッド制作者 所属学部・学科・回生-->
+            <li id="dateAndTimeEtc"></li>
+            <!--スレッド作成日時-->
+          </ul>
+        </section>
+        <section id="chatArea">
+          <div id="mainChatSpace">
+            <div id="page2Icon">
+              <ion-icon name="apps-outline"></ion-icon>
+            </div>
+
+            <ul id="chat">
+              <!--
+            <div class="commentDetail">
+              <li class="chatDetail1">1:testUser1(学部/学科/n回生)</li>
+              <li class="chatDetail2">yyyy/mmm/dd time</li>
+              <li class="comment">testComment</li>
+            </div>-->
+            </ul>
+            <form class="messageArea">
+              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <button type="submit" class="btn">
+                <ion-icon id="sndIcon" name="send-outline"></ion-icon>
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+
+      <div id="page2">
+        <section id="searchOptions">
+          <div id="createThread">
+            <h2>スレッド作成</h2>
+            <form class="messageArea">
+              <ion-button
+                aria-label="Favorite"
+                class="optionIcon"
+                onclick="option()"
+              >
+                <ion-icon name="options-outline"></ion-icon>
+              </ion-button>
+              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <button type="submit" class="btn">
+                <ion-icon
+                  class="page2SubmitIcon"
+                  name="create-outline"
+                ></ion-icon>
+              </button>
+            </form>
+          </div>
+
+          <div id="searchByTitle">
+            <h2>スレッド検索</h2>
+            <form class="messageArea">
+              <ion-button
+                aria-label="Favorite"
+                class="optionIcon"
+                onclick="option()"
+              >
+                <ion-icon name="options-outline"></ion-icon>
+              </ion-button>
+              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <ion-button
+                aria-label="Favorite"
+                id="searchOptionIcon"
+                onclick="searchFilter()"
+              >
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+              </ion-button>
+            </form>
+          </div>
+
+          <div id="searchByTag">
+            <h2>タグ検索</h2>
+            <form class="messageArea">
+              <ion-button
+                aria-label="Favorite"
+                class="optionIcon"
+                onclick="option()"
+              >
+                <ion-icon name="options-outline"></ion-icon>
+              </ion-button>
+              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <ion-icon name="pricetags-outline"></ion-icon>
+            </form>
+          </div>
+        </section>
+        <section id="searchResult">
+          <div id="mainResultSpace">
+            <div id="page1Icon">
+              <ion-icon name="chatbox-outline"></ion-icon>
+            </div>
+            <ul id="result">
+              <div class="commentDetail" onclick="info0()">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+              <div class="commentDetail">
+                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
+                <li class="chatDetail2">yyyy/mmm/dd time</li>
+                <li class="comment">1testComment</li>
+              </div>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy;2023 A, B</p>
+      <div id="footerIcon">
+        <ion-button aria-label="Favorite" id="themeIcon">
+          <ion-icon name="color-palette-outline"></ion-icon>
+        </ion-button>
+        <ion-button aria-label="Favorite" id="developerIcon">
+          <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+        </ion-button>
+      </div>
+    </footer>
+
+    <!-- page2からpage1に遷移する時のアイコン -->
+    <!-- <ion-icon name="chatbox-outline"></ion-icon> -->
+    <!-- スレッド作成アイコン -->
+    <!-- <ion-icon name="create-outline"></ion-icon> -->
+    <!-- スレッド検索アイコン -->
+    <!-- <ion-icon name="search-outline"></ion-icon> -->
+    <!-- タグ検索アイコン -->
+    <!-- <ion-icon name="pricetags-outline"></ion-icon> -->
+
+    <script src="script.js"></script>
+    <script src="scriptCommon.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script src="./lib/sweetalert2.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      ScrollReveal({ reset: true, duration: 1800 });
+      ScrollReveal().reveal("#threadTitle", {
+        delay: 200,
+        origin: "left",
+        distance: "40px",
+        afterReveal: function () {
+          // ScrollReveal().destroy();
+          console.log("アニメーション終了");
+        },
+      });
+      ScrollReveal().reveal("#mainChatSpace", {
+        delay: 200,
+        origin: "right",
+        distance: "40px",
+      });
+      ScrollReveal().reveal("header nav ul,header > div,footer p,#footerIcon", {
+        delay: 200,
+        origin: "bottom",
+        distance: "10px",
+        interval: 150,
+      });
+    </script>
+  </body>
+</html>
+<!-- サイトの背景画像(black)の著作権は不明．
+壁紙サイトからダウンロードしたものである．
+footerにでもこれらを載せる．
+pink:
+https://www.wallpaperflare.com/artistic-mountain-minimalist-moon-nature-night-wallpaper-gktsx
+MatrixRetoastet
+https://www.reddit.com/user/MatrixRetoastet/
+
+green:
+https://www.deviantart.com/ncoll36/art/Landscape-1-Forest-Mountain-661412777
+ncoll36
+https://www.deviantart.com/ncoll36
+
+black:
+https://www.wallpaperflare.com/artistic-mountain-minimalist-moon-nature-night-wallpaper-gktsx -->
