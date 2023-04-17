@@ -20,7 +20,6 @@ document.querySelector(".viewOnly").addEventListener("click", function () {
 let UniEmail = "a601021355@st.tachibana-u.ac.jp"; //大学メールアドレスの例
 function studentIDAndGradeAnalysis(UniEmail) {
   const str = UniEmail.replace("@st.tachibana-u.ac.jp", "");
-  //test
   var yearCount = new Date().getFullYear() - 2000;
   const faculty = {
     1020: "文学部/日本語日本文学科",
@@ -49,3 +48,4 @@ function studentIDAndGradeAnalysis(UniEmail) {
   );
 }
 studentIDAndGradeAnalysis(UniEmail);
+//これでわかりやすいね(test記述)
