@@ -111,6 +111,7 @@ document.querySelector("#developerIcon").addEventListener("click", function () {
     title: "DeveloperToolLogin",
     html: '<input type="email" class="swal2-input" placeholder="Email" name="selectTime" id="dtEmail"><input type="password" class="swal2-input" placeholder="Password" name="selectTime" id="dtPassword">',
     toast: "true",
+    width: "400px", //ここの値で幅が変わる．
     showCancelButton: true,
     preConfirm: () => {
       var dtEmail = document.getElementById("dtEmail").value;
