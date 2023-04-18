@@ -48,4 +48,3 @@ function studentIDAndGradeAnalysis(UniEmail) {
   );
 }
 studentIDAndGradeAnalysis(UniEmail);
-//これでわかりやすいね(test記述)
