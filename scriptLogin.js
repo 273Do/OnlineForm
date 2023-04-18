@@ -2,20 +2,24 @@
 window.onload = function () {
   document.querySelector("#register").style.display = "none";
 };
+
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
   document.querySelector("#login").style.display = "none";
   document.querySelector("#register").style.display = "block";
 });
+
 //loginボタンが押された時の動作
 document.querySelector("#loginIcon").addEventListener("click", function () {
   document.querySelector("#register").style.display = "none";
   document.querySelector("#login").style.display = "block";
 });
+
 //viewOnlyボタンが押された時の動作
 document.querySelector(".viewOnly").addEventListener("click", function () {
   console.log("test");
 });
+
 //学籍番号から，学部学科と学年を解析する関数
 let UniEmail = "a601021355@st.tachibana-u.ac.jp"; //大学メールアドレスの例
 function studentIDAndGradeAnalysis(UniEmail) {
@@ -41,7 +45,9 @@ function studentIDAndGradeAnalysis(UniEmail) {
     9040: "健康科学部/救急救命学科",
     9050: "健康科学部/臨床検査学科",
   };
-  const grade = { 0: "一回生", 1: "二回生", 2: "3回生", 3: "4回生" };
+
+  //コメントデータベースに合わせて、数字のみを出力するように変更．　2023.04.19(水) 有田海斗
+  const grade = { 0: "1", 1: "2", 2: "3", 3: "4" };
   console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
   console.log(
     faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)]

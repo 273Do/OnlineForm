@@ -4,6 +4,7 @@ window.onload = function () {
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#page2").style.display = "none";
 };
+
 //スプレッドシートよりスレッド取得   2023/04/14(金) 有田海斗
 const thread_data =
   "https://script.googleusercontent.com/macros/echo?user_content_key=hTx8wFRUE2qbwLxB3AjsDbwmZvWeb3JJ6muTht4ZJkC7zR8sv2WS_sfx5HEh9JJfr29tyQKtTNsKOQoZq7zSktyhPheX0ZqLm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnFDzYkW62iTnTRRvq0UzqL2aLRzsznG29RR9oj8S5JsSMqOTsh77sGIbR0Rc_Gyuwi_zrFfFSS6M_iG8pnzLkT2Exmw6L_5gdNz9Jw9Md8uu&lib=MALqgNzxnUdruCf9dwMX1EjnQ_tEriaYy";
@@ -72,6 +73,7 @@ document.querySelector("#Account").addEventListener("click", function () {
     showCancelButton: true,
   });
 });
+
 //Logoutボタンが押された時の動作
 document.querySelector("#Logout").addEventListener("click", function () {
   Swal.fire({
@@ -86,16 +88,19 @@ document.querySelector("#Logout").addEventListener("click", function () {
     }
   });
 });
+
 //page2Iconボタンが押された時の動作
 document.querySelector("#page2Icon").addEventListener("click", function () {
   document.querySelector("#page1").style.display = "none";
   document.querySelector("#page2").style.display = "block";
 });
+
 //page1Iconボタンが押された時の動作
 document.querySelector("#page1Icon").addEventListener("click", function () {
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
 });
+
 //optionボタンが押された時の動作
 function option() {
   const inputOptions = {
@@ -127,6 +132,7 @@ function option() {
     },
   });
 }
+
 //フィルター検索の設定項目  2023/04/15(土) 山口慶大
 function searchFilter() {
   const inputOptions = {
@@ -151,6 +157,7 @@ function searchFilter() {
     },
   });
 }
+
 var searchWord; //検索ワード
 //日付検索
 function searchDays() {
@@ -174,6 +181,7 @@ function searchDays() {
     },
   });
 }
+
 //時間検索
 function searchTimes() {
   Swal.fire({
@@ -193,7 +201,9 @@ function searchTimes() {
     },
   });
 }
+
 //学年検索
+//データベースの形式に合わせて、漢数字→数字へ変更．　2023.04.19(水)　有田海斗
 function searchGrades() {
   Swal.fire({
     title: "Please select a grade.",
@@ -203,10 +213,10 @@ function searchGrades() {
     denyButtonText: "back",
     toast: true,
     inputOptions: {
-      一回生: "一回生",
-      二回生: "二回生",
-      三回生: "三回生",
-      四回生: "四回生",
+      一回生: "1回生",
+      二回生: "2回生",
+      三回生: "3回生",
+      四回生: "4回生",
     },
     inputPlaceholder: "SelectGrade▼",
     stopKeydownPropagation: false,
