@@ -234,12 +234,13 @@ header ul li {
   opacity: 0.5;
 }
 
+/* ちらつき防止のため、overflowをscroll→clipへ変更． 2023.04.18(火) 有田海斗 */
 #chat {
   /* background-color: #202023; */
   margin-top: -2px;
   margin-left: -15px;
   height: calc(98% - 95px);
-  overflow: scroll;
+  overflow: clip;
   overflow-x: hidden;
 }
 ::-webkit-scrollbar {
