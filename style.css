@@ -234,14 +234,14 @@ header ul li {
   opacity: 0.5;
 }
 
-/* overflowをscroll→hiddenに変更．　2023.04.18(火) 有田海斗 */
+/* overflowをscrollへ戻し、overflow-xをhidden→visibleへ変更．　2023.04.18(火) 有田海斗 */
 #chat {
   /* background-color: #202023; */
   margin-top: -2px;
   margin-left: -15px;
   height: calc(98% - 95px);
-  overflow: hidden;
-  overflow-x: hidden;
+  overflow: scroll;
+  overflow-x: visible;
 }
 ::-webkit-scrollbar {
   width: 3px;
