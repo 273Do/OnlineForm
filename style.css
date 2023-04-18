@@ -234,13 +234,14 @@ header ul li {
   opacity: 0.5;
 }
 
+/* overflowをscrollへ戻し、overflow-xをhidden→visibleへ変更．　2023.04.18(火) 有田海斗 */
 #chat {
   /* background-color: #202023; */
   margin-top: -2px;
   margin-left: -15px;
   height: calc(98% - 95px);
   overflow: scroll;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 ::-webkit-scrollbar {
   width: 3px;
@@ -262,10 +263,9 @@ header ul li {
   cursor: default;
 }
 
-/* .commentのword-wrapをbreak-word→normalへ変更．　2023.04.18(火) 有田海斗*/
 .comment {
   width: calc(100% - 5px);
-  word-wrap: normal;
+  word-wrap: break-word;
   margin-top: 20px;
 }
 
