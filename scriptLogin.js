@@ -4,6 +4,7 @@ window.onload = function () {
 };
 
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
+// 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
 const thread_data =
   "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
 fetch(thread_data)
@@ -11,14 +12,16 @@ fetch(thread_data)
   .then((data) => {
     alert(data[0]["Mail"]);
     alert(data[0]["Password"]);
+    studentIDAndGradeAnalysis(data[0]["Mail"]);
   })
   .catch((error) => {
     showError("ユーザー情報の取得に失敗しました.", error);
   });
 
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
-function usercheck(){
-  alert(document.getElementById(email))
+// スペルチェック   2023.04.19(水)　山口慶大
+function userCheck() {
+  alert(document.getElementById(email));
   alert("動作確認");
 }
 
@@ -40,7 +43,6 @@ document.querySelector(".viewOnly").addEventListener("click", function () {
 });
 
 //学籍番号から，学部学科と学年を解析する関数
-let UniEmail = "a601021355@st.tachibana-u.ac.jp"; //大学メールアドレスの例
 function studentIDAndGradeAnalysis(UniEmail) {
   const str = UniEmail.replace("@st.tachibana-u.ac.jp", "");
   var yearCount = new Date().getFullYear() - 2000;
@@ -72,4 +74,3 @@ function studentIDAndGradeAnalysis(UniEmail) {
     faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)]
   );
 }
-studentIDAndGradeAnalysis(UniEmail);
