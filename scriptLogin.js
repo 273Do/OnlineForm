@@ -9,12 +9,11 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    var arr = JSON.parse(data);
-    alert(arr[0][0]);
+    alert(data[0][0]);
   })
-  .catch((error) => {
-    showError("タイトル取得に失敗しました.", error);
-  });
+  //.catch((error) => {
+    //showError("タイトル取得に失敗しました.", error);
+  //});
 
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
