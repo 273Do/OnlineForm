@@ -89,21 +89,27 @@ document.querySelector("#themeIcon").addEventListener("click", function () {
     inputOptions: inputOptions,
     inputValidator: (value) => {
       if (!value) return "テーマを選択してください．";
-      else if (value == 0)
-        document.body.style.backgroundImage = 'url("./img/backgroundPink.jpg")';
-      else if (value == 1)
-        document.body.style.backgroundImage =
-          'url("./img/backgroundGreen.jpg")';
-      else if (value == 2)
-        document.body.style.backgroundImage =
-          'url("./img/backgroundBlack.jpg")';
-      else if (value == 3) {
-        if (PE == 0) PE = 1;
-        else PE = 0;
-      }
+      else BGImageAndPE(value, 0);
     },
   });
 });
+//背景画像変更，視差効果切り替えを行う関数　　更新：2023/04/19(水) 山口慶大
+function BGImageAndPE(value, Flg) {
+  //Flgの値で背景画像変更，視差効果のスイッチを行っている．
+  if (Flg == 0) {
+    if (value == 0)
+      document.body.style.backgroundImage = 'url("./img/backgroundPink.jpg")';
+    else if (value == 1)
+      document.body.style.backgroundImage = 'url("./img/backgroundGreen.jpg")';
+    else if (value == 2)
+      document.body.style.backgroundImage = 'url("./img/backgroundBlack.jpg")';
+    else if (value == 3) {
+      if (PE == 0) PE = 1;
+      else PE = 0;
+    }
+    //ここにでデータベースに値を書き換えるコードを書く．
+  } else if (Flg == 1) PE = value;
+}
 //developerボタンが押された時の動作  更新：2023/04/15(土) 山口慶大
 document.querySelector("#developerIcon").addEventListener("click", function () {
   Swal.fire({

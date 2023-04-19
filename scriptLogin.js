@@ -12,6 +12,8 @@ fetch(thread_data)
   .then((data) => {
     alert(data[0]["Mail"]);
     alert(data[0]["Password"]);
+    BGImageAndPE(data[0]["BackGround"], 0);
+    BGImageAndPE(data[0]["ParallaxEffect"], 1);
     studentIDAndGradeAnalysis(data[0]["Mail"]);
   })
   .catch((error) => {
