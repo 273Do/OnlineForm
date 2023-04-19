@@ -16,6 +16,12 @@ fetch(thread_data)
     showError("ユーザー情報の取得に失敗しました.", error);
   });
 
+//ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
+function usercheck(){
+  alert(document.getElementById(email))
+  alert("動作確認");
+}
+
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
   document.querySelector("#login").style.display = "none";
