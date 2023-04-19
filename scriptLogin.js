@@ -9,7 +9,7 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    alert(data.Value);
+    alert(data[1][1]);
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
