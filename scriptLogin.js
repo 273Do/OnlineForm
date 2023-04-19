@@ -9,10 +9,11 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    alert(data[1][1]);
+    alert(data[0]["Mail"]);
+    alert(data[0]["Password"]);
   })
   .catch((error) => {
-    showError("タイトル取得に失敗しました.", error);
+    showError("ユーザー情報の取得に失敗しました.", error);
   });
 
 //registerボタンが押された時の動作
