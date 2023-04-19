@@ -3,6 +3,19 @@ window.onload = function () {
   document.querySelector("#register").style.display = "none";
 };
 
+//スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
+const thread_data =
+  "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+fetch(thread_data)
+  .then((response) => response.json())
+  .then((data) => {
+    var arr = JSON.parse(data);
+    alert(arr[0][0]);
+  })
+  .catch((error) => {
+    showError("タイトル取得に失敗しました.", error);
+  });
+
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
   document.querySelector("#login").style.display = "none";
