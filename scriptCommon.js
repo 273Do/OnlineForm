@@ -12,6 +12,8 @@ document.addEventListener("mousemove", (event) => {
   background.style.marginTop = y + "px";
 });
 //Usageボタンが押されたときの動作  更新：2023/04/21(金) 山口慶大
+//Usageボタンを押すと，ツールチップのOn，Offを切り替えることができる．このツールチップは<span>タグで実装されており，cssで操作すると，それに囲まれている要素にも影響が出てしまう．文字を空白{""}にすることにより回避している．
+//このコードは，いくらツールチップを追加削除しても書き換える必要はない．
 var UsageFlg = -1;
 var tooltipTmp = [];
 var tooltipCounter = 0;
