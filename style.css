@@ -431,6 +431,83 @@ footer p {
   opacity: 0.5;
 }
 
+/* ツールチップ表示 */
+/* 赤色にする予定 */
+[tooltip] {
+  position: relative;
+}
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: 0.7em;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: "";
+  border: 0px solid transparent;
+}
+[tooltip]::after {
+  content: attr(tooltip);
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  min-width: 3em;
+  max-width: 210em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 1ch 1.5ch;
+  border-radius: 20px;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+  background: #202023;
+  color: #f4ede4;
+  z-index: 1000;
+  font-family: "Objective-Thin", "NotoSansJP-Thin";
+  /* font-family: "NotoSansJP-Medium"; */
+}
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+[tooltip=""]::before,
+[tooltip=""]::after {
+  display: none !important;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #202023;
+}
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 7px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, 0.5em);
+}
+@keyframes tooltips-vert {
+  to {
+    opacity: 0.9;
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes tooltips-horz {
+  to {
+    opacity: 0.9;
+    transform: translate(0, -50%);
+  }
+}
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
 /* (スマホ対応)レスポンシブ */
 @media screen and (max-width: 720px) {
   header {
