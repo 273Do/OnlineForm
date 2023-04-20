@@ -15,7 +15,7 @@ document.addEventListener("mousemove", (event) => {
 var UsageFlg = -1;
 var tooltipTmp = [];
 var tooltipCounter = 0;
-document.querySelector("#UsageIcon").addEventListener("click", function () {
+function usageIcon() {
   const spanElements = document.querySelectorAll("span[tooltip]");
   UsageFlg *= -1;
   UsageFlg == 1
@@ -32,8 +32,8 @@ document.querySelector("#UsageIcon").addEventListener("click", function () {
           .querySelector("span[tooltip='']")
           .setAttribute("tooltip", tooltipTmp[tooltipCounter - 1]);
       });
-});
-
+}
+usageIcon();
 //infoボタン
 function info0() {
   Swal.fire({
