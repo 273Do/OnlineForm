@@ -44,7 +44,7 @@ document.querySelector(".viewOnly").addEventListener("click", function () {
 });
 
 //学籍番号から，学部学科と学年を解析する関数
-//処理の未完成しており、出力はまだ．　2023.04.20(木) 有田海斗
+//処理のみ完成しており、出力はまだ．　2023.04.20(木) 有田海斗
 function studentIDAndGradeAnalysis(UniEmail) {
   const str = UniEmail.replace("@st.tachibana-u.ac.jp", "");
   var yearCount = new Date().getFullYear() - 2000;
