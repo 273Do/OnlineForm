@@ -24,18 +24,24 @@
               <li>Usage</li>
               <ion-icon size="small" name="help-circle-outline"></ion-icon></div
           ></span>
-          <div class="navIcon" id="infoIcon" onclick="info0()">
-            <li>Info</li>
-            <ion-icon size="small" name="information-circle-outline"></ion-icon>
-          </div>
-          <div class="navIcon" id="Account">
-            <li>Account</li>
-            <ion-icon size="small" name="person-outline"></ion-icon>
-          </div>
-          <div class="navIcon" id="Logout">
-            <li>Logout</li>
-            <ion-icon size="small" name="log-out-outline"></ion-icon>
-          </div>
+          <span tooltip="インフォ" flow="down">
+            <div class="navIcon" id="infoIcon" onclick="info0()">
+              <li>Info</li>
+              <ion-icon
+                size="small"
+                name="information-circle-outline"
+              ></ion-icon></div
+          ></span>
+          <span tooltip="アカウント情報" flow="down">
+            <div class="navIcon" id="Account">
+              <li>Account</li>
+              <ion-icon size="small" name="person-outline"></ion-icon></div
+          ></span>
+          <span tooltip="ログアウト" flow="down">
+            <div class="navIcon" id="Logout">
+              <li>Logout</li>
+              <ion-icon size="small" name="log-out-outline"></ion-icon></div
+          ></span>
         </ul>
       </nav>
     </header>
@@ -203,16 +209,20 @@
         </section>
       </div>
     </div>
-
     <footer>
       <p>&copy;2023 A, B</p>
       <div id="footerIcon">
-        <ion-button aria-label="Favorite" id="themeIcon">
-          <ion-icon name="color-palette-outline"></ion-icon>
-        </ion-button>
-        <ion-button aria-label="Favorite" id="developerIcon">
-          <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
-        </ion-button>
+        <span tooltip="テーマ" flow="up">
+          <ion-button aria-label="Favorite" id="themeIcon">
+            <ion-icon name="color-palette-outline"></ion-icon> </ion-button
+        ></span>
+        <span tooltip="開発用" flow="up">
+          <ion-button aria-label="Favorite" id="developerIcon">
+            <ion-icon
+              name="hammer-outline"
+              aria-hidden="true"
+            ></ion-icon> </ion-button
+        ></span>
       </div>
     </footer>
 

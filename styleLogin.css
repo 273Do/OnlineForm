@@ -113,6 +113,7 @@ header {
   padding: 0 4%;
   padding: 0px 20px 0px 20px;
   height: 45px;
+  z-index: 10;
   font-family: "NotoSansJP-Medium";
 }
 
@@ -380,14 +381,13 @@ footer p {
 }
 
 /* ツールチップ表示 */
-/* 赤色にする予定 */
 [tooltip] {
   position: relative;
 }
 [tooltip]::before,
 [tooltip]::after {
   text-transform: none;
-  font-size: 0.7em;
+  font-size: 1em;
   line-height: 1;
   user-select: none;
   pointer-events: none;
@@ -401,7 +401,8 @@ footer p {
 }
 [tooltip]::after {
   content: attr(tooltip);
-  font-family: Helvetica, sans-serif;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   text-align: center;
   min-width: 3em;
   max-width: 210em;
@@ -411,7 +412,7 @@ footer p {
   padding: 1ch 1.5ch;
   border-radius: 20px;
   box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
-  background: #202023;
+  border: 1px solid #f4ede4;
   color: #f4ede4;
   z-index: 1000;
   font-family: "Objective-Thin", "NotoSansJP-Thin";
@@ -425,32 +426,60 @@ footer p {
 [tooltip=""]::after {
   display: none !important;
 }
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 20px);
+  margin-left: -7px;
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -0.5em);
+}
+
+/* FLOW: DOWN */
 [tooltip]:not([flow])::after,
 [tooltip][flow^="down"]::before {
   top: 100%;
   border-top-width: 0;
-  border-bottom-color: #202023;
+  border-bottom-color: #333;
 }
 [tooltip][flow^="down"]::after {
-  top: calc(100% + 7px);
+  top: calc(100% + 6px);
+  margin-left: 10px;
 }
 [tooltip][flow^="down"]::before,
 [tooltip][flow^="down"]::after {
   left: 50%;
   transform: translate(-50%, 0.5em);
 }
+
 @keyframes tooltips-vert {
   to {
-    opacity: 0.9;
+    opacity: 1;
     transform: translate(-50%, 0);
   }
 }
 @keyframes tooltips-horz {
   to {
-    opacity: 0.9;
+    opacity: 1;
     transform: translate(0, -50%);
   }
 }
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
 [tooltip][flow^="down"]:hover::before,
 [tooltip][flow^="down"]:hover::after {
   animation: tooltips-vert 300ms ease-out forwards;

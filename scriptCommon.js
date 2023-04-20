@@ -11,12 +11,29 @@ document.addEventListener("mousemove", (event) => {
   background.style.marginLeft = x + "px";
   background.style.marginTop = y + "px";
 });
-//Usageボタンが押されたときの動作  更新：2023/04/20(木) 山口慶大
+//Usageボタンが押されたときの動作  更新：2023/04/21(金) 山口慶大
 var UsageFlg = -1;
+var tooltipTmp = [];
+var tooltipCounter = 0;
 document.querySelector("#UsageIcon").addEventListener("click", function () {
+  const spanElements = document.querySelectorAll("span[tooltip]");
   UsageFlg *= -1;
-  UsageFlg == 1 ? console.log("block") : console.log("none");
+  UsageFlg == 1
+    ? spanElements.forEach((element) => {
+        const tooltipValue = element.getAttribute("tooltip");
+        document
+          .querySelector("span[tooltip=" + tooltipValue + "]")
+          .setAttribute("tooltip", "");
+        tooltipTmp.push(tooltipValue);
+      })
+    : spanElements.forEach((element) => {
+        tooltipCounter++;
+        document
+          .querySelector("span[tooltip='']")
+          .setAttribute("tooltip", tooltipTmp[tooltipCounter - 1]);
+      });
 });
+
 //infoボタン
 function info0() {
   Swal.fire({
