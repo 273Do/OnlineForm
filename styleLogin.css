@@ -54,6 +54,7 @@ body {
   overflow-y: hidden;
   background: url("./img/backgroundBlack.jpg"), url("./img/backgroundGreen.jpg"),
     url("./img/backgroundPink.jpg"), no-repeat;
+  /* black(既定値)のみの読み込みの方が軽いが，初回，変更する際に，一瞬ちらつきが起きる． */
   background-size: cover;
   background-position: center;
 }

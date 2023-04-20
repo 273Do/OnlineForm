@@ -12,7 +12,8 @@ fetch(thread_data)
   .then((data) => {
     alert(data[0]["Mail"]);
     alert(data[0]["Password"]);
-    BGImageAndPE(data[0]["BackGround"], 0);
+    // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
+    BGImageAndPE(data[0]["BackGround"], 0); //いずれはここ消します．
     BGImageAndPE(data[0]["ParallaxEffect"], 1);
     studentIDAndGradeAnalysis(data[0]["Mail"]);
   })

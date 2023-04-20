@@ -11,16 +11,13 @@ document.addEventListener("mousemove", (event) => {
   background.style.marginLeft = x + "px";
   background.style.marginTop = y + "px";
 });
+//Usageボタンが押されたときの動作  更新：2023/04/20(木) 山口慶大
+var UsageFlg = -1;
+document.querySelector("#UsageIcon").addEventListener("click", function () {
+  UsageFlg *= -1;
+  UsageFlg == 1 ? console.log("block") : console.log("none");
+});
 //infoボタン
-// document.querySelector("#infoIcon").addEventListener("click", function () {
-//   Swal.fire({
-//     // icon: "info",
-//     title: "BGSource",
-//     backdrop: "none",
-//     confirmButtonColor: "#f4ede400",
-//     html: BGDisc,
-//   });
-// });
 function info0() {
   Swal.fire({
     icon: "info",
@@ -111,6 +108,7 @@ function BGImageAndPE(value, Flg) {
   } else if (Flg == 1) PE = value;
 }
 //developerボタンが押された時の動作  更新：2023/04/15(土) 山口慶大
+//管理者がログインしている場合のみ，押せるようにし，それ以外のユーザーが押すとエラーが出るようにする，フラグで管理．
 document.querySelector("#developerIcon").addEventListener("click", function () {
   Swal.fire({
     icon: "warning",
@@ -139,4 +137,3 @@ function showError(value, error) {
     text: error,
   });
 }
-// テスト
