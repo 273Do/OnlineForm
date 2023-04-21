@@ -5,39 +5,41 @@ window.onload = function () {
 
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
 // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
+let userData = [];
 const user_data = "https://script.googleusercontent.com/macros/";
 fetch(user_data)
 .then((response) => response.json())
 .then((data) => {
+    userData = data;
+})
+.catch((error) => {
+showError("ユーザー情報の取得に失敗しました.", error);
+});
 
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 //email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
 //passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
 function loginBtn() {
-alert("クリック");
-const email = document.getElementsByClassName('email');
-const password = document.getElementsByClassName('password');
-
-//データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-for(var i = 0; i < data.length-1; i++){
-  alert(email[0].value == data[i]["Mail"]);
-  if(email[0].value == data[i]["Mail"]){
-    alert(password[0].value == data[i]["Password"]);
-    if(password[0].value == data[i]["Password"]){
-        alert("IDとPASSが一致しました．")
-          //ログイン処理記述
-          // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-        BGImageAndPE(data[i]["BackGround"], 0); //いずれはここ消します．
-        BGImageAndPE(data[i]["ParallaxEffect"], 1);
-        studentIDAndGradeAnalysis(data[i]["Mail"]);
+  alert("クリック");
+  const email = document.getElementsByClassName('email');
+  const password = document.getElementsByClassName('password');
+  
+  //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
+  for(var i = 0; i < data.length-1; i++){
+    alert(email[0].value == data[i]["Mail"]);
+    if(email[0].value == data[i]["Mail"]){
+      alert(password[0].value == data[i]["Password"]);
+      if(password[0].value == data[i]["Password"]){
+          alert("IDとPASSが一致しました．")
+            //ログイン処理記述
+            // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
+          BGImageAndPE(data[i]["BackGround"], 0); //いずれはここ消します．
+          BGImageAndPE(data[i]["ParallaxEffect"], 1);
+          studentIDAndGradeAnalysis(data[i]["Mail"]);
+        }
       }
     }
   }
-}
-})
-.catch((error) => {
-showError("ユーザー情報の取得に失敗しました.", error);
-});
 
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
