@@ -55,14 +55,19 @@ function registerBtn(){
   const password = document.getElementsByClassName('password');
   const username = document.getElementsByClassName('username');
 
-  var data = { Mail: email[1].value, Password: password[1].value, Name: username.value, Undergraduate: "未完成", Department: "未完成", Grade: "未完成", BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
-  var url = "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
-  }).then((response) => {
-    console.log(response.status); // レスポンスのステータスを表示
-  });
+  if(email[1].value == "" || password[1].value == "" || username[0].value == ""){
+    showError("入力されていない項目があります．")
+  }else{
+    var data = { Mail: email[1].value, Password: password[1].value, Name: username[0].value, Undergraduate: "未完成", Department: "未完成", Grade: "未完成", BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
+    var url = "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((response) => {
+      console.log(response.status); // レスポンスのステータスを表示
+    });
+    alert("登録しました．\nログインしてください．")
+  }
 }
 
 //registerボタンが押された時の動作
