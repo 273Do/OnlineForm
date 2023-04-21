@@ -3,6 +3,14 @@ window.onload = function () {
   document.querySelector("#register").style.display = "none";
 };
 
+//ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
+//email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
+//passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
+function loginBtn() {
+  const email = document.getElementsByClassName('email');
+  const password = document.getElementsByClassName('password');
+
+  
   //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
   // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
   const user_data =
@@ -17,12 +25,7 @@ window.onload = function () {
     showError("ユーザー情報の取得に失敗しました.", error);
   });
 
-//ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
-//email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
-//passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
-function loginBtn() {
-  const email = document.getElementsByClassName('email');
-  const password = document.getElementsByClassName('password');
+
   alert(email[0].value);
   alert(password[0].value);
 
