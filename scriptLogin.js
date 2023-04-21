@@ -58,6 +58,9 @@ function registerBtn(){
 
   if(email[1].value == "" || password[1].value == "" || username[0].value == ""){
     //入力不備がある場合は実行しない．
+  }else if(email[1].value.indexOf('@st.tachibana-u.ac.jp') !== -1){
+    //大学のメールアドレスかチェック．
+    showError("大学から付与されたメールアドレスを入力してください.");
   }else{
     let Analysis = studentIDAndGradeAnalysis(email[1].value)
     var data = { Mail: email[1].value, Password: password[1].value, Name: username[0].value, Undergraduate: Analysis[0], Department: Analysis[1], Grade: Analysis[2], BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
