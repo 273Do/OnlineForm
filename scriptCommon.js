@@ -18,7 +18,7 @@ var UsageFlg = -1;
 var tooltipTmp = [];
 var tooltipCounter = 0;
 function usageIcon() {
-  const spanElements = document.querySelectorAll("span");
+  const spanElements = document.querySelectorAll("span[tooltip]");
   UsageFlg *= -1;
   UsageFlg == 1
     ? spanElements.forEach((element) => {
