@@ -158,3 +158,13 @@ function showError(value, error) {
     text: error,
   });
 }
+
+//メッセージ表示
+function showMessage(value) {
+  Swal.fire({
+    icon: "success",
+    title: value,
+    toast: "true",
+    text: message,
+  });
+}

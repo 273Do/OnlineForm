@@ -29,7 +29,7 @@ function loginBtn() {
       flag = false;
       if(email[0].value == userData[i]["Mail"]){
         if(password[0].value == userData[i]["Password"]){
-            alert("IDとPASSが一致しました．")
+          showMessage("IDとPASSが一致しました．")
               //ログイン処理記述
               break;
 
@@ -59,14 +59,15 @@ function registerBtn(){
   if(email[1].value == "" || password[1].value == "" || username[0].value == ""){
     //入力不備がある場合は実行しない．
   }else{
-    var data = { Mail: email[1].value, Password: password[1].value, Name: username[0].value, Undergraduate: "未完成", Department: "未完成", Grade: "未完成", BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
+    let Analysis = studentIDAndGradeAnalysis(email[1].value)
+    var data = { Mail: email[1].value, Password: password[1].value, Name: username[0].value, Undergraduate: Analysis[0], Department: Analysis[1], Grade: Analysis[2], BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
     var url = "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
     }).then((response) => {
     });
-    alert("登録しました．\nログインしてください．")
+    showMessage("登録しました．\nログインしてください．")
 
     //ログインタブへ切り替え
     document.querySelector("#register").style.display = "none";
@@ -103,7 +104,7 @@ document.querySelector(".viewOnly").addEventListener("click", function () {
 });
 
 //学籍番号から，学部学科と学年を解析する関数
-//処理のみ完成しており、出力はまだ．　2023.04.20(木) 有田海斗
+//学部・学科・学年の3つをリターンするように改良．　2023.04.21(金)　有田海斗
 function studentIDAndGradeAnalysis(UniEmail) {
   const str = UniEmail.replace("@st.tachibana-u.ac.jp", "");
   var yearCount = new Date().getFullYear() - 2000;
@@ -128,10 +129,14 @@ function studentIDAndGradeAnalysis(UniEmail) {
     9050: "健康科学部/臨床検査学科",
   };
 
-  //コメントデータベースに合わせて、数字のみを出力するように変更．　2023.04.19(水) 有田海斗
   const grade = { 0: "1", 1: "2", 2: "3", 3: "4" };
   console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
   console.log(
     faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)]
   );
+
+  var Undergraduate = str.substr(0, str.indexOf('/'));
+  var Department = str.substr(str.indexOf('/') + 1);
+
+  return [Undergraduate, Department, grade];
 }
