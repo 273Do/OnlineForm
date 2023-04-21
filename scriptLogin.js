@@ -19,25 +19,30 @@ showError("ユーザー情報の取得に失敗しました.", error);
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 //email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
 //passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
+let flag = false;
 function loginBtn() {
   const email = document.getElementsByClassName('email');
   const password = document.getElementsByClassName('password');
   
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
   for(var i = 0; i < user_data.length; i++){
-    alert("ループ開始");
-    alert(email[0].value == user_data[i]["Mail"]);
     if(email[0].value == user_data[i]["Mail"]){
-      alert(password[0].value == user_data[i]["Password"]);
       if(password[0].value == user_data[i]["Password"]){
           alert("IDとPASSが一致しました．")
             //ログイン処理記述
+            break;
+            
             // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
           BGImageAndPE(user_data[i]["BackGround"], 0); //いずれはここ消します．
           BGImageAndPE(user_data[i]["ParallaxEffect"], 1);
           studentIDAndGradeAnalysis(user_data[i]["Mail"]);
         }
+      }else{
+        flag = true;
       }
+    }
+    if(flag == true){
+      showError("メールアドレスかパスワードが間違っています．")
     }
   }
 
