@@ -18,7 +18,7 @@ var UsageFlg = -1;
 var tooltipTmp = [];
 var tooltipCounter = 0;
 function usageIcon() {
-  const spanElements = document.querySelectorAll("span[tooltip]");
+  const spanElements = document.querySelectorAll("span");
   UsageFlg *= -1;
   UsageFlg == 1
     ? spanElements.forEach((element) => {
@@ -29,7 +29,7 @@ function usageIcon() {
         tooltipTmp.push(tooltipValue);
         document.querySelector("#Usage").style.color = "#f4ede4";
       })
-    : spanElements.forEach((element) => {
+    : spanElements.forEach(() => {
         tooltipCounter++;
         document
           .querySelector("span[tooltip='']")
