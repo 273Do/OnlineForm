@@ -130,13 +130,13 @@ function studentIDAndGradeAnalysis(UniEmail) {
   };
 
   const grade = { 0: "1", 1: "2", 2: "3", 3: "4" };
-  console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
-  console.log(
-    faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)]
-  );
+  //console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
+  //console.log(
+    //faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)]
+  //);
 
-  var Undergraduate = str.substr(0, str.indexOf('/'));
-  var Department = str.substr(str.indexOf('/') + 1);
+  var Undergraduate = faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)].substr(0, str.indexOf('/'));
+  var Department = faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)].substr(str.indexOf('/') + 1);
 
-  return [Undergraduate, Department, grade];
+  return [Undergraduate, Department, grade[yearCount - (str.charAt(5) + str.charAt(6))]];
 }
