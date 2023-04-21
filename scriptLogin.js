@@ -24,7 +24,6 @@ fetch(thread_data)
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 function userCheck() {
   alert(document.getElementById(email));
-  alert("動作確認");
 }
 
 //registerボタンが押された時の動作
