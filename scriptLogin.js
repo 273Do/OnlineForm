@@ -5,9 +5,9 @@ window.onload = function () {
 
   //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
   // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
-  const thread_data =
+  const user_data =
   "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
-  fetch(thread_data)
+  fetch(user_data)
   .then((response) => response.json())
   .then((data) => {
     //alert(data[0]["Mail"]);
@@ -23,8 +23,8 @@ window.onload = function () {
 function loginbtn() {
   const email = document.getElementsByClassName('email');
   const password = document.getElementsByClassName('password');
-  //alert(email[0].value);
-  //alert(password[0].value);
+  alert(email[0].value);
+  alert(password[0].value);
 
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
   for(var i = 0; i <= data.length; i++){
@@ -37,8 +37,6 @@ function loginbtn() {
           BGImageAndPE(data[i]["ParallaxEffect"], 1);
           studentIDAndGradeAnalysis(data[i]["Mail"]);
       }
-    }else{
-      showError("メールアドレスかパスワードが間違っています．");
     }
   }
 }
