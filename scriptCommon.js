@@ -165,6 +165,5 @@ function showMessage(value) {
     icon: "success",
     title: value,
     toast: "true",
-    text: message,
   });
 }

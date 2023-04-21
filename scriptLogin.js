@@ -134,9 +134,13 @@ function studentIDAndGradeAnalysis(UniEmail) {
   //console.log(
     var Number = faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)];
   //);
+  showMessage(Number);
 
   var Undergraduate = Number.substr(0, str.indexOf('/'));
   var Department = Number.substr(str.indexOf('/') + 1);
+
+  showMessage(Undergraduate);
+  showMessage(Department);
 
   return [Undergraduate, Department, grade[yearCount - (str.charAt(5) + str.charAt(6))]];
 }
