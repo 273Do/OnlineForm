@@ -16,36 +16,37 @@ fetch(user_data)
 showError("ユーザー情報の取得に失敗しました.", error);
 });
 
-//ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
-//email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
-//passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
+//データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
 let flag = false;
 function loginBtn() {
   const email = document.getElementsByClassName('email');
   const password = document.getElementsByClassName('password');
 
-  //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-  for(var i = 0; i < userData.length; i++){
-    flag = false;
-    if(email[0].value == userData[i]["Mail"]){
-      if(password[0].value == userData[i]["Password"]){
-          alert("IDとPASSが一致しました．")
-            //ログイン処理記述
-            break;
+  if(email[0].value == "" || password[0].value == ""){
+    //入力不備がある場合は実行しない．
+  }else{
+    for(var i = 0; i < userData.length; i++){
+      flag = false;
+      if(email[0].value == userData[i]["Mail"]){
+        if(password[0].value == userData[i]["Password"]){
+            alert("IDとPASSが一致しました．")
+              //ログイン処理記述
+              break;
 
             // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-          BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
-          BGImageAndPE(userData[i]["ParallaxEffect"], 1);
-          studentIDAndGradeAnalysis(userData[i]["Mail"]);
+            BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
+            BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+            studentIDAndGradeAnalysis(userData[i]["Mail"]);
+          }else{
+            flag = true;
+          }
         }else{
           flag = true;
         }
-      }else{
-        flag = true;
       }
-    }
-    if(flag == true){
-      showError("メールアドレスかパスワードが間違っています．")
+      if(flag == true){
+        showError("メールアドレスかパスワードが間違っています．")
+      }
     }
   }
 
@@ -56,7 +57,7 @@ function registerBtn(){
   const username = document.getElementsByClassName('username');
 
   if(email[1].value == "" || password[1].value == "" || username[0].value == ""){
-    showError("入力されていない項目があります．")
+    //入力不備がある場合は実行しない．
   }else{
     var data = { Mail: email[1].value, Password: password[1].value, Name: username[0].value, Undergraduate: "未完成", Department: "未完成", Grade: "未完成", BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
     var url = "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
