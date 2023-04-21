@@ -24,18 +24,18 @@ function loginBtn() {
   const password = document.getElementsByClassName('password');
   
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-  for(var i = 0; i < data.length; i++){
+  for(var i = 0; i < user_data.length; i++){
     alert("ループ開始");
-    alert(email[0].value == data[i]["Mail"]);
-    if(email[0].value == data[i]["Mail"]){
-      alert(password[0].value == data[i]["Password"]);
-      if(password[0].value == data[i]["Password"]){
+    alert(email[0].value == user_data[i]["Mail"]);
+    if(email[0].value == user_data[i]["Mail"]){
+      alert(password[0].value == user_data[i]["Password"]);
+      if(password[0].value == user_data[i]["Password"]){
           alert("IDとPASSが一致しました．")
             //ログイン処理記述
             // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-          BGImageAndPE(data[i]["BackGround"], 0); //いずれはここ消します．
-          BGImageAndPE(data[i]["ParallaxEffect"], 1);
-          studentIDAndGradeAnalysis(data[i]["Mail"]);
+          BGImageAndPE(user_data[i]["BackGround"], 0); //いずれはここ消します．
+          BGImageAndPE(user_data[i]["ParallaxEffect"], 1);
+          studentIDAndGradeAnalysis(user_data[i]["Mail"]);
         }
       }
     }
