@@ -6,8 +6,10 @@ window.onload = function () {
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 //email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
 function loginbtn() {
-  const email = document.getElementsByClassName('email').Value;
-  alert(email);
+  const email = document.getElementsByClassName('email');
+  alert(email.value);
+  alert(email[0].value);
+  alert(email[1].value);
 }
 
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
