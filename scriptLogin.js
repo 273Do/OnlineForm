@@ -141,5 +141,9 @@ function studentIDAndGradeAnalysis(UniEmail) {
   var Undergraduate = Number.substr(0, Number.indexOf('/'));
   var Department = Number.substr(Number.indexOf('/') + 1);
 
-  return [Undergraduate, Department, grade[yearCount - (str.charAt(5) + str.charAt(6))]];
+  if(Undergraduate == "" || Department == ""){
+    showError("学籍番号に誤りがあります.");
+  }else{
+    return [Undergraduate, Department, grade[yearCount - (str.charAt(5) + str.charAt(6))]];
+  }  
 }
