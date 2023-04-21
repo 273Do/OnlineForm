@@ -65,9 +65,23 @@ function registerBtn(){
       method: "POST",
       body: JSON.stringify(data),
     }).then((response) => {
-      console.log(response.status); // レスポンスのステータスを表示
     });
     alert("登録しました．\nログインしてください．")
+
+    //ログインタブへ切り替え
+    document.querySelector("#register").style.display = "none";
+    document.querySelector("#login").style.display = "block";
+
+    //データベース再読み込み
+    const user_data = "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+    fetch(user_data)
+    .then((response) => response.json())
+    .then((data) => {
+        userData = data;
+    })
+    .catch((error) => {
+    showError("ユーザー情報の取得に失敗しました.", error);
+    });
   }
 }
 
