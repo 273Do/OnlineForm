@@ -23,7 +23,6 @@ let flag = false;
 function loginBtn() {
   const email = document.getElementsByClassName('email');
   const password = document.getElementsByClassName('password');
-  alert(userData.length);
 
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
   for(var i = 0; i < userData.length; i++){
@@ -38,6 +37,8 @@ function loginBtn() {
           BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
           BGImageAndPE(userData[i]["ParallaxEffect"], 1);
           studentIDAndGradeAnalysis(userData[i]["Mail"]);
+        }else{
+          flag = true;
         }
       }else{
         flag = true;
