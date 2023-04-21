@@ -19,9 +19,13 @@ function loginbtn() {
   fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-  //alert(data[0]["Mail"]);
-  //alert(data[0]["Password"]);
-
+    //alert(data[0]["Mail"]);
+    //alert(data[0]["Password"]);
+  })
+  .catch((error) => {
+  showError("ユーザー情報の取得に失敗しました.", error);
+});
+  
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
   for(let i = 0; i <= data.length; i++){
     if(email[0].value == data[i]["Mail"]){
@@ -37,11 +41,6 @@ function loginbtn() {
       showError("メールアドレスかパスワードが間違っています．");
     }
   }
-
-})
-.catch((error) => {
-  showError("ユーザー情報の取得に失敗しました.", error);
-});
 }
 
 //registerボタンが押された時の動作
