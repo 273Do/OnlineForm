@@ -5,8 +5,7 @@ window.onload = function () {
 
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
 // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
-const user_data =
-"https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+const user_data = "https://script.googleusercontent.com/macros/";
 fetch(user_data)
 .then((response) => response.json())
 .then((data) => {
@@ -15,29 +14,29 @@ fetch(user_data)
 //email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
 //passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
 function loginBtn() {
-  const email = document.getElementsByClassName('email');
-  const password = document.getElementsByClassName('password');
+alert("クリック");
+const email = document.getElementsByClassName('email');
+const password = document.getElementsByClassName('password');
 
-  //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-  for(var i = 0; i < data.length-1; i++){
-    alert(email[0].value == data[i]["Mail"]);
-    if(email[0].value == data[i]["Mail"]){
-      alert(password[0].value == data[i]["Password"]);
-      if(password[0].value == data[i]["Password"]){
-          alert("IDとPASSが一致しました．")
+//データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
+for(var i = 0; i < data.length-1; i++){
+  alert(email[0].value == data[i]["Mail"]);
+  if(email[0].value == data[i]["Mail"]){
+    alert(password[0].value == data[i]["Password"]);
+    if(password[0].value == data[i]["Password"]){
+        alert("IDとPASSが一致しました．")
           //ログイン処理記述
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-          BGImageAndPE(data[i]["BackGround"], 0); //いずれはここ消します．
-          BGImageAndPE(data[i]["ParallaxEffect"], 1);
-          studentIDAndGradeAnalysis(data[i]["Mail"]);
-        }
+        BGImageAndPE(data[i]["BackGround"], 0); //いずれはここ消します．
+        BGImageAndPE(data[i]["ParallaxEffect"], 1);
+        studentIDAndGradeAnalysis(data[i]["Mail"]);
       }
     }
+  }
 }
-
 })
 .catch((error) => {
-  showError("ユーザー情報の取得に失敗しました.", error);
+showError("ユーザー情報の取得に失敗しました.", error);
 });
 
 //registerボタンが押された時の動作
