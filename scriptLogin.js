@@ -5,8 +5,8 @@ window.onload = function () {
 
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 function loginbtn() {
-  alert('1' + email);
-  alert('2' + email.value);
+  const email = document.getElementsByClassName('email');
+  alert(email);
 }
 
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
