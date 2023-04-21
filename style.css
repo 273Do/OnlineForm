@@ -578,6 +578,15 @@ footer p {
     margin-top: -18px;
   } */
 
+  #threadTitle ul {
+    padding: 0;
+  }
+
+  #threadTitle ul li {
+    margin: 0 auto;
+    padding-right: 5px;
+  }
+
   #createThread,
   #searchByTitle,
   #searchByTag {
