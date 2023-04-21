@@ -6,86 +6,101 @@ window.onload = function () {
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
 // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
 let userData = [];
-const user_data = "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+const user_data =
+  "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
 fetch(user_data)
-.then((response) => response.json())
-.then((data) => {
+  .then((response) => response.json())
+  .then((data) => {
     userData = data;
-})
-.catch((error) => {
-showError("ユーザー情報の取得に失敗しました.", error);
-});
+  })
+  .catch((error) => {
+    showError("ユーザー情報の取得に失敗しました.", error);
+  });
 
 //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
 let flag = false;
 function loginBtn() {
-  const email = document.getElementsByClassName('email');
-  const password = document.getElementsByClassName('password');
+  const email = document.getElementsByClassName("email");
+  const password = document.getElementsByClassName("password");
 
-  if(email[0].value == "" || password[0].value == ""){
+  if (email[0].value == "" || password[0].value == "") {
     //入力不備がある場合は実行しない．
-  }else{
-    for(var i = 0; i < userData.length; i++){
+  } else {
+    for (var i = 0; i < userData.length; i++) {
       flag = false;
-      if(email[0].value == userData[i]["Mail"]){
-        if(password[0].value == userData[i]["Password"]){
-          showMessage("IDとPASSが一致しました．")
-              //ログイン処理記述
-              break;
+      if (email[0].value == userData[i]["Mail"]) {
+        if (password[0].value == userData[i]["Password"]) {
+          showMessage("IDとPASSが一致しました．");
+          //ログイン処理記述
+          break;
 
-            // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-            BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
-            BGImageAndPE(userData[i]["ParallaxEffect"], 1);
-            studentIDAndGradeAnalysis(userData[i]["Mail"]);
-          }else{
-            flag = true;
-          }
-        }else{
+          // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
+          BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
+          BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+          studentIDAndGradeAnalysis(userData[i]["Mail"]);
+        } else {
           flag = true;
         }
-      }
-      if(flag == true){
-        showError("メールアドレスかパスワードが間違っています．")
+      } else {
+        flag = true;
       }
     }
+    if (flag == true) {
+      showError("メールアドレスかパスワードが間違っています．");
+    }
   }
+}
 
 //新規登録 データベース書き込み処理．　2023.04.21(金)　有田海斗
-function registerBtn(){
-  const email = document.getElementsByClassName('email');
-  const password = document.getElementsByClassName('password');
-  const username = document.getElementsByClassName('username');
+function registerBtn() {
+  const email = document.getElementsByClassName("email");
+  const password = document.getElementsByClassName("password");
+  const username = document.getElementsByClassName("username");
 
-  if(email[1].value == "" || password[1].value == "" || username[0].value == ""){
+  if (
+    email[1].value == "" ||
+    password[1].value == "" ||
+    username[0].value == ""
+  ) {
     //入力不備がある場合は実行しない．
-  }else if(email[1].value.indexOf('@st.tachibana-u.ac.jp') == -1){
+  } else if (email[1].value.indexOf("@st.tachibana-u.ac.jp") == -1) {
     //大学のメールアドレスかチェック．
     showError("大学から付与されたメールアドレスを入力してください.");
-  }else{
-    let Analysis = studentIDAndGradeAnalysis(email[1].value)
-    var data = { Mail: email[1].value, Password: password[1].value, Name: username[0].value, Undergraduate: Analysis[0], Department: Analysis[1], Grade: Analysis[2], BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
-    var url = "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
+  } else {
+    let Analysis = studentIDAndGradeAnalysis(email[1].value);
+    var data = {
+      Mail: email[1].value,
+      Password: password[1].value,
+      Name: username[0].value,
+      Undergraduate: Analysis[0],
+      Department: Analysis[1],
+      Grade: Analysis[2],
+      BackGround: "0",
+      ParallaxEffect: "1",
+    }; // POSTするデータを定義
+    var url =
+      "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
-    }).then((response) => {
-    });
-    showMessage("登録しました．\nログインしてください．")
+    }).then((response) => {});
+    showMessage("登録しました．\nログインしてください．");
 
     //ログインタブへ切り替え
     document.querySelector("#register").style.display = "none";
     document.querySelector("#login").style.display = "block";
 
     //データベース再読み込み
-    const user_data = "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+    const user_data =
+      "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
     fetch(user_data)
-    .then((response) => response.json())
-    .then((data) => {
+      .then((response) => response.json())
+      .then((data) => {
         userData = data;
-    })
-    .catch((error) => {
-    showError("ユーザー情報の取得に失敗しました.", error);
-    });
+      })
+      .catch((error) => {
+        showError("ユーザー情報の取得に失敗しました.", error);
+      });
   }
 }
 
@@ -135,15 +150,20 @@ function studentIDAndGradeAnalysis(UniEmail) {
   const grade = { 0: "1", 1: "2", 2: "3", 3: "4" };
   //console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
   //console.log(
-    var Number = faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)];
+  var Number =
+    faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)];
   //);
 
-  var Undergraduate = Number.substr(0, Number.indexOf('/'));
-  var Department = Number.substr(Number.indexOf('/') + 1);
+  var Undergraduate = Number.substr(0, Number.indexOf("/"));
+  var Department = Number.substr(Number.indexOf("/") + 1);
 
-  if(Undergraduate == "" || Department == ""){
+  if (Undergraduate == "" || Department == "") {
     showError("学籍番号に誤りがあります.");
-  }else{
-    return [Undergraduate, Department, grade[yearCount - (str.charAt(5) + str.charAt(6))]];
-  }  
+  } else {
+    return [
+      Undergraduate,
+      Department,
+      grade[yearCount - (str.charAt(5) + str.charAt(6))],
+    ];
+  }
 }
