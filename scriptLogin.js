@@ -23,7 +23,8 @@ fetch(thread_data)
 
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 function userCheck() {
-  alert(document.getElementById('email').Value);
+  let email = document.getElementById('email');
+  alert(email.Value);
 }
 
 //registerボタンが押された時の動作
