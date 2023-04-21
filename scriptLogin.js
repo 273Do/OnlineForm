@@ -6,7 +6,7 @@ window.onload = function () {
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
 // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
 let userData = [];
-const user_data = "https://script.googleusercontent.com/macros/";
+const user_data = "https://script.googleusercontent.com/macros/echo?user_content_key=vD4KTWm0hZMDES7NDs6FQLN1dnRmwCDkAvHHVpZvypxKLGsiJItUSAmbzC-SdHtlsAU712aRxY5ux9cRG8o-0E3dWjs6p5SSm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJO1Zq-hrZvcxrF-tnDWrHMuiYc3EmL3SKsr9hTN9wY0oJzoUNvyf94KAzgpzZQDk8lncmXzKm90aPXk2M260fDTO0f0Y-wUpNz9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
 fetch(user_data)
 .then((response) => response.json())
 .then((data) => {
