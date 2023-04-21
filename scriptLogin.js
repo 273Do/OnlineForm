@@ -49,6 +49,22 @@ function loginBtn() {
     }
   }
 
+//新規登録 データベース書き込み処理．　2023.04.21(金)　有田海斗
+function registerBtn(){
+  const email = document.getElementsByClassName('email');
+  const password = document.getElementsByClassName('password');
+  const username = document.getElementsByClassName('username');
+
+  var data = { Mail: email[1].value, Password: password[1].value, Name: username.value, Undergraduate: "未完成", Department: "未完成", Grade: "未完成", BackGround: "0", ParallaxEffect: "1" }; // POSTするデータを定義
+  var url = "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  }).then((response) => {
+    console.log(response.status); // レスポンスのステータスを表示
+  });
+}
+
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
   document.querySelector("#login").style.display = "none";
