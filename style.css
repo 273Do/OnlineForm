@@ -645,7 +645,8 @@ footer p {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     height: calc(71vh - 25px);
-    margin-right: 10%;
+    /* margin-right: 10%; */
+    margin: 30px;
   }
 
   /* footer */
