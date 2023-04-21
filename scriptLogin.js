@@ -21,7 +21,7 @@ fetch(user_data)
 //email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
 //passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
 function loginBtn() {
-alert(DB);
+alert(DB.lengh);
 const email = document.getElementsByClassName('email');
 const password = document.getElementsByClassName('password');
 
@@ -42,6 +42,7 @@ for(var i = 0; i < DB.length-1; i++){
       alert(i);
     }
   }
+  alert("ループ終了");
 }
 
 //registerボタンが押された時の動作
