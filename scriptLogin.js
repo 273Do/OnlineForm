@@ -27,7 +27,7 @@ function loginBtn() {
   alert(password[0].value);
 
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-  for(var i = 0; i <= data.length; i++){
+  for(var i = 0; i <= data.length-1; i++){
     if(email[0].value == data[i]["Mail"]){
       if(password[0].value == data[i]["Password"]){
           alert("IDとPASSが一致しました．")
@@ -36,6 +36,8 @@ function loginBtn() {
           BGImageAndPE(data[i]["BackGround"], 0); //いずれはここ消します．
           BGImageAndPE(data[i]["ParallaxEffect"], 1);
           studentIDAndGradeAnalysis(data[i]["Mail"]);
+      }else{
+        alert(i);
       }
     }
   }
