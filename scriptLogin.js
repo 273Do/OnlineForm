@@ -3,6 +3,12 @@ window.onload = function () {
   document.querySelector("#register").style.display = "none";
 };
 
+//ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
+function loginbtn() {
+  let email = document.getElementById('email');
+  alert(email.Value);
+}
+
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
 // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
 const thread_data =
@@ -20,12 +26,6 @@ fetch(thread_data)
   .catch((error) => {
     showError("ユーザー情報の取得に失敗しました.", error);
   });
-
-//ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
-function userCheck() {
-  let email = document.getElementById('email');
-  alert(email.Value);
-}
 
 //registerボタンが押された時の動作
 document.querySelector("#registerIcon").addEventListener("click", function () {
