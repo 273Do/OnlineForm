@@ -58,7 +58,7 @@ function registerBtn(){
 
   if(email[1].value == "" || password[1].value == "" || username[0].value == ""){
     //入力不備がある場合は実行しない．
-  }else if(email[1].value.indexOf('@st.tachibana-u.ac.jp') !== -1){
+  }else if(email[1].value.indexOf('@st.tachibana-u.ac.jp') == -1){
     //大学のメールアドレスかチェック．
     showError("大学から付与されたメールアドレスを入力してください.");
   }else{
