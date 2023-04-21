@@ -45,15 +45,17 @@
         <div id="mainLoginArea">
           <!-- ログイン -->
           <div id="login">
-            <div id="registerIcon">
-              <ion-icon name="person-add-outline" aria-hidden="true"></ion-icon>
-              <!-- <ion-button aria-label="Favorite">
-                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-              </ion-button> -->
-            </div>
-            <div class="viewOnly">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
+            <span tooltip="新規登録" flow="down" style="margin-left: 5px">
+              <div id="registerIcon">
+                <ion-icon name="person-add-outline" aria-hidden="true">
+                </ion-icon>
+              </div>
+            </span>
+            <span tooltip="閲覧のみ" flow="down" style="margin-left: 40px">
+              <div class="viewOnly">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+            </span>
             <h2>Login</h2>
             <form action="#">
               <div class="input-box">
@@ -77,12 +79,16 @@
           </div>
           <!-- 登録 -->
           <div id="register">
-            <div id="loginIcon">
-              <ion-icon name="log-in-outline"></ion-icon>
-            </div>
-            <div class="viewOnly">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
+            <span tooltip="ログイン" flow="down" style="margin-left: 5px">
+              <div id="loginIcon">
+                <ion-icon name="log-in-outline"></ion-icon>
+              </div>
+            </span>
+            <span tooltip="閲覧のみ" flow="down" style="margin-left: 40px">
+              <div class="viewOnly">
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+            </span>
             <h2>Registration</h2>
             <form action="#">
               <div class="input-box">
@@ -107,7 +113,7 @@
                 <label>Password</label>
               </div>
               <button type="submit" class="btn" onclick="registerBtn()">
-              Register
+                Register
               </button>
             </form>
           </div>

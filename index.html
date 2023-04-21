@@ -63,9 +63,15 @@
         </section>
         <section id="chatArea">
           <div id="mainChatSpace">
-            <div id="page2Icon">
-              <ion-icon name="apps-outline"></ion-icon>
-            </div>
+            <span
+              tooltip="スレッド関連"
+              flow="down"
+              style="margin-left: calc(95% - 90px)"
+            >
+              <div id="page2Icon">
+                <ion-icon name="apps-outline"></ion-icon>
+              </div>
+            </span>
 
             <ul id="chat">
               <!--
@@ -76,9 +82,11 @@
             </div>-->
             </ul>
             <form class="messageArea">
-              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <textarea class="message-form" rows="1" cols="40"></textarea>
               <button type="submit" class="btn">
-                <ion-icon id="sndIcon" name="send-outline"></ion-icon>
+                <span tooltip="コメント送信" flow="up">
+                  <ion-icon id="sndIcon" name="send-outline"></ion-icon
+                ></span>
               </button>
             </form>
           </div>
@@ -90,54 +98,61 @@
           <div id="createThread">
             <h2>スレッド作成</h2>
             <form class="messageArea">
-              <ion-button
-                aria-label="Favorite"
-                class="optionIcon"
-                onclick="option()"
-              >
-                <ion-icon name="options-outline"></ion-icon>
-              </ion-button>
-              <textarea class="message-form" rows="1" cols="40"> </textarea>
-              <button type="submit" class="btn">
-                <ion-icon
-                  class="page2SubmitIcon"
-                  name="create-outline"
-                ></ion-icon>
-              </button>
+              <span tooltip="機能切替" flow="down">
+                <ion-button
+                  aria-label="Favorite"
+                  class="optionIcon"
+                  onclick="option()"
+                >
+                  <ion-icon name="options-outline"></ion-icon> </ion-button
+              ></span>
+              <textarea class="message-form" rows="1" cols="40"></textarea>
+              <span tooltip="作成" flow="down">
+                <button type="submit" class="btn">
+                  <ion-icon
+                    class="page2SubmitIcon"
+                    name="create-outline"
+                  ></ion-icon></button
+              ></span>
             </form>
           </div>
 
           <div id="searchByTitle">
             <h2>スレッド検索</h2>
             <form class="messageArea">
-              <ion-button
-                aria-label="Favorite"
-                class="optionIcon"
-                onclick="option()"
-              >
-                <ion-icon name="options-outline"></ion-icon>
-              </ion-button>
-              <textarea class="message-form" rows="1" cols="40"> </textarea>
-              <ion-button
-                aria-label="Favorite"
-                id="searchOptionIcon"
-                onclick="searchFilter()"
-              >
-                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-              </ion-button>
+              <span tooltip="機能切替" flow="down">
+                <ion-button
+                  aria-label="Favorite"
+                  class="optionIcon"
+                  onclick="option()"
+                >
+                  <ion-icon name="options-outline"></ion-icon> </ion-button
+              ></span>
+              <textarea class="message-form" rows="1" cols="40"></textarea
+              ><span tooltip="検索フィルター" flow="down">
+                <ion-button
+                  aria-label="Favorite"
+                  id="searchOptionIcon"
+                  onclick="searchFilter()"
+                >
+                  <ion-icon name="search-outline" aria-hidden="true">
+                  </ion-icon>
+                </ion-button>
+              </span>
             </form>
           </div>
 
           <div id="searchByTag">
             <h2>タグ検索</h2>
             <form class="messageArea">
-              <ion-button
-                aria-label="Favorite"
-                class="optionIcon"
-                onclick="option()"
-              >
-                <ion-icon name="options-outline"></ion-icon>
-              </ion-button>
+              <span tooltip="機能切替" flow="down">
+                <ion-button
+                  aria-label="Favorite"
+                  class="optionIcon"
+                  onclick="option()"
+                >
+                  <ion-icon name="options-outline"></ion-icon> </ion-button
+              ></span>
               <textarea class="message-form" rows="1" cols="40"> </textarea>
               <ion-icon name="pricetags-outline"></ion-icon>
             </form>
@@ -145,9 +160,15 @@
         </section>
         <section id="searchResult">
           <div id="mainResultSpace">
-            <div id="page1Icon">
-              <ion-icon name="chatbox-outline"></ion-icon>
-            </div>
+            <span
+              tooltip="スレッド関連"
+              flow="down"
+              style="margin-left: calc(95% - 90px)"
+            >
+              <div id="page1Icon">
+                <ion-icon name="chatbox-outline"></ion-icon>
+              </div>
+            </span>
             <ul id="result">
               <div class="commentDetail" onclick="info0()">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>

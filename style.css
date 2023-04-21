@@ -177,7 +177,7 @@ header ul li {
 #page1 section {
   float: left;
   width: calc(50% - 12px);
-  /* margin-left: 8px; */
+  margin-left: 8px;
   height: calc(100vh - 105px);
 }
 
@@ -199,6 +199,7 @@ header ul li {
   text-align: center;
   margin-right: 40px;
   margin-top: 35vh;
+  z-index: 1000;
 }
 
 #threadDetail li {
@@ -218,6 +219,7 @@ header ul li {
   /* background-color: #ffffff15; */
   height: calc(100% - 30px);
   margin: 25px;
+
   border: 1px solid #f4ede4;
   border-radius: 40px;
   backdrop-filter: blur(20px);
@@ -445,15 +447,15 @@ footer p {
   position: absolute;
   display: none;
   opacity: 0;
+  z-index: 1000;
 }
 [tooltip]::before {
   content: "";
   border: 0px solid transparent;
+  z-index: 1000;
 }
 [tooltip]::after {
   content: attr(tooltip);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   text-align: center;
   min-width: 3em;
   max-width: 210em;
@@ -462,7 +464,9 @@ footer p {
   text-overflow: ellipsis;
   padding: 1ch 1.5ch;
   border-radius: 20px;
-  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid #f4ede4;
   color: #f4ede4;
   z-index: 1000;
@@ -483,7 +487,8 @@ footer p {
 [tooltip][flow^="up"]::before {
   bottom: 100%;
   border-bottom-width: 0;
-  border-top-color: #333;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 [tooltip]:not([flow])::after,
 [tooltip][flow^="up"]::after {
@@ -503,16 +508,20 @@ footer p {
 [tooltip][flow^="down"]::before {
   top: 100%;
   border-top-width: 0;
-  border-bottom-color: #333;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1000;
 }
 [tooltip][flow^="down"]::after {
   top: calc(100% + 6px);
   margin-left: 10px;
+  z-index: 1000;
 }
 [tooltip][flow^="down"]::before,
 [tooltip][flow^="down"]::after {
   left: 50%;
   transform: translate(-50%, 0.5em);
+  z-index: 1000;
 }
 
 @keyframes tooltips-vert {
@@ -566,7 +575,6 @@ footer p {
   }
 
   #threadDetail {
-    margin: 0;
     margin-top: 5vh;
     justify-content: center;
   }
