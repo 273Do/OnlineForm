@@ -20,12 +20,12 @@ showError("ユーザー情報の取得に失敗しました.", error);
 //email[1]で登録画面の入力アドレスが取得可能．　2023.04.21(金)　有田海斗
 //passsword[1]で登録画面の入力パスワードが取得可能．　2023.04.21(金)　有田海斗
 function loginBtn() {
-  alert("クリック");
   const email = document.getElementsByClassName('email');
   const password = document.getElementsByClassName('password');
   
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-  for(var i = 0; i < data.length-1; i++){
+  for(var i = 0; i < data.length; i++){
+    alert("ループ開始");
     alert(email[0].value == data[i]["Mail"]);
     if(email[0].value == data[i]["Mail"]){
       alert(password[0].value == data[i]["Password"]);
