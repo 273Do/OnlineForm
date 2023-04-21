@@ -10,8 +10,8 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    alert(data[0]["Mail"]);
-    alert(data[0]["Password"]);
+    //alert(data[0]["Mail"]);
+    //alert(data[0]["Password"]);
     // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
     BGImageAndPE(data[0]["BackGround"], 0); //いずれはここ消します．
     BGImageAndPE(data[0]["ParallaxEffect"], 1);
@@ -23,7 +23,7 @@ fetch(thread_data)
 
 //ログインボタン押下時のクリックイベント．　2023.04.19(水)　有田海斗
 function userCheck() {
-  alert(document.getElementById(email));
+  alert(document.getElementById('email').Value);
 }
 
 //registerボタンが押された時の動作
