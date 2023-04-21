@@ -10,7 +10,7 @@ function loginBtn() {
   const email = document.getElementsByClassName('email');
   const password = document.getElementsByClassName('password');
 
-  
+
   //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
   // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
   const user_data =
@@ -18,8 +18,8 @@ function loginBtn() {
   fetch(user_data)
   .then((response) => response.json())
   .then((data) => {
-    //alert(data[0]["Mail"]);
-    //alert(data[0]["Password"]);
+    alert(data[0]["Mail"]);
+    alert(data[0]["Password"]);
   })
   .catch((error) => {
     showError("ユーザー情報の取得に失敗しました.", error);
@@ -31,7 +31,7 @@ function loginBtn() {
 
   //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
   alert(data.length);
-  for(var i = 0; i <= data.length-1; i++){
+  for(var i = 0; i < data.length-1; i++){
     alert(email[0].value == data[i]["Mail"]);
     if(email[0].value == data[i]["Mail"]){
       alert(password[0].value == data[i]["Password"]);
