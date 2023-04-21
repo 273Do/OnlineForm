@@ -27,12 +27,14 @@ function usageIcon() {
           .querySelector("span[tooltip=" + tooltipValue + "]")
           .setAttribute("tooltip", "");
         tooltipTmp.push(tooltipValue);
+        document.querySelector("#Usage").style.color = "#f4ede4";
       })
     : spanElements.forEach((element) => {
         tooltipCounter++;
         document
           .querySelector("span[tooltip='']")
           .setAttribute("tooltip", tooltipTmp[tooltipCounter - 1]);
+        document.querySelector("#Usage").style.color = "lime";
       });
 }
 usageIcon();
