@@ -206,6 +206,12 @@ function searchDate() {
 
 //学部検索
 function searchUndergraduate() {
+  const inputOptions = {
+    "#date": "日付",
+    "#Undergraduate": "学部",
+    "#Department": "学科",
+    "#grade": "学年",
+  };
   Swal.fire({
     title: "Please select a undergraduate.",
     input: "select",
@@ -213,12 +219,7 @@ function searchUndergraduate() {
     showDenyButton: true,
     denyButtonText: "back",
     toast: true,
-    inputOptions: {
-      "1回生": "1回生",
-      "2回生": "2回生",
-      "3回生": "3回生",
-      "4回生": "4回生",
-    },
+    inputOptions: inputOptions,
     inputPlaceholder: "SelectUndergraduate▼",
     stopKeydownPropagation: false,
     preDeny: () => {
@@ -236,6 +237,12 @@ function searchUndergraduate() {
 
 //学科検索
 function searchDepartment() {
+  const inputOptions = {
+    "#date": "日付",
+    "#Undergraduate": "学部",
+    "#Department": "学科",
+    "#grade": "学年",
+  };
   Swal.fire({
     title: "Please select a department.",
     input: "select",
@@ -243,12 +250,7 @@ function searchDepartment() {
     showDenyButton: true,
     denyButtonText: "back",
     toast: true,
-    inputOptions: {
-      "1回生": "1回生",
-      "2回生": "2回生",
-      "3回生": "3回生",
-      "4回生": "4回生",
-    },
+    inputOptions: inputOptions,
     inputPlaceholder: "SelectDepartment▼",
     stopKeydownPropagation: false,
     preDeny: () => {
@@ -267,6 +269,12 @@ function searchDepartment() {
 //学年検索
 //データベースの形式に合わせて、漢数字→数字へ変更．　2023.04.19(水)　有田海斗
 function searchGrades() {
+  const inputOptions = {
+    "１回生": "１回生",
+    "２回生": "２回生",
+    "３回生": "３回生",
+    "４回生": "４回生",
+  };
   Swal.fire({
     title: "Please select a grade.",
     input: "select",
@@ -274,12 +282,7 @@ function searchGrades() {
     showDenyButton: true,
     denyButtonText: "back",
     toast: true,
-    inputOptions: {
-      "1回生": "1回生",
-      "2回生": "2回生",
-      "3回生": "3回生",
-      "4回生": "4回生",
-    },
+    inputOptions: inputOptions,
     inputPlaceholder: "SelectGrade▼",
     stopKeydownPropagation: false,
     preDeny: () => {

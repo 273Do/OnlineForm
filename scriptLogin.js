@@ -147,7 +147,7 @@ function studentIDAndGradeAnalysis(UniEmail) {
     9050: "健康科学部/臨床検査学科",
   };
 
-  const grade = { 0: "1", 1: "2", 2: "3", 3: "4" };
+  const grade = { 0: "１", 1: "２", 2: "３", 3: "４" };
   //console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
   //console.log(
   var Number =
