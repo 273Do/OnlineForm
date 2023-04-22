@@ -308,14 +308,14 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   console.log(searchThread("文学部", "Undergraduate"));
   console.log(searchThread("経済学科", "Department"));
   console.log(searchThread("１", "Grade"));
+  console.log(searchThread("エラー用のワード", "0")); //エラー出力
 });
 //スレッドの検索関数   2023.04.19(水)　山口慶大
 function searchThread(words, fnc) {
   var tmp = [];
   var searchTmp = [];
   var outputTmp = [];
-  var i = (j = 0);
-  var column = 0;
+  var i = (j = column = 0);
   fnc == 0
     ? trueThreadsStorage.forEach(() => {
         if (trueThreadsStorage[column].indexOf(words) != -1)
@@ -325,7 +325,6 @@ function searchThread(words, fnc) {
     : threadsStorage.forEach(() => {
         tmp.push(threadsStorage[i][fnc]);
         i++;
-        if (tmp.length == 0) showError("スレッドが見つかりませんでした．");
       }),
     tmp.forEach(() => {
       if (tmp[column].indexOf(words) != -1) searchTmp.push(column);
@@ -335,6 +334,7 @@ function searchThread(words, fnc) {
     outputTmp.push(threadsStorage[searchTmp[j]]["Thread_ID"]);
     j++;
   });
-  if (outputTmp.length == 0) showError("スレッドが見つかりませんでした．");
+  if (outputTmp.length == 0)
+    showError("スレッドが見つかりませんでした．", "ワード：" + words);
   return outputTmp;
 }
