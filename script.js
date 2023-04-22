@@ -6,23 +6,45 @@ window.onload = function () {
 };
 
 //スプレッドシートよりスレッド取得   2023/04/14(金) 有田海斗
+var tN = 0; //threadNumber
+var threadsStorage = []; //全スレッドのタイトル等が格納されています．
+var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
 const thread_data =
   "https://script.googleusercontent.com/macros/echo?user_content_key=hTx8wFRUE2qbwLxB3AjsDbwmZvWeb3JJ6muTht4ZJkC7zR8sv2WS_sfx5HEh9JJfr29tyQKtTNsKOQoZq7zSktyhPheX0ZqLm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnFDzYkW62iTnTRRvq0UzqL2aLRzsznG29RR9oj8S5JsSMqOTsh77sGIbR0Rc_Gyuwi_zrFfFSS6M_iG8pnzLkT2Exmw6L_5gdNz9Jw9Md8uu&lib=MALqgNzxnUdruCf9dwMX1EjnQ_tEriaYy";
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
+    //全スレッドを取得して配列に格納   2023/04/22(土) 山口慶大
+    data.forEach((data) => {
+      threadsStorage.push(data);
+      trueThreadsStorage.push(
+        data["Thread_Title"] +
+          "　" +
+          data["Creator_Name"] +
+          "　" +
+          data["date(yyyy/mm/dd)"] +
+          "　" +
+          data["time(hh:mm:dd)"] +
+          "　" +
+          data["Undergraduate"] +
+          data["Department"] +
+          "　" +
+          data["Grade"] +
+          "回生"
+      );
+    });
     document.getElementById("title").innerHTML =
-      "<h2>" + data[0]["Thread_Title"] + "</h2>";
-    document.getElementById("maker").innerHTML = data[0]["Creator_Name"];
+      "<h2>" + data[tN]["Thread_Title"] + "</h2>";
+    document.getElementById("maker").innerHTML = data[tN]["Creator_Name"];
     document.getElementById("facultyEtc").innerHTML =
-      data[0]["Undergraduate"] +
+      data[tN]["Undergraduate"] +
       " " +
-      data[0]["Department"] +
+      data[tN]["Department"] +
       " " +
-      data[0]["Grade"] +
+      data[tN]["Grade"] +
       "回生";
     document.getElementById("dateAndTimeEtc").innerHTML =
-      data[0]["date(yyyy/mm/dd)"] + "　" + data[0]["time(hh:mm:dd)"];
+      data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
@@ -136,10 +158,10 @@ function option() {
 //フィルター検索の設定項目  2023/04/15(土) 山口慶大
 function searchFilter() {
   const inputOptions = {
-    "#days": "日付",
-    "#times": "時間",
+    "#date": "日付",
+    "#Undergraduate": "学部",
+    "#Department": "学科",
     "#grade": "学年",
-    // "#comment": "コメント数",
   };
   Swal.fire({
     title: "searchFilter",
@@ -150,17 +172,17 @@ function searchFilter() {
     inputOptions: inputOptions,
     inputValidator: (value) => {
       if (!value) return "Please select a filter.";
-      else if (value == "#days") searchDays();
-      else if (value == "#times") searchTimes();
+      else if (value == "#date") searchDate();
+      else if (value == "#Undergraduate") searchUndergraduate();
+      else if (value == "#Department") searchDepartment();
       else if (value == "#grade") searchGrades();
-      else if (value == "#comment") searchCommentValue();
     },
   });
 }
 
-var searchWord; //検索ワード
+var searchWords; //検索ワード
 //日付検索
-function searchDays() {
+function searchDate() {
   Swal.fire({
     title: "Please choose a date.",
     html: '<input type="date" class="swal2-input" name="selectTime" id="date">',
@@ -177,27 +199,67 @@ function searchDays() {
         .getElementById("date")
         .value.replace("-", "/")
         .replace("-", "/");
-      console.log(searchWord ? searchWord : "Please choose a date.");
+      console.log(searchWords ? searchWords : "Please choose a date.");
     },
   });
 }
 
-//時間検索
-function searchTimes() {
+//学部検索
+function searchUndergraduate() {
   Swal.fire({
-    title: "Please select a time.",
-    html: '<input type="time" class="swal2-input" name="selectTime" id="time">',
+    title: "Please select a undergraduate.",
+    input: "select",
     showCancelButton: true,
     showDenyButton: true,
     denyButtonText: "back",
-    focusConfirm: false,
     toast: true,
+    inputOptions: {
+      "1回生": "1回生",
+      "2回生": "2回生",
+      "3回生": "3回生",
+      "4回生": "4回生",
+    },
+    inputPlaceholder: "SelectUndergraduate▼",
+    stopKeydownPropagation: false,
     preDeny: () => {
       searchFilter();
     },
-    preConfirm: () => {
-      searchWord = document.getElementById("time").value;
-      console.log(searchWord ? searchWord : "Please select a time.");
+    inputValidator: (result) => {
+      if (!result) return "Please select a undergraduate.";
+      else {
+        searchWord = result;
+        console.log(searchWords);
+      }
+    },
+  });
+}
+
+//学科検索
+function searchDepartment() {
+  Swal.fire({
+    title: "Please select a department.",
+    input: "select",
+    showCancelButton: true,
+    showDenyButton: true,
+    denyButtonText: "back",
+    toast: true,
+    inputOptions: {
+      "1回生": "1回生",
+      "2回生": "2回生",
+      "3回生": "3回生",
+      "4回生": "4回生",
+    },
+    inputPlaceholder: "SelectDepartment▼",
+    stopKeydownPropagation: false,
+    preDeny: () => {
+      searchFilter();
+    },
+    inputValidator: (result) => {
+      if (!result) return "Please select a department.";
+      else {
+        searchWord = result;
+        console.log(searchWords);
+      }
     },
   });
 }
@@ -227,8 +289,52 @@ function searchGrades() {
       if (!result) return "Please select a grade.";
       else {
         searchWord = result;
-        console.log(searchWord);
+        console.log(searchWords);
       }
     },
   });
+}
+//スレッドのテスト   2023.04.19(水)　山口慶大
+//debugBtnと連動しています．
+//fncが0の場合，フリーワード検索
+//fncが属性の場合，各フィルター検索が可能
+//スレッドが見つからない場合はエラー表示
+document.getElementById("debugBtn").addEventListener("click", function () {
+  console.log(searchThread("2023/04/21　19:20:21", "0"));
+  console.log(searchThread("テストスレッド２", "Thread_Title"));
+  console.log(searchThread("ﾔﾏｸﾞﾁｹ", "Creator_Name"));
+  console.log(searchThread("2023/04/21", "date(yyyy/mm/dd)"));
+  console.log(searchThread("17:12:12", "time(hh:mm:dd)"));
+  console.log(searchThread("文学部", "Undergraduate"));
+  console.log(searchThread("経済学科", "Department"));
+  console.log(searchThread("１", "Grade"));
+});
+//スレッドの検索関数   2023.04.19(水)　山口慶大
+function searchThread(words, fnc) {
+  var tmp = [];
+  var searchTmp = [];
+  var outputTmp = [];
+  var i = (j = 0);
+  var column = 0;
+  fnc == 0
+    ? trueThreadsStorage.forEach(() => {
+        if (trueThreadsStorage[column].indexOf(words) != -1)
+          searchTmp.push(column);
+        column++;
+      })
+    : threadsStorage.forEach(() => {
+        tmp.push(threadsStorage[i][fnc]);
+        i++;
+        if (tmp.length == 0) showError("スレッドが見つかりませんでした．");
+      }),
+    tmp.forEach(() => {
+      if (tmp[column].indexOf(words) != -1) searchTmp.push(column);
+      column++;
+    });
+  searchTmp.forEach(() => {
+    outputTmp.push(threadsStorage[searchTmp[j]]["Thread_ID"]);
+    j++;
+  });
+  if (outputTmp.length == 0) showError("スレッドが見つかりませんでした．");
+  return outputTmp;
 }

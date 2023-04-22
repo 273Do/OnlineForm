@@ -155,15 +155,16 @@ function showError(value, error) {
     icon: "error",
     title: value,
     toast: "true",
+    width: "400px",
     text: error,
   });
 }
-
 //メッセージ表示
 function showMessage(value) {
   Swal.fire({
     icon: "success",
     title: value,
     toast: "true",
+    width: "400px",
   });
 }
