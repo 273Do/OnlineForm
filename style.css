@@ -192,6 +192,7 @@ header ul li {
 
 #threadDetail h2 {
   margin-bottom: 8px;
+  margin-left: 20px;
   font-size: 48px;
 }
 
@@ -623,6 +624,7 @@ footer p {
   #threadDetail h2,
   #searchOptions div h2 {
     margin-bottom: 1px;
+    margin-left: 20px;
     font-size: 30px;
   }
 
