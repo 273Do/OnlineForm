@@ -197,11 +197,29 @@ function searchDate() {
       searchFilter();
     },
     preConfirm: () => {
-      searchWord = document
+      document
         .getElementById("date")
         .value.replace("-", "/")
-        .replace("-", "/");
-      console.log(searchWords ? searchWords : "Please choose a date.");
+        .replace("-", "/") !== ""
+        ? console.log(
+            searchThread(
+              document
+                .getElementById("date")
+                .value.replace("-", "/")
+                .replace("-", "/"),
+              "date(yyyy/mm/dd)"
+            )
+          )
+        : Swal.fire({
+            icon: "error",
+            title: "Please choose a date.",
+            toast: "true",
+            width: "400px",
+            showCancelButton: true,
+            confirmButtonText: "back",
+          }).then((result) => {
+            if (result.isConfirmed) searchDate();
+          });
     },
   });
 }
