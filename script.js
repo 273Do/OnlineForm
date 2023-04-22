@@ -85,13 +85,14 @@ fetch(comment_data)
 
 //Accountボタンが押された時の動作
 document.querySelector("#Account").addEventListener("click", function () {
-  var ex = 1;
+  let testName = "たち　ばな";
+  let testEmail = "a600000000@st.tachibana-u.ac.jp";
   Swal.fire({
     title: "YourAccount",
     // toast: "true",
     backdrop: "none",
-    html: "ログインしているアカウント情報を表示" + ex,
-    // showLoaderOnConfirm: true,
+    html: "アカウント名：" + testName + "<br>メールアドレス：" + testEmail,
+    footer: "<p onclick=searchDate() style='cursor:pointer'>変更はこちら</p>",
     showCancelButton: true,
   });
 });
