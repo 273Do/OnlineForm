@@ -180,7 +180,6 @@ function searchFilter() {
   });
 }
 
-var searchWords; //検索ワード
 //日付検索
 function searchDate() {
   Swal.fire({
@@ -207,10 +206,15 @@ function searchDate() {
 //学部検索
 function searchUndergraduate() {
   const inputOptions = {
-    "#date": "日付",
-    "#Undergraduate": "学部",
-    "#Department": "学科",
-    "#grade": "学年",
+    文学部: "文学部",
+    国際英語学部: "国際英語学部",
+    発達教育学部: "発達教育学部",
+    総合心理学部: "総合心理学部",
+    現代ビジネス学部: "現代ビジネス学部",
+    経済学部: "経済学部",
+    経営学部: "経営学部",
+    工学部: "工学部",
+    健康科学部: "健康科学部",
   };
   Swal.fire({
     title: "Please select a undergraduate.",
@@ -227,10 +231,7 @@ function searchUndergraduate() {
     },
     inputValidator: (result) => {
       if (!result) return "Please select a undergraduate.";
-      else {
-        searchWord = result;
-        console.log(searchWords);
-      }
+      else console.log(searchThread(result, "Undergraduate"));
     },
   });
 }
@@ -238,10 +239,23 @@ function searchUndergraduate() {
 //学科検索
 function searchDepartment() {
   const inputOptions = {
-    "#date": "日付",
-    "#Undergraduate": "学部",
-    "#Department": "学科",
-    "#grade": "学年",
+    日本語日本文学科: "日本語日本文学科",
+    歴史学科: "歴史学科",
+    歴史遺産学科: "歴史遺産学科",
+    国際英語学: "国際英語学科",
+    児童教育学科: "児童教育学科",
+    総合心理学科: "総合心理学科",
+    都市環境デザイン学科: "都市環境デザイン学科",
+    経済学科: "経済学科",
+    経営学科: "経営学科",
+    情報工学科: "情報工学科",
+    建築デザイン学科: "建築デザイン学科",
+    看護学科: "看護学科",
+    心理学科: "心理学科",
+    理学療法学科: "理学療法学科",
+    作業療法学科: "作業療法学科",
+    救急救命学科: "救急救命学科",
+    臨床検査学科: "臨床検査学科",
   };
   Swal.fire({
     title: "Please select a department.",
@@ -258,10 +272,7 @@ function searchDepartment() {
     },
     inputValidator: (result) => {
       if (!result) return "Please select a department.";
-      else {
-        searchWord = result;
-        console.log(searchWords);
-      }
+      else console.log(searchThread(result, "Department"));
     },
   });
 }
@@ -270,10 +281,10 @@ function searchDepartment() {
 //データベースの形式に合わせて、漢数字→数字へ変更．　2023.04.19(水)　有田海斗
 function searchGrades() {
   const inputOptions = {
-    "１回生": "１回生",
-    "２回生": "２回生",
-    "３回生": "３回生",
-    "４回生": "４回生",
+    "１": "１回生",
+    "２": "２回生",
+    "３": "３回生",
+    "４": "４回生",
   };
   Swal.fire({
     title: "Please select a grade.",
@@ -290,10 +301,7 @@ function searchGrades() {
     },
     inputValidator: (result) => {
       if (!result) return "Please select a grade.";
-      else {
-        searchWord = result;
-        console.log(searchWords);
-      }
+      else console.log(searchThread(result, "Grade"));
     },
   });
 }
@@ -338,6 +346,6 @@ function searchThread(words, fnc) {
     j++;
   });
   if (outputTmp.length == 0)
-    showError("スレッドが見つかりませんでした．", "ワード：" + words);
+    showError("スレッドが見つかりませんでした．", "検索：" + words);
   return outputTmp;
 }
