@@ -3,6 +3,8 @@ window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "none";
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#page2").style.display = "none";
+  // BGImageAndPE(userData[i]["BackGround"], 0);
+  // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
 };
 
 //スプレッドシートよりスレッド取得   2023/04/14(金) 有田海斗
