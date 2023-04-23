@@ -440,7 +440,7 @@ function searchThread(words, fnc) {
   });
   if (outputTmp.length == 0)
     showError("スレッドが見つかりませんでした．", "検索：" + words);
-  return outputTmp;
+  else return outputTmp;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
 //検索ワードとを入れることで，そのコメントが投稿されているスレッドIDとコメントIDを二次元配列にして返します．
@@ -465,5 +465,5 @@ function searchComment(words) {
     .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
   if (outputTmp.length == 0)
     showError("コメントが見つかりませんでした．", "検索：" + words);
-  return outputTmp;
+  else return outputTmp;
 }
