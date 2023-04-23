@@ -23,21 +23,21 @@ fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
     //全スレッドを取得して配列に格納   2023/04/22(土) 山口慶大
-    data.forEach((data) => {
-      threadsStorage.push(data);
+    data.forEach((e) => {
+      threadsStorage.push(e);
       trueThreadsStorage.push(
-        data["Thread_Title"] +
+        e["Thread_Title"] +
           "　" +
-          data["Creator_Name"] +
+          e["Creator_Name"] +
           "　" +
-          data["date(yyyy/mm/dd)"] +
+          e["date(yyyy/mm/dd)"] +
           "　" +
-          data["time(hh:mm:dd)"] +
+          e["time(hh:mm:dd)"] +
           "　" +
-          data["Undergraduate"] +
-          data["Department"] +
+          e["Undergraduate"] +
+          e["Department"] +
           "　" +
-          data["Grade"] +
+          e["Grade"] +
           "回生"
       );
     });
@@ -60,6 +60,7 @@ fetch(thread_data)
 
 var chat_load = "";
 var div = document.getElementById("commentDetail");
+var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
 const comment_data =
   "https://script.googleusercontent.com/macros/echo?user_content_key=sRYv53Om9t149qVBsez11_YqRE6UjtlYW9ff9QWH8MEyXQP5yrBt56IOqfXUMHrjaEOj5tM39yw8xRgUhP7NFcP7FaQqNfTam5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnCA_Svx5peXM6XMVrJ3Ipyu5znJnMuSzh4NxdlUwwMC05fDn9qpO80WIQjTfxIPCKYRkkyNAa567dyQeJ-doWvdoyYxsyg8V8w&lib=MZhz0KtvML4lyEqBxIAkhMMa0aySdfDvo";
@@ -67,6 +68,7 @@ fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     for (var i = 0; i < data.length; i++) {
+      commentStorage.push(data[i]);
       chat_load +=
         '<div class="commentDetail"> <li class="chatDetail1">' +
         data[i]["Wrote_Name"] +
@@ -85,6 +87,27 @@ fetch(comment_data)
         data[i]["Comment"] +
         "</li> </div>";
     }
+    //リファクタリングを行いました．(今後，スレッド番号による変更がありそうなのでコメント化しています．)   2023.04.23(日)　山口慶大
+    //  data.forEach((e) => {
+    //   commentStorage.push(e);
+    //   chat_load +=
+    //     '<div class="commentDetail"> <li class="chatDetail1">' +
+    //     e["Wrote_Name"] +
+    //     "(" +
+    //     e["Undergraduate"] +
+    //     " " +
+    //     e["Department"] +
+    //     " " +
+    //     e["Grade"] +
+    //     "回生)" +
+    //     '</li> <li class="chatDetail2">' +
+    //     e["date(yyyy/mm/dd)"] +
+    //     "　" +
+    //     e["time(hh:mm:dd)"] +
+    //     '</li> <li class="comment">' +
+    //     e["Comment"] +
+    //     "</li> </div>";
+    // });
     document.getElementById("chat").innerHTML = chat_load;
   })
   .catch((error) => {
@@ -390,32 +413,55 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   console.log(searchThread("経済学科", "Department"));
   console.log(searchThread("１", "Grade"));
   console.log(searchThread("エラー用のワード", "0")); //エラー出力
+
+  console.log(searchComment("ゲーム"));
+  console.log(searchComment("エラー用のワード")); //エラー出力
 });
-//スレッドの検索関数   2023.04.19(水)　山口慶大
+//スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
   var tmp = [];
   var searchTmp = [];
   var outputTmp = [];
-  var i = (j = column = 0);
+  var i = 0;
   fnc == 0
-    ? trueThreadsStorage.forEach(() => {
-        if (trueThreadsStorage[column].indexOf(words) != -1)
-          searchTmp.push(column);
-        column++;
-      })
-    : threadsStorage.forEach(() => {
-        tmp.push(threadsStorage[i][fnc]);
+    ? trueThreadsStorage.forEach((e) => {
+        if (e.indexOf(words) != -1) searchTmp.push(i);
         i++;
+      })
+    : threadsStorage.forEach((e) => {
+        tmp.push(e[fnc]);
       }),
-    tmp.forEach(() => {
-      if (tmp[column].indexOf(words) != -1) searchTmp.push(column);
-      column++;
+    tmp.forEach((e) => {
+      if (e.indexOf(words) != -1) searchTmp.push(i);
+      i++;
     });
-  searchTmp.forEach(() => {
-    outputTmp.push(threadsStorage[searchTmp[j]]["Thread_ID"]);
-    j++;
+  searchTmp.forEach((e) => {
+    outputTmp.push(threadsStorage[e]["Thread_ID"]);
   });
   if (outputTmp.length == 0)
     showError("スレッドが見つかりませんでした．", "検索：" + words);
+  return outputTmp;
+}
+//コメントの検索関数   2023.04.23(日)　山口慶大
+function searchComment(words) {
+  var tmp = [];
+  var resultTmp = [];
+  var outputTmp;
+  var i = 0;
+  commentStorage.forEach((e) => {
+    if (e["Comment"].indexOf(words) != -1) tmp.push(i);
+    i++;
+  });
+  tmp.forEach((e) => {
+    resultTmp.push(
+      commentStorage[e]["Thread_ID"],
+      commentStorage[e]["Comment_ID"]
+    );
+  });
+  outputTmp = new Array(Math.ceil(resultTmp.length / 2))
+    .fill()
+    .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
+  if (outputTmp.length == 0)
+    showError("コメントが見つかりませんでした．", "検索：" + words);
   return outputTmp;
 }
