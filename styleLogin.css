@@ -250,9 +250,12 @@ header ul li {
   transition: all 0.3s;
 }
 
-#registerIcon:hover,
-#loginIcon:hover,
 .viewOnly:hover {
+  color: #7a7aff;
+}
+
+#registerIcon:hover,
+#loginIcon:hover {
   opacity: 0.5;
 }
 

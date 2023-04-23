@@ -21,6 +21,11 @@
         <ul>
           <!-- デバッグボタン -->
           <li id="debugBtn" style="color: red">debugBtn</li>
+          <span tooltip="閲覧モード" flow="down" id="view">
+            <div class="navIcon" style="color: #7a7aff" onclick="vOnly()">
+              <li>View</li>
+              <ion-icon size="small" name="eye-outline"></ion-icon></div
+          ></span>
           <span tooltip="使い方" flow="down">
             <div class="navIcon" id="Usage" onclick="usageIcon()">
               <li>Usage</li>
@@ -145,7 +150,7 @@
           </div>
 
           <div id="searchByTag">
-            <h2>タグ検索</h2>
+            <h2>コメント検索</h2>
             <form class="messageArea">
               <span tooltip="機能切替" flow="down">
                 <ion-button
@@ -156,7 +161,7 @@
                   <ion-icon name="options-outline"></ion-icon> </ion-button
               ></span>
               <textarea class="message-form" rows="1" cols="40"> </textarea>
-              <ion-icon name="pricetags-outline"></ion-icon>
+              <ion-icon name="chatbox-ellipses-outline"></ion-icon>
             </form>
           </div>
         </section>

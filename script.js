@@ -1,8 +1,14 @@
 //ロード時の動作
+//閲覧モード状態   2023/04/23(日) 山口慶大
+var viewOnly = 0;
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "none";
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#page2").style.display = "none";
+  viewOnly == 1
+    ? (document.querySelector("#view").style.display = "block")
+    : (document.querySelector("#view").style.display = "none");
+
   // BGImageAndPE(userData[i]["BackGround"], 0);
   // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
 };
@@ -85,6 +91,21 @@ fetch(comment_data)
     showError("チャット取得に失敗しました.", error);
   });
 
+//Viewボタンが押された時の動作
+function vOnly() {
+  Swal.fire({
+    icon: "warning",
+    title: "ログインしますか?",
+    toast: "true",
+    // showLoaderOnConfirm: true,
+    showCancelButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      console.log("ログインページへ移動．");
+    }
+  });
+}
+
 //Accountボタンが押された時の動作
 document.querySelector("#Account").addEventListener("click", function () {
   let testName = "たち　ばな";
@@ -131,12 +152,13 @@ function option() {
   const inputOptions = {
     0: "create",
     1: "searchByTitle",
-    2: "searchByTag",
+    2: "searchByComment",
   };
   Swal.fire({
     title: "About threads",
     input: "radio",
     backdrop: "none",
+    width: "600px",
     showCancelButton: true,
     inputOptions: inputOptions,
     inputValidator: (value) => {
