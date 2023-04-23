@@ -443,6 +443,8 @@ function searchThread(words, fnc) {
   return outputTmp;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
+//検索ワードとを入れることで，そのコメントが投稿されているスレッドIDとコメントIDを二次元配列にして返します．
+//見つからない場合はエラーを表示します．
 function searchComment(words) {
   var tmp = [];
   var resultTmp = [];
