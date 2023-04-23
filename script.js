@@ -1,6 +1,6 @@
-//ロード時の動作
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 0;
+//ロード時の動作
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "none";
   document.querySelector("#searchByTag").style.display = "none";
@@ -91,7 +91,7 @@ fetch(comment_data)
     showError("チャット取得に失敗しました.", error);
   });
 
-//Viewボタンが押された時の動作
+//Viewボタンが押された時の動作   2023/04/23(日) 山口慶大
 function vOnly() {
   Swal.fire({
     icon: "warning",
@@ -115,7 +115,8 @@ document.querySelector("#Account").addEventListener("click", function () {
     // toast: "true",
     backdrop: "none",
     html: "アカウント名：" + testName + "<br>メールアドレス：" + testEmail,
-    footer: "<p onclick=searchDate() style='cursor:pointer'>変更はこちら</p>",
+    footer:
+      "<p onclick=changeAccountDate() style='cursor:pointer'>変更はこちら</p>",
     showCancelButton: true,
   });
 });
@@ -175,6 +176,32 @@ function option() {
         document.querySelector("#createThread").style.display = "none";
         document.querySelector("#searchByTitle").style.display = "none";
         document.querySelector("#searchByTag").style.display = "block";
+      }
+    },
+  });
+}
+//アカウント情報の変更　　2023/04/23(日) 山口慶大
+//バリデーションチェックはまだ
+function changeAccountDate() {
+  Swal.fire({
+    title: "ChangeAccountDate",
+    input: "checkbox",
+    html: '<select name="example" class="swal2-input" id="changeContents"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
+    backdrop: "none",
+    inputPlaceholder: "ChangeYourAccountDate?",
+    showCancelButton: true,
+    inputValidator: (value) => {
+      if (!value) return "You need to agree.";
+      else if (document.getElementById("changeAccount").value == "")
+        return "入力欄が空です．";
+      else if (document.getElementById("changeContents").value == "select")
+        return "項目が選択されていません．";
+      else {
+        console.log(
+          document.getElementById("changeContents").value,
+          document.getElementById("changeAccount").value
+        );
+        showMessage("変更しました．");
       }
     },
   });
