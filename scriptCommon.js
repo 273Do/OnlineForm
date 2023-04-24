@@ -21,8 +21,8 @@ function usageIcon() {
   const spanElements = document.querySelectorAll("span[tooltip]");
   UsageFlg *= -1;
   UsageFlg == 1
-    ? spanElements.forEach((element) => {
-        const tooltipValue = element.getAttribute("tooltip");
+    ? spanElements.forEach((e) => {
+        const tooltipValue = e.getAttribute("tooltip");
         document
           .querySelector("span[tooltip=" + tooltipValue + "]")
           .setAttribute("tooltip", "");

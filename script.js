@@ -1,5 +1,5 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
-var viewOnly = 0;
+var viewOnly = 1;
 //ロード時の動作
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "none";
@@ -413,7 +413,6 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   console.log(searchThread("経済学科", "Department"));
   console.log(searchThread("１", "Grade"));
   console.log(searchThread("エラー用のワード", "0")); //エラー出力
-
   console.log(searchComment("ゲーム"));
   console.log(searchComment("エラー用のワード")); //エラー出力
 });
@@ -421,7 +420,7 @@ document.getElementById("debugBtn").addEventListener("click", function () {
 function searchThread(words, fnc) {
   var tmp = [];
   var searchTmp = [];
-  var outputTmp = [];
+  var output = [];
   var i = 0;
   fnc == 0
     ? trueThreadsStorage.forEach((e) => {
@@ -436,11 +435,11 @@ function searchThread(words, fnc) {
       i++;
     });
   searchTmp.forEach((e) => {
-    outputTmp.push(threadsStorage[e]["Thread_ID"]);
+    output.push(threadsStorage[e]["Thread_ID"]);
   });
-  if (outputTmp.length == 0)
+  if (output.length == 0)
     showError("スレッドが見つかりませんでした．", "検索：" + words);
-  else return outputTmp;
+  else return output;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
 //検索ワードとを入れることで，そのコメントが投稿されているスレッドIDとコメントIDを二次元配列にして返します．
@@ -448,7 +447,7 @@ function searchThread(words, fnc) {
 function searchComment(words) {
   var tmp = [];
   var resultTmp = [];
-  var outputTmp;
+  var output;
   var i = 0;
   commentStorage.forEach((e) => {
     if (e["Comment"].indexOf(words) != -1) tmp.push(i);
@@ -460,10 +459,10 @@ function searchComment(words) {
       commentStorage[e]["Comment_ID"]
     );
   });
-  outputTmp = new Array(Math.ceil(resultTmp.length / 2))
+  output = new Array(Math.ceil(resultTmp.length / 2))
     .fill()
     .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
-  if (outputTmp.length == 0)
+  if (output.length == 0)
     showError("コメントが見つかりませんでした．", "検索：" + words);
-  else return outputTmp;
+  else return output;
 }
