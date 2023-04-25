@@ -36,9 +36,10 @@ function loginBtn() {
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
           var access_code = (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2);
-          var url = 'https://script.google.com/macros/s/AKfycbxJzVtKs_w2LVDY_Ql_0yFWJpIHE4Vsq6L4Y3rPMCFYNWPRntSdsT7SXjFZjv8v7jmIKg/exec' +
+          var url = 'https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec' +
           '?row=' + (i + 2) +
-          '&value=' + encodeURIComponent(access_code);
+          '&value1=' + encodeURIComponent(access_code) +
+          '&value2=' + getCurrentTime;
           var xhr = new XMLHttpRequest();
           xhr.open('GET', url);
           xhr.send();
@@ -49,7 +50,7 @@ function loginBtn() {
           studentIDAndGradeAnalysis(userData[i]["Mail"]);
 
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          location.href = "index.html?user=" + access_code;
+          location.href = "/index.html?user=" + access_code;
         } else {
           flag = true;
         }
@@ -179,4 +180,24 @@ function studentIDAndGradeAnalysis(UniEmail) {
       grade[yearCount - (str.charAt(5) + str.charAt(6))],
     ];
   }
+
+  //現在時刻取得(yyyy/mm/dd hh:mm:ss)　2023年4月25日　有田海斗
+function getCurrentTime() {
+	var now = new Date();
+	var res = "" + now.getFullYear() + "/" + padZero(now.getMonth() + 1) + 
+		"/" + padZero(now.getDate()) + " " + padZero(now.getHours()) + ":" + 
+		padZero(now.getMinutes()) + ":" + padZero(now.getSeconds());
+	return res;
+}
+
+//先頭ゼロ付加　2023年4月25日　有田海斗
+function padZero(num) {
+	var result;
+	if (num < 10) {
+		result = "0" + num;
+	} else {
+		result = "" + num;
+	}
+	return result;
+}
 }
