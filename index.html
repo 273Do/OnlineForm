@@ -165,7 +165,12 @@
                 >
                   <ion-icon name="options-outline"></ion-icon> </ion-button
               ></span>
-              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <textarea
+                id="searchByComment"
+                class="message-form"
+                rows="1"
+                cols="40"
+              ></textarea>
               <ion-icon name="chatbox-ellipses-outline"></ion-icon>
             </form>
           </div>
@@ -282,7 +287,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script>
       ScrollReveal({ reset: false, duration: 1800 });
-      ScrollReveal().reveal("#threadTitle", {
+      ScrollReveal().reveal("#searchOptions", {
         delay: 200,
         origin: "left",
         distance: "40px",
@@ -291,7 +296,7 @@
           console.log("アニメーション終了");
         },
       });
-      ScrollReveal().reveal("#mainChatSpace", {
+      ScrollReveal().reveal("#mainResultSpace", {
         delay: 200,
         origin: "right",
         distance: "40px",
