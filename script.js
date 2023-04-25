@@ -1,6 +1,6 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 1;
-//ロード時の動作
+//ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
@@ -8,7 +8,7 @@ window.onload = function () {
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
-
+  //データ引渡しができてからコメント解除
   // BGImageAndPE(userData[i]["BackGround"], 0);
   // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
   //スレッド検索：ワードを入れるたびに動作
@@ -18,6 +18,7 @@ window.onload = function () {
       console.log(this.value);
       console.log(searchThread(this.value, 0));
     });
+  //コメント検索：ワードを入れるたびに動作
   document
     .querySelector("#searchByComment")
     .addEventListener("input", function () {
@@ -186,9 +187,9 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 //optionボタンが押された時の動作
 function option() {
   const inputOptions = {
-    0: "searchByTitle",
-    1: "searchByComment",
-    2: "create",
+    0: "TitleSearch",
+    1: "CommentSearch",
+    2: "CreateThread",
   };
   Swal.fire({
     title: "About threads",
@@ -480,13 +481,3 @@ function searchComment(words) {
     return "コメントが見つかりませんでした． 検索：" + words;
   else return output;
 }
-//branchTest
-// 食べ過ぎたら起こったこと、後悔した話。
-// 誰も信じなかった私の予言、的中した話。
-// ペットのマネをしていたら、誤解された話。
-// 思い出を振り返っていたら、恥ずかしい秘密が発覚した話。
-// 話を盛ってしまったら、怖い目に遭った話。
-// 友達と喧嘩したけど、最後には仲直りした話。
-// パーティーで酔いすぎて、恥ずかしいことをしてしまった話。
-// 思わぬ出会いが、大きな転機になった話。
-// ついつい手を出してしまった、危ない遊びの話。

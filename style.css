@@ -83,7 +83,8 @@ li {
   margin-top: -2px;
 }
 
-textarea {
+textarea,
+.message-form {
   resize: none;
   background: none;
   outline: none;
