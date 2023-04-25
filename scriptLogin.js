@@ -26,7 +26,7 @@ function loginBtn() {
   const password = document.getElementsByClassName("password");
 
   if (email[0].value == "" || password[0].value == "") {
-    //入力不備がある場合は実行しない．
+    flag = true;
   } else {
     for (var i = 0; i < userData.length; i++) {
       flag = false;
@@ -61,6 +61,7 @@ function loginBtn() {
     }
     if (flag == true) {
       showError("メールアドレスかパスワードが間違っています．");
+      flag = false;
     }
   }
 }
