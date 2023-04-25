@@ -38,11 +38,11 @@ function loginBtn() {
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
           var access_code = console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2));
-          var url = 'https://script.google.com/macros/s/AKfycbzDyOmVY9N-aRyJNA8i9hlFdd1AaS7wt0pwu0yj13dBodCsa8o74ixTH_EWUZazek6_yQ/exec' +
+          var url = 'https://script.google.com/macros/s/AKfycbzluX4FeB8T-SLIC-cXbEQX3hbEmcJgNlC5S5Zt8KO94Q2gE-tmKiQk_5JLk587po6v/exec' +
           '?col=' + (i + 2) +
-          '&value=' + access_code;
+          '&value=' + encodeURIComponent(access_code);
           var xhr = new XMLHttpRequest();
-          xhr.open('POST', url);
+          xhr.open('GET', url);
           xhr.send();
           
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
