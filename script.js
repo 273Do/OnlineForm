@@ -18,7 +18,7 @@ var tN = 0; //threadNumber
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
 const thread_data =
-  "https://script.googleusercontent.com/macros/echo?user_content_key=ydyEHK8czyCc0jLK0TgZEiRuQBgyM-2Dz0EvzKOxVSlYM56vZkg0USLplu3CKh1xbMcHneVwybB6IV2zsWeI72QyT3b7tttMm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnGzl-GvM2UdVp6gcd4UZQRZGH0gnNSEyzYxYcpcmcrlYrA-6whO6UGa8tfedmGPKMaPYOu-T2iV7AZlj6JTuX8N3UVRQ8fw829z9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+  "https://script.googleusercontent.com/macros/echo?user_content_key=3UyBdwer_JyO0DDsEx7Vjedf4THPT8GcOOgDkLSf4bt7pfodvCLuYuuPCgbQ4it8Ij9SLcmVBx3yF84_ZakM85dqqODOe_mOm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnIhsZ48sU-cj3ci2NrW_pfsJxwAbLC4WHUMdrOT0YI6PqegCaRBrKgGaukudiPvE65pllq4bTFQ3oA2ZBRjCNI4EUe19oaiRDdz9Jw9Md8uu&lib=MALqgNzxnUdruCf9dwMX1EjnQ_tEriaYy";
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
@@ -53,16 +53,6 @@ fetch(thread_data)
       "回生";
     document.getElementById("dateAndTimeEtc").innerHTML =
       data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
-
-      //データ取得確認　2023年4月25日　有田海斗
-      console.log(trueThreadsStorage);
-      console.log(data[tN]["Thread_Title"]);
-      console.log(data[tN]["Creator_Name"]);
-      console.log(data[tN]["Undergraduate"]);
-      console.log(data[tN]["Department"]);
-      console.log(data[tN]["Grade"]);
-      console.log(data[tN]["date(yyyy/mm/dd)"]);
-      console.log(data[tN]["time(hh:mm:dd)"]);
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
