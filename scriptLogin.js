@@ -29,10 +29,8 @@ function loginBtn() {
     flag = true;
   } else {
     for (var i = 0; i < userData.length; i++) {
-      flag = false;
       if (email[0].value == userData[i]["Mail"]) {
         if (password[0].value == userData[i]["Password"]) {
-          showMessage("IDとPASSが一致しました．");
           //ログイン処理
           //アクセスコード生成　2023年4月25日　有田海斗
           
@@ -44,14 +42,14 @@ function loginBtn() {
           var xhr = new XMLHttpRequest();
           xhr.open('GET', url);
           xhr.send();
-          
-          //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          location.href = "index.html?user=" + string(access_code);
-          
+
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
           BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
           BGImageAndPE(userData[i]["ParallaxEffect"], 1);
           studentIDAndGradeAnalysis(userData[i]["Mail"]);
+
+          //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
+          location.href = "index.html?user=" + access_code;
         } else {
           flag = true;
         }
