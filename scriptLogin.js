@@ -21,6 +21,7 @@ fetch(user_data)
 
 //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
 let flag = false;
+var access_code;
 function loginBtn() {
   const email = document.getElementsByClassName("email");
   const password = document.getElementsByClassName("password");
@@ -33,9 +34,29 @@ function loginBtn() {
       if (email[0].value == userData[i]["Mail"]) {
         if (password[0].value == userData[i]["Password"]) {
           showMessage("IDとPASSが一致しました．");
-          //ログイン処理記述
-          break;
-
+          //ログイン処理
+          //アクセスコード生成　2023年4月25日　有田海斗
+          access_code = console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2));
+          
+          //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
+          var spreadsheetId = '1S_clTgUNnonAjDGJDke6BPhp1EAntmAHg8_mut7_yFg';
+          var sheetName = 'Account';
+          var row = 9;
+          var col = i + 1;
+          var value = access_code;
+          var url = 'https://script.google.com/macros/s/<SCRIPT_ID>/exec' +
+          '?spreadsheetId=' + spreadsheetId +
+          '&sheetName=' + sheetName +
+          '&row=' + row +
+          '&col=' + col +
+          '&value=' + encodeURIComponent(value);
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', url);
+          xhr.send();
+          
+          //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
+          location = './index.html?=user' + access_code;
+          
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
           BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
           BGImageAndPE(userData[i]["ParallaxEffect"], 1);
@@ -161,6 +182,7 @@ function studentIDAndGradeAnalysis(UniEmail) {
 
   if (Undergraduate == "" || Department == "") {
     showError("学籍番号に誤りがあります.");
+    break;
   } else {
     return [
       Undergraduate,
