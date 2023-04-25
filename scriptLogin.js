@@ -37,7 +37,7 @@ function loginBtn() {
           //アクセスコード生成　2023年4月25日　有田海斗
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
-          var access_code = "'" + console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2)) + "'";
+          var access_code = (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2);
           var url = 'https://script.google.com/macros/s/AKfycbxJzVtKs_w2LVDY_Ql_0yFWJpIHE4Vsq6L4Y3rPMCFYNWPRntSdsT7SXjFZjv8v7jmIKg/exec' +
           '?row=' + (i + 2) +
           '&value=' + encodeURIComponent(access_code);
