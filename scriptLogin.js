@@ -46,7 +46,7 @@ function loginBtn() {
           xhr.send();
           
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          location = 'index.html?user=' + access_code;
+          location.href = 'index.html?user=' + access_code;
           
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
           BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
