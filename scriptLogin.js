@@ -9,7 +9,7 @@ window.onload = function () {
 // 大学メールより，解析されるかチェック   2023.04.19(水)　山口慶大
 let userData = [];
 const user_data =
-  "https://script.googleusercontent.com/macros/echo?user_content_key=ydyEHK8czyCc0jLK0TgZEiRuQBgyM-2Dz0EvzKOxVSlYM56vZkg0USLplu3CKh1xbMcHneVwybB6IV2zsWeI72QyT3b7tttMm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnGzl-GvM2UdVp6gcd4UZQRZGH0gnNSEyzYxYcpcmcrlYrA-6whO6UGa8tfedmGPKMaPYOu-T2iV7AZlj6JTuX8N3UVRQ8fw829z9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+  "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
 fetch(user_data)
   .then((response) => response.json())
   .then((data) => {
@@ -106,7 +106,7 @@ function registerBtn() {
 
     //データベース再読み込み
     const user_data =
-      "https://script.googleusercontent.com/macros/echo?user_content_key=ydyEHK8czyCc0jLK0TgZEiRuQBgyM-2Dz0EvzKOxVSlYM56vZkg0USLplu3CKh1xbMcHneVwybB6IV2zsWeI72QyT3b7tttMm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnGzl-GvM2UdVp6gcd4UZQRZGH0gnNSEyzYxYcpcmcrlYrA-6whO6UGa8tfedmGPKMaPYOu-T2iV7AZlj6JTuX8N3UVRQ8fw829z9Jw9Md8uu&lib=Myv0raDKCsIQD01rt9rFOEDnQ_tEriaYy";
+      "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
     fetch(user_data)
       .then((response) => response.json())
       .then((data) => {

@@ -18,7 +18,7 @@ var tN = 0; //threadNumber
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
 const thread_data =
-  "https://script.googleusercontent.com/macros/echo?user_content_key=3UyBdwer_JyO0DDsEx7Vjedf4THPT8GcOOgDkLSf4bt7pfodvCLuYuuPCgbQ4it8Ij9SLcmVBx3yF84_ZakM85dqqODOe_mOm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnIhsZ48sU-cj3ci2NrW_pfsJxwAbLC4WHUMdrOT0YI6PqegCaRBrKgGaukudiPvE65pllq4bTFQ3oA2ZBRjCNI4EUe19oaiRDdz9Jw9Md8uu&lib=MALqgNzxnUdruCf9dwMX1EjnQ_tEriaYy";
+  "https://script.google.com/macros/s/AKfycbyLA7mP7nOgQvvVy9vGLWUmXC-T0wsDMk_bR6mYrHNwhPNh6Rn01pNAR2hQMm8SZgopBw/exec";
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
@@ -63,7 +63,7 @@ var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
 const comment_data =
-  "https://script.googleusercontent.com/macros/echo?user_content_key=uoiLJpNMrkCOAp5IIK76u-KjE4N96ZOkS2-fSWELPgQm6aNBB2221RkZ8s6VbWbib9VNO5Z9RHXFSoqWUKT0jgZXu3oRryp5m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnGuuznB-1IVpCXuAToq9M0yxLmkNOn5llonehqecMTTRAfF2BN7E4sN-PXF_7N_2rBSFR8ef2l8D0KVixp1OCr1d1jzQiNN_Idz9Jw9Md8uu&lib=MMVbT_xkc9qZI94DtOPrtwTnQ_tEriaYy";
+  "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
 fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
