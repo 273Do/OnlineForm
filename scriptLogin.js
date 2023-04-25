@@ -20,8 +20,8 @@ fetch(user_data)
   });
 
 //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
-let flag = false;
 function loginBtn() {
+  let flag = false;
   const email = document.getElementsByClassName("email");
   const password = document.getElementsByClassName("password");
 
