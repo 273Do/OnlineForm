@@ -11,6 +11,13 @@ window.onload = function () {
 
   // BGImageAndPE(userData[i]["BackGround"], 0);
   // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+
+  document
+    .querySelector("#searchByWord")
+    .addEventListener("input", function () {
+      console.log("Input action");
+      console.log(this.value);
+    });
 };
 
 //スプレッドシートよりスレッド取得   2023/04/14(金) 有田海斗

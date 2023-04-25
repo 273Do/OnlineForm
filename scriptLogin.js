@@ -35,22 +35,26 @@ function loginBtn() {
           showMessage("IDとPASSが一致しました．");
           //ログイン処理
           //アクセスコード生成　2023年4月25日　有田海斗
-          
+
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
-          var access_code = console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2));
-          var url = 'https://script.google.com/macros/s/AKfycbzluX4FeB8T-SLIC-cXbEQX3hbEmcJgNlC5S5Zt8KO94Q2gE-tmKiQk_5JLk587po6v/exec' +
-          '?col=' + (i + 2) +
-          '&value=' + encodeURIComponent(access_code);
+          var access_code = console.log(
+            (Math.random() + 1).toString(36).substring(2) +
+              (Math.random() + 1).toString(36).substring(2) +
+              (Math.random() + 1).toString(36).substring(2)
+          );
+          var url =
+            "https://script.google.com/macros/s/AKfycbzluX4FeB8T-SLIC-cXbEQX3hbEmcJgNlC5S5Zt8KO94Q2gE-tmKiQk_5JLk587po6v/exec" +
+            "?col=" +
+            (i + 2) +
+            "&value=" +
+            encodeURIComponent(access_code);
           var xhr = new XMLHttpRequest();
-          xhr.open('GET', url);
+          xhr.open("GET", url);
           xhr.send();
-          
+
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          location = 'index.html?user=' + access_code;
-          
-          // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-          BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
-          BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+          location = "index.html?user=" + access_code;
+
           studentIDAndGradeAnalysis(userData[i]["Mail"]);
         } else {
           flag = true;
@@ -173,7 +177,6 @@ function studentIDAndGradeAnalysis(UniEmail) {
 
   if (Undergraduate == "" || Department == "") {
     showError("学籍番号に誤りがあります.");
-    break;
   } else {
     return [
       Undergraduate,
