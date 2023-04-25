@@ -38,18 +38,15 @@ function loginBtn() {
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
           var access_code = console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2));
-          var url = 'https://script.google.com/macros/s/AKfycbyufeItpOKm4FAu3J_Pycp8VQKn90vDV_tTo_nMRNe-u4HjIfZ84z2frIVBhu5Bt-fK6w/exec' +
-          '?spreadsheetId=' + '1S_clTgUNnonAjDGJDke6BPhp1EAntmAHg8_mut7_yFg' +
-          '&sheetName=' + 'Account' +
-          '&row=' + 9 +
-          '&col=' + i + 2 +
-          '&value=' + encodeURIComponent(access_code);
+          var url = 'https://script.google.com/macros/s/AKfycbzDyOmVY9N-aRyJNA8i9hlFdd1AaS7wt0pwu0yj13dBodCsa8o74ixTH_EWUZazek6_yQ/exec' +
+          '?col=' + (i + 2) +
+          '&value=' + access_code;
           var xhr = new XMLHttpRequest();
           xhr.open('POST', url);
           xhr.send();
           
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          location = 'index.html?=user' + access_code;
+          location = 'index.html?user=' + access_code;
           
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
           BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
