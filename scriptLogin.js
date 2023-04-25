@@ -1,6 +1,8 @@
 //ロード時の動作
 window.onload = function () {
   document.querySelector("#register").style.display = "none";
+  BGImageAndPE(3, 0); //初期値
+  BGImageAndPE(1, 1); //初期値
 };
 
 //スプレッドシートよりユーザー情報取得   2023/04/19(水) 有田海斗
