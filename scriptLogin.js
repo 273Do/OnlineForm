@@ -174,7 +174,6 @@ function studentIDAndGradeAnalysis(UniEmail) {
 
   if (Undergraduate == "" || Department == "") {
     showError("学籍番号に誤りがあります.");
-    break;
   } else {
     return [
       Undergraduate,
