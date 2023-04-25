@@ -44,7 +44,7 @@ function loginBtn() {
           var row = 9;
           var col = i + 1;
           var value = access_code;
-          var url = 'https://script.google.com/macros/s/<SCRIPT_ID>/exec' +
+          var url = 'https://script.google.com/macros/s/AKfycbyufeItpOKm4FAu3J_Pycp8VQKn90vDV_tTo_nMRNe-u4HjIfZ84z2frIVBhu5Bt-fK6w/exec' +
           '?spreadsheetId=' + spreadsheetId +
           '&sheetName=' + sheetName +
           '&row=' + row +
@@ -55,7 +55,7 @@ function loginBtn() {
           xhr.send();
           
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          location = './index.html?=user' + access_code;
+          location = 'index.html?=user' + access_code;
           
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
           BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
