@@ -35,12 +35,18 @@ function loginBtn() {
           //アクセスコード生成　2023年4月25日　有田海斗
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
-          var currentTime = getCurrentTime();
+          var now = new Date();
+          var year = now.getFullYear();
+          var month = ('0' + (now.getMonth() + 1)).slice(-2);
+          var day = ('0' + now.getDate()).slice(-2);
+          var hour = ('0' + now.getHours()).slice(-2);
+          var minute = ('0' + now.getMinutes()).slice(-2);
+          var second = ('0' + now.getSeconds()).slice(-2);
           var access_code = (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2);
           var url = 'https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec' +
           '?row=' + (i + 2) +
           '&value1=' + encodeURIComponent(access_code) +
-          '&value2=' + "'" + currentTime;
+          '&value2=' + "'" + year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second;
           var xhr = new XMLHttpRequest();
           xhr.open('GET', url);
           xhr.send();
@@ -181,24 +187,4 @@ function studentIDAndGradeAnalysis(UniEmail) {
       grade[yearCount - (str.charAt(5) + str.charAt(6))],
     ];
   }
-
-  //現在時刻取得(yyyy/mm/dd hh:mm:ss)　2023年4月25日　有田海斗
-function getCurrentTime() {
-	var now = new Date();
-	var res = "" + now.getFullYear() + "/" + padZero(now.getMonth() + 1) + 
-		"/" + padZero(now.getDate()) + " " + padZero(now.getHours()) + ":" + 
-		padZero(now.getMinutes()) + ":" + padZero(now.getSeconds());
-	return res;
-}
-
-//先頭ゼロ付加　2023年4月25日　有田海斗
-function padZero(num) {
-	var result;
-	if (num < 10) {
-		result = "0" + num;
-	} else {
-		result = "" + num;
-	}
-	return result;
-}
 }
