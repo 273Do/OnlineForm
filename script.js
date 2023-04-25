@@ -466,3 +466,4 @@ function searchComment(words) {
     showError("コメントが見つかりませんでした．", "検索：" + words);
   else return output;
 }
+//branchTest
