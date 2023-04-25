@@ -54,8 +54,15 @@ fetch(thread_data)
     document.getElementById("dateAndTimeEtc").innerHTML =
       data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
 
-      //配列確認　2023年4月25日　有田海斗
-      console.log(e)
+      //データ取得確認　2023年4月25日　有田海斗
+      console.log(trueThreadsStorage);
+      console.log(data[tN]["Thread_Title"]);
+      console.log(data[tN]["Creator_Name"]);
+      console.log(data[tN]["Undergraduate"]);
+      console.log(data[tN]["Department"]);
+      console.log(data[tN]["Grade"]);
+      console.log(data[tN]["date(yyyy/mm/dd)"]);
+      console.log(data[tN]["time(hh:mm:dd)"]);
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
