@@ -53,6 +53,9 @@ fetch(thread_data)
       "回生";
     document.getElementById("dateAndTimeEtc").innerHTML =
       data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
+
+      //配列確認　2023年4月25日　有田海斗
+      console.log(e)
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
