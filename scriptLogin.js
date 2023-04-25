@@ -35,18 +35,11 @@ function loginBtn() {
           //アクセスコード生成　2023年4月25日　有田海斗
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
-          var now = new Date();
-          var year = now.getFullYear();
-          var month = ('0' + (now.getMonth() + 1)).slice(-2);
-          var day = ('0' + now.getDate()).slice(-2);
-          var hour = ('0' + now.getHours()).slice(-2);
-          var minute = ('0' + now.getMinutes()).slice(-2);
-          var second = ('0' + now.getSeconds()).slice(-2);
           var access_code = (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2);
           var url = 'https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec' +
           '?row=' + (i + 2) +
           '&value1=' + encodeURIComponent(access_code) +
-          '&value2=' + "'" + year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second;
+          '&value2=' + "";
           var xhr = new XMLHttpRequest();
           xhr.open('GET', url);
           xhr.send();
@@ -59,7 +52,7 @@ function loginBtn() {
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
           setTimeout(function(){
             location.href = "index.html?user=" + access_code;
-          }, 100);
+          }, 1000);
         } else {
           flag = true;
         }

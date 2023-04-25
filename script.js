@@ -2,6 +2,7 @@
 var viewOnly = 1;
 //ロード時の動作
 window.onload = function () {
+
   document.querySelector("#searchByTitle").style.display = "none";
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#page2").style.display = "none";
@@ -11,9 +12,75 @@ window.onload = function () {
 
   // BGImageAndPE(userData[i]["BackGround"], 0);
   // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+
+//パラーメーターの有無を確認．　2023年4月25日　有田海斗
+const url = new URL(window.location.href);
+const params = url.searchParams;
+
+//パラメーターが無い場合、ログイン画面へ遷移．　2023年4月25日　有田海斗
+if(params == "" || params == null){
+  setTimeout(function(){
+    location.href = "indexLogin.html";
+  }, 100);
+}
+
+//データベースからアカウント情報を取得．　2023年4月25日　有田海斗
+let userData = [];
+const user_data = "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
+        
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    fetch(user_data)
+    .then((response) => response.json())
+    .then((data) => {
+      userData = data;
+        resolve();
+      })
+    .catch((error) => {
+      reject(error);
+    });
+  });
 };
 
-//スプレッドシートよりスレッド取得   2023/04/14(金) 有田海斗
+fetchData().then(() => {
+  const user = params.get("user");
+
+  //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
+  let flag = false;
+  for (var i = 0; i < userData.length; i++) {
+    if (userData[i]["Access_Code"] == user) {
+      //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = ('0' + (now.getMonth() + 1)).slice(-2);
+      var day = ('0' + now.getDate()).slice(-2);
+      var hour = ('0' + now.getHours()).slice(-2);
+      var minute = ('0' + now.getMinutes()).slice(-2);
+      var second = ('0' + now.getSeconds()).slice(-2);
+      var url = 'https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec' +
+      '?row=' + (i + 2) +
+      '&value1=' + encodeURIComponent("") +
+      '&value2=' + "'" + year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.send();
+      flag = false;
+      break;
+    }else{
+      flag = true;
+    }
+  }
+  if(flag == true){
+    setTimeout(function(){
+      location.href = "indexLogin.html";
+    }, 100);
+  }
+}).catch((error) => {
+  showError("ユーザー情報の取得に失敗しました.", error);
+});
+};
+
+//スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
 var tN = 0; //threadNumber
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
