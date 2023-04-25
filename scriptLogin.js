@@ -21,7 +21,6 @@ fetch(user_data)
 
 //データベースとのログイン情報照合処理．　2023.04.21(金)　有田海斗
 let flag = false;
-var access_code;
 function loginBtn() {
   const email = document.getElementsByClassName("email");
   const password = document.getElementsByClassName("password");
@@ -36,20 +35,15 @@ function loginBtn() {
           showMessage("IDとPASSが一致しました．");
           //ログイン処理
           //アクセスコード生成　2023年4月25日　有田海斗
-          access_code = console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2));
           
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
-          var spreadsheetId = '1S_clTgUNnonAjDGJDke6BPhp1EAntmAHg8_mut7_yFg';
-          var sheetName = 'Account';
-          var row = 9;
-          var col = i + 1;
-          var value = access_code;
+          var access_code = console.log((Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2));
           var url = 'https://script.google.com/macros/s/AKfycbyufeItpOKm4FAu3J_Pycp8VQKn90vDV_tTo_nMRNe-u4HjIfZ84z2frIVBhu5Bt-fK6w/exec' +
-          '?spreadsheetId=' + spreadsheetId +
-          '&sheetName=' + sheetName +
-          '&row=' + row +
-          '&col=' + col +
-          '&value=' + encodeURIComponent(value);
+          '?spreadsheetId=' + '1S_clTgUNnonAjDGJDke6BPhp1EAntmAHg8_mut7_yFg' +
+          '&sheetName=' + 'Account' +
+          '&row=' + 9 +
+          '&col=' + i + 2 +
+          '&value=' + encodeURIComponent(access_code);
           var xhr = new XMLHttpRequest();
           xhr.open('POST', url);
           xhr.send();
