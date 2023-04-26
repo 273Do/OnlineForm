@@ -46,9 +46,8 @@
           <!-- ログイン -->
           <div id="login">
             <span tooltip="新規登録" flow="down" style="margin-left: 5px">
-              <div id="registerIcon">
-                <ion-icon name="person-add-outline" aria-hidden="true">
-                </ion-icon>
+              <div id="demoRegisterIcon">
+                <ion-icon name="person-add-outline"></ion-icon>
               </div>
             </span>
             <span tooltip="閲覧のみ" flow="down" style="margin-left: 40px">
@@ -184,6 +183,49 @@
           origin: "bottom",
           distance: "10px",
           interval: 150,
+        }
+      );
+
+      ScrollReveal().reveal(
+        "#login div, #login h2, button, #demoRegisterIcon",
+        {
+          delay: 200,
+          origin: "bottom",
+          distance: "28px",
+          interval: 100,
+          afterReveal: function () {
+            window.setTimeout(function () {
+              // document.getElementById("registerIcon").innerHTML =
+              //   '<ion-icon name="person-add-outline"></ion-icon>';
+              document.getElementById("demoRegisterIcon").id = "registerIcon";
+              //registerボタンが押された時の動作
+              document
+                .querySelector("#registerIcon")
+                .addEventListener("click", function () {
+                  document.querySelector("#login").style.display = "none";
+                  document.querySelector("#register").style.display = "block";
+                });
+              //loginボタンが押された時の動作
+              document
+                .querySelector("#loginIcon")
+                .addEventListener("click", function () {
+                  document.querySelector("#register").style.display = "none";
+                  document.querySelector("#login").style.display = "block";
+                });
+              var registerIcon = document.getElementById("registerIcon");
+              registerIcon.style.position = "absolute";
+              registerIcon.style.marginTop = "-10px";
+              registerIcon.style.lineHeight = "57px";
+              registerIcon.style.cursor = "pointer";
+              registerIcon.style.transition = "all 0.3s";
+              registerIcon.addEventListener("mouseover", function () {
+                registerIcon.style.opacity = "0.5";
+              });
+              registerIcon.addEventListener("mouseleave", function () {
+                registerIcon.style.opacity = "1";
+              });
+            }, 450);
+          },
         }
       );
     </script>

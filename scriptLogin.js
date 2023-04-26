@@ -122,18 +122,6 @@ function registerBtn() {
   }
 }
 
-//registerボタンが押された時の動作
-document.querySelector("#registerIcon").addEventListener("click", function () {
-  document.querySelector("#login").style.display = "none";
-  document.querySelector("#register").style.display = "block";
-});
-
-//loginボタンが押された時の動作
-document.querySelector("#loginIcon").addEventListener("click", function () {
-  document.querySelector("#register").style.display = "none";
-  document.querySelector("#login").style.display = "block";
-});
-
 //viewOnlyボタンが押された時の動作
 function viewOnly() {
   Swal.fire({
