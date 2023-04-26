@@ -4,7 +4,7 @@ var viewOnly = 1;
 window.onload = function () {
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
-  document.querySelector("#page1").style.display = "none";
+  document.querySelector("#page2").style.display = "none";
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
@@ -66,12 +66,18 @@ fetch(thread_data)
       "回生";
     document.getElementById("dateAndTimeEtc").innerHTML =
       data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
+    ScrollReveal().reveal("#threadTitle", {
+      delay: 200,
+      origin: "left",
+      distance: "60px",
+    });
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
   });
 
 var chat_load = "";
+var chat_load2 = "";
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
@@ -84,6 +90,24 @@ fetch(comment_data)
       commentStorage.push(data[i]);
       chat_load +=
         '<div class="commentDetail"> <li class="chatDetail1">' +
+        data[i]["Wrote_Name"] +
+        "(" +
+        data[i]["Undergraduate"] +
+        " " +
+        data[i]["Department"] +
+        " " +
+        data[i]["Grade"] +
+        "回生)" +
+        '</li> <li class="chatDetail2">' +
+        data[i]["date(yyyy/mm/dd)"] +
+        "　" +
+        data[i]["time(hh:mm:dd)"] +
+        '</li> <li class="comment">' +
+        data[i]["Comment"] +
+        "</li> </div>";
+
+      chat_load2 +=
+        '<div class="trueCommentDetail"> <li class="chatDetail1">' +
         data[i]["Wrote_Name"] +
         "(" +
         data[i]["Undergraduate"] +
@@ -122,6 +146,15 @@ fetch(comment_data)
     //     "</li> </div>";
     // });
     document.getElementById("chat").innerHTML = chat_load;
+    ScrollReveal().reveal("#chat, .commentDetail", {
+      delay: 200,
+      origin: "left",
+      distance: "60px",
+      interval: 100,
+      afterReveal: function () {
+        document.getElementById("chat").innerHTML = chat_load2;
+      },
+    });
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
