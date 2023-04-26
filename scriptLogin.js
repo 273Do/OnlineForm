@@ -135,9 +135,16 @@ document.querySelector("#loginIcon").addEventListener("click", function () {
 });
 
 //viewOnlyボタンが押された時の動作
-document.querySelector(".viewOnly").addEventListener("click", function () {
-  console.log("test");
-});
+function viewOnly() {
+  Swal.fire({
+    icon: "question",
+    title: "閲覧モードに移行しますか?",
+    footer: "スレッド作成や書き込みはできません．",
+    showCancelButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) location = "index.html";
+  });
+}
 
 //学籍番号から，学部学科と学年を解析する関数
 //学部・学科・学年の3つをリターンするように改良．　2023.04.21(金)　有田海斗
