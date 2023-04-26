@@ -132,7 +132,7 @@ fetch(comment_data)
     ScrollReveal().reveal("#chat, .commentDetail", {
       delay: 200,
       origin: "left",
-      distance: "60px",
+      distance: "28px",
       interval: 100,
       afterReveal: function () {
         window.setTimeout(function () {
@@ -236,11 +236,13 @@ function option() {
 }
 //アカウント情報の変更　　2023/04/23(日) 山口慶大
 //バリデーションチェックはまだ
+//'<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="changeUsername">Username</option><option value="changePassword">Password</option></select><input type="text" class="swal2-input" id="changeUsername" style="align-items: center"><input type="password" class="swal2-input" id="changePassword" style="  display:flex, flex-direction: column,align-items:center">'
 function changeAccountDate() {
+  let tmp = "";
   Swal.fire({
-    title: "ChangeAccountDate",
+    title: "ChangeAccountData",
     input: "checkbox",
-    html: '<select name="example" class="swal2-input" id="changeContents"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
+    html: '<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
     backdrop: "none",
     inputPlaceholder: "ChangeYourAccountDate?",
     showCancelButton: true,
@@ -251,11 +253,28 @@ function changeAccountDate() {
       else if (document.getElementById("changeContents").value == "select")
         return "項目が選択されていません．";
       else {
-        console.log(
-          document.getElementById("changeContents").value,
-          document.getElementById("changeAccount").value
-        );
-        showMessage("変更しました．");
+        tmp = document.getElementById("changeAccount").value;
+        if (document.getElementById("changeContents").value == "Username") {
+          showMessage("変更しました．");
+          console.log(
+            document.getElementById("changeContents").value,
+            document.getElementById("changeAccount").value
+          );
+        } else {
+          Swal.fire({
+            title: "ReEnterPassword",
+            input: "password",
+            showCancelButton: true,
+            inputValidator: (value) => {
+              value == tmp
+                ? showMessage("変更しました．")
+                : showError(
+                    "変更できませんでした．",
+                    "パスワードが合致しません．"
+                  );
+            },
+          });
+        }
       }
     },
   });
