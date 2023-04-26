@@ -105,24 +105,7 @@ fetch(comment_data)
         '</li> <li class="comment">' +
         data[i]["Comment"] +
         "</li> </div>";
-
-      chat_load2 +=
-        '<div class="trueCommentDetail"> <li class="chatDetail1">' +
-        data[i]["Wrote_Name"] +
-        "(" +
-        data[i]["Undergraduate"] +
-        " " +
-        data[i]["Department"] +
-        " " +
-        data[i]["Grade"] +
-        "回生)" +
-        '</li> <li class="chatDetail2">' +
-        data[i]["date(yyyy/mm/dd)"] +
-        "　" +
-        data[i]["time(hh:mm:dd)"] +
-        '</li> <li class="comment">' +
-        data[i]["Comment"] +
-        "</li> </div>";
+      chat_load2 = chat_load.replace("commentDetail", "trueCommentDetail");
     }
     //リファクタリングを行いました．(今後，スレッド番号による変更がありそうなのでコメント化しています．)   2023.04.23(日)　山口慶大
     //  data.forEach((e) => {
@@ -152,7 +135,9 @@ fetch(comment_data)
       distance: "60px",
       interval: 100,
       afterReveal: function () {
-        document.getElementById("chat").innerHTML = chat_load2;
+        window.setTimeout(function () {
+          document.getElementById("chat").innerHTML = chat_load2;
+        }, 450);
       },
     });
   })
