@@ -255,7 +255,10 @@ function changeAccountDate() {
       else {
         tmp = document.getElementById("changeAccount").value;
         if (document.getElementById("changeContents").value == "Username") {
-          showMessage("変更しました．");
+          showMessage(
+            "変更しました．",
+            "変更：" + document.getElementById("changeAccount").value
+          );
           console.log(
             document.getElementById("changeContents").value,
             document.getElementById("changeAccount").value
