@@ -2,7 +2,7 @@
 var viewOnly = 1;
 
 let userData = [];
-var i = 0
+var i = 0;
 
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
@@ -49,7 +49,7 @@ window.onload = function () {
   fetchData()
     .then(() => {
       const user = params.get("user");
-      
+
       //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
       let flag = false;
       for (i = 0; i < userData.length; i++) {
@@ -84,7 +84,7 @@ window.onload = function () {
           var xhr = new XMLHttpRequest();
           xhr.open("GET", url);
           xhr.send();
-          
+
           flag = false;
           break;
         } else {
@@ -117,6 +117,7 @@ window.onload = function () {
 };
 //スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
 var tN = 0; //threadNumber
+var commonThreadData;
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
 const thread_data =
@@ -124,42 +125,8 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    //全スレッドを取得して配列に格納   2023/04/22(土) 山口慶大
-    data.forEach((e) => {
-      threadsStorage.push(e);
-      trueThreadsStorage.push(
-        e["Thread_Title"] +
-          "　" +
-          e["Creator_Name"] +
-          "　" +
-          e["date(yyyy/mm/dd)"] +
-          "　" +
-          e["time(hh:mm:dd)"] +
-          "　" +
-          e["Undergraduate"] +
-          e["Department"] +
-          "　" +
-          e["Grade"] +
-          "回生"
-      );
-    });
-    document.getElementById("title").innerHTML =
-      "<h2>" + data[tN]["Thread_Title"] + "</h2>";
-    document.getElementById("maker").innerHTML = data[tN]["Creator_Name"];
-    document.getElementById("facultyEtc").innerHTML =
-      data[tN]["Undergraduate"] +
-      " " +
-      data[tN]["Department"] +
-      " " +
-      data[tN]["Grade"] +
-      "回生";
-    document.getElementById("dateAndTimeEtc").innerHTML =
-      data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
-    ScrollReveal().reveal("#threadTitle", {
-      delay: 200,
-      origin: "left",
-      distance: "60px",
-    });
+    commonThreadData = data;
+    showTitle(data, threadID);
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
@@ -175,60 +142,8 @@ const comment_data =
 fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
-    for (var i = 0; i < data.length; i++) {
-      commentStorage.push(data[i]);
-      chat_load +=
-        '<div class="commentDetail"> <li class="chatDetail1">' +
-        data[i]["Wrote_Name"] +
-        "(" +
-        data[i]["Undergraduate"] +
-        " " +
-        data[i]["Department"] +
-        " " +
-        data[i]["Grade"] +
-        "回生)" +
-        '</li> <li class="chatDetail2">' +
-        data[i]["date(yyyy/mm/dd)"] +
-        "　" +
-        data[i]["time(hh:mm:dd)"] +
-        '</li> <li class="comment">' +
-        data[i]["Comment"] +
-        "</li> </div>";
-      chat_load2 = chat_load.replace("commentDetail", "trueCommentDetail");
-    }
-    //リファクタリングを行いました．(今後，スレッド番号による変更がありそうなのでコメント化しています．)   2023.04.23(日)　山口慶大
-    //  data.forEach((e) => {
-    //   commentStorage.push(e);
-    //   chat_load +=
-    //     '<div class="commentDetail"> <li class="chatDetail1">' +
-    //     e["Wrote_Name"] +
-    //     "(" +
-    //     e["Undergraduate"] +
-    //     " " +
-    //     e["Department"] +
-    //     " " +
-    //     e["Grade"] +
-    //     "回生)" +
-    //     '</li> <li class="chatDetail2">' +
-    //     e["date(yyyy/mm/dd)"] +
-    //     "　" +
-    //     e["time(hh:mm:dd)"] +
-    //     '</li> <li class="comment">' +
-    //     e["Comment"] +
-    //     "</li> </div>";
-    // });
-    document.getElementById("chat").innerHTML = chat_load;
-    ScrollReveal().reveal("#chat, .commentDetail", {
-      delay: 200,
-      origin: "left",
-      distance: "28px",
-      interval: 100,
-      afterReveal: function () {
-        window.setTimeout(function () {
-          document.getElementById("chat").innerHTML = chat_load2;
-        }, 450);
-      },
-    });
+    commonCommentData = data;
+    showThread(data, threadID);
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
@@ -255,7 +170,11 @@ document.querySelector("#Account").addEventListener("click", function () {
     title: "YourAccount",
     // toast: "true",
     backdrop: "none",
-    html: "アカウント名：" + userData[i]["Name"] + "<br>メールアドレス：" + userData[i]["Mail"],
+    html:
+      "アカウント名：" +
+      userData[i]["Name"] +
+      "<br>メールアドレス：" +
+      userData[i]["Mail"],
     footer:
       "<p onclick=changeAccountData() style='cursor:pointer'>変更はこちら</p>",
     showCancelButton: true,
@@ -272,7 +191,7 @@ document.querySelector("#Logout").addEventListener("click", function () {
     showCancelButton: true,
   }).then((result) => {
     if (result.isConfirmed) {
-      setTimeout(function(){
+      setTimeout(function () {
         location.href = "indexLogin.html";
       }, 100);
     }
@@ -344,13 +263,13 @@ function changeAccountData() {
       else {
         tmp = document.getElementById("changeAccount").value;
         if (document.getElementById("changeContents").value == "Username") {
-
           var url =
-          "https://script.google.com/macros/s/AKfycbwXlVw4BI718xsCxkaQYOatfIGhKUQSQpFRiZkQ5S9vZHbql6R-65u415HbEvUQhKjj/exec" +
-          "?row=" +
-          (i + 2) +
-          "&changeData=" + document.getElementById("changeAccount").value +
-          encodeURIComponent("");
+            "https://script.google.com/macros/s/AKfycbwXlVw4BI718xsCxkaQYOatfIGhKUQSQpFRiZkQ5S9vZHbql6R-65u415HbEvUQhKjj/exec" +
+            "?row=" +
+            (i + 2) +
+            "&changeData=" +
+            document.getElementById("changeAccount").value +
+            encodeURIComponent("");
           var xhr = new XMLHttpRequest();
           xhr.open("GET", url);
           xhr.send();
@@ -370,24 +289,25 @@ function changeAccountData() {
             input: "password",
             showCancelButton: true,
             inputValidator: (value) => {
-              if(value == tmp){
+              if (value == tmp) {
                 url =
-                "https://script.google.com/macros/s/AKfycbxoiJlyW8AJ0_HqNvYebBkmL0b019rlR0KyRuZzsGAn7EY9fD8BuYjt5w4UIVqjmKrD/exec" +
-                "?row=" +
-                (i + 2) +
-                "&changeData=" + tmp +
-                encodeURIComponent("");
+                  "https://script.google.com/macros/s/AKfycbxoiJlyW8AJ0_HqNvYebBkmL0b019rlR0KyRuZzsGAn7EY9fD8BuYjt5w4UIVqjmKrD/exec" +
+                  "?row=" +
+                  (i + 2) +
+                  "&changeData=" +
+                  tmp +
+                  encodeURIComponent("");
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", url);
                 xhr.send();
 
                 showMessage("変更しました．");
-              }else{
+              } else {
                 showError(
-                    "変更できませんでした．",
-                    "パスワードが一致しません．"
-                  );
-                }
+                  "変更できませんでした．",
+                  "パスワードが一致しません．"
+                );
+              }
             },
           });
         }
@@ -633,4 +553,89 @@ function searchComment(words) {
     // showError("コメントが見つかりませんでした．", "検索：" + words);
     return "コメントが見つかりませんでした． 検索：" + words;
   else return output;
+}
+//スレッドIDを指定したらコメントを表示する関数
+function showThread(commentData, thread_ID) {
+  var chat_load = "";
+  var chat_load2 = "";
+  commentData.forEach((e) => {
+    commentStorage.push(e);
+    if (e["Thread_ID"] == thread_ID) {
+      chat_load +=
+        '<div class="commentDetail"> <li class="chatDetail1">' +
+        e["Wrote_Name"] +
+        "(" +
+        e["Undergraduate"] +
+        " " +
+        e["Department"] +
+        " " +
+        e["Grade"] +
+        "回生)" +
+        '</li> <li class="chatDetail2">' +
+        e["date(yyyy/mm/dd)"] +
+        "　" +
+        e["time(hh:mm:dd)"] +
+        '</li> <li class="comment">' +
+        e["Comment"] +
+        "</li> </div>";
+      chat_load2 = chat_load.replace("commentDetail", "trueCommentDetail");
+    }
+  });
+  document.getElementById("chat").innerHTML = chat_load;
+  ScrollReveal().reveal("#chat, .commentDetail", {
+    delay: 200,
+    origin: "left",
+    distance: "28px",
+    interval: 100,
+    afterReveal: function () {
+      window.setTimeout(function () {
+        document.getElementById("chat").innerHTML = chat_load2;
+      }, 450);
+    },
+  });
+}
+//スレッドIDを指定したらタイトルを表示する関数
+function showTitle(threadData, thread_ID) {
+  var i = 0;
+  threadData.forEach((e) => {
+    threadsStorage.push(e);
+    trueThreadsStorage.push(
+      e["Thread_Title"] +
+        "　" +
+        e["Creator_Name"] +
+        "　" +
+        e["date(yyyy/mm/dd)"] +
+        "　" +
+        e["time(hh:mm:dd)"] +
+        "　" +
+        e["Undergraduate"] +
+        e["Department"] +
+        "　" +
+        e["Grade"] +
+        "回生"
+    );
+    if (e["Thread_ID"] == thread_ID) {
+      document.getElementById("title").innerHTML =
+        "<h2>" + threadData[i]["Thread_Title"] + "</h2>";
+      document.getElementById("maker").innerHTML =
+        threadData[i]["Creator_Name"];
+      document.getElementById("facultyEtc").innerHTML =
+        threadData[i]["Undergraduate"] +
+        " " +
+        threadData[i]["Department"] +
+        " " +
+        threadData[i]["Grade"] +
+        "回生";
+      document.getElementById("dateAndTimeEtc").innerHTML =
+        threadData[i]["date(yyyy/mm/dd)"] +
+        "　" +
+        threadData[i]["time(hh:mm:dd)"];
+    }
+    i++;
+  });
+  ScrollReveal().reveal("#threadTitle", {
+    delay: 200,
+    origin: "left",
+    distance: "60px",
+  });
 }
