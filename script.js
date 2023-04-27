@@ -25,9 +25,11 @@ window.onload = function () {
   const params = url.searchParams;
 
   //パラメーターが無い場合、ログイン画面へ遷移．　2023年4月25日　有田海斗
+
   if (params == "" || params == null) {
     setTimeout(function () {
-      location.href = "indexLogin.html";
+      //一旦無効化
+      //location.href = "indexLogin.html";
     }, 100);
   }
 
@@ -96,7 +98,8 @@ window.onload = function () {
       }
       if (flag == true) {
         setTimeout(function () {
-          location.href = "indexLogin.html";
+          //一旦無効化
+          // location.href = "indexLogin.html";
         }, 100);
       }
     })
