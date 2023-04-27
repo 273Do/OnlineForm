@@ -329,11 +329,11 @@ function option() {
 function changeAccountData() {
   let tmp = "";
   Swal.fire({
-    title: "ChangeAccountData",
+    title: "Change Account Data",
     input: "checkbox",
     html: '<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
     backdrop: "none",
-    inputPlaceholder: "ChangeYourAccountDate?",
+    inputPlaceholder: "Change Your Account Data?",
     showCancelButton: true,
     inputValidator: (value) => {
       if (!value) return "You need to agree.";
@@ -344,6 +344,18 @@ function changeAccountData() {
       else {
         tmp = document.getElementById("changeAccount").value;
         if (document.getElementById("changeContents").value == "Username") {
+
+          var url =
+          "https://script.google.com/macros/s/AKfycbwXlVw4BI718xsCxkaQYOatfIGhKUQSQpFRiZkQ5S9vZHbql6R-65u415HbEvUQhKjj/exec" +
+          "?row=" +
+          (i + 2) +
+          "&changeData=" + document.getElementById("changeAccount").value +
+          encodeURIComponent("");
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+          xhr.send();
+          userData[i]["Name"] = document.getElementById("changeAccount").value;
+
           showMessage(
             "変更しました．",
             "変更：" + document.getElementById("changeAccount").value
@@ -354,16 +366,28 @@ function changeAccountData() {
           );
         } else {
           Swal.fire({
-            title: "ReEnterPassword",
+            title: "ReEnter New Password",
             input: "password",
             showCancelButton: true,
             inputValidator: (value) => {
-              value == tmp
-                ? showMessage("変更しました．")
-                : showError(
+              if(value == tmp){
+                url =
+                "https://script.google.com/macros/s/AKfycbxoiJlyW8AJ0_HqNvYebBkmL0b019rlR0KyRuZzsGAn7EY9fD8BuYjt5w4UIVqjmKrD/exec" +
+                "?row=" +
+                (i + 2) +
+                "&changeData=" + tmp +
+                encodeURIComponent("");
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url);
+                xhr.send();
+
+                showMessage("変更しました．");
+              }else{
+                showError(
                     "変更できませんでした．",
-                    "パスワードが合致しません．"
+                    "パスワードが一致しません．"
                   );
+                }
             },
           });
         }
