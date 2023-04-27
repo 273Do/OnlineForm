@@ -71,7 +71,12 @@
                 <input class="password" type="password" required />
                 <label>Password</label>
               </div>
-              <button type="submit" class="btn" onclick="loginBtn()">
+              <button
+                id="loginSub"
+                type="submit"
+                class="btn"
+                onclick="loginBtn()"
+              >
                 Login
               </button>
             </form>
@@ -187,7 +192,7 @@
       );
 
       ScrollReveal().reveal(
-        "#login div, #login h2, button, #demoRegisterIcon",
+        "#login div, #login h2, #loginSub, #demoRegisterIcon",
         {
           delay: 200,
           origin: "bottom",
