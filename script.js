@@ -49,6 +49,8 @@ window.onload = function () {
   fetchData()
     .then(() => {
       const user = params.get("user");
+      login_user_name = userData[i]["Name"];
+      login_user_email = userData[i]["Mail"];
 
       //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
       let flag = false;
@@ -85,9 +87,6 @@ window.onload = function () {
           xhr.open("GET", url);
           xhr.send();
           
-          login_user_name = userData[i]["Name"];
-          login_user_email = userData[i]["Mail"];
-
           flag = false;
           break;
         } else {
