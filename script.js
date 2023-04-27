@@ -1,85 +1,116 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 1;
-//ロード時の動作
+//ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
-
   document.querySelector("#searchByTitle").style.display = "none";
   document.querySelector("#searchByTag").style.display = "none";
+  document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page2").style.display = "none";
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
-
+  //データ引渡しができてからコメント解除
   // BGImageAndPE(userData[i]["BackGround"], 0);
   // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
 
-//パラーメーターの有無を確認．　2023年4月25日　有田海斗
-const url = new URL(window.location.href);
-const params = url.searchParams;
+  //パラーメーターの有無を確認．　2023年4月25日　有田海斗
+  const url = new URL(window.location.href);
+  const params = url.searchParams;
 
-//パラメーターが無い場合、ログイン画面へ遷移．　2023年4月25日　有田海斗
-if(params == "" || params == null){
-  setTimeout(function(){
-    location.href = "indexLogin.html";
-  }, 100);
-}
-
-//データベースからアカウント情報を取得．　2023年4月25日　有田海斗
-let userData = [];
-const user_data = "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
-        
-const fetchData = () => {
-  return new Promise((resolve, reject) => {
-    fetch(user_data)
-    .then((response) => response.json())
-    .then((data) => {
-      userData = data;
-        resolve();
-      })
-    .catch((error) => {
-      reject(error);
-    });
-  });
-};
-
-fetchData().then(() => {
-  const user = params.get("user");
-
-  //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
-  let flag = false;
-  for (var i = 0; i < userData.length; i++) {
-    if (userData[i]["Access_Code"] == user) {
-      //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
-      var now = new Date();
-      var year = now.getFullYear();
-      var month = ('0' + (now.getMonth() + 1)).slice(-2);
-      var day = ('0' + now.getDate()).slice(-2);
-      var hour = ('0' + now.getHours()).slice(-2);
-      var minute = ('0' + now.getMinutes()).slice(-2);
-      var second = ('0' + now.getSeconds()).slice(-2);
-      var url = 'https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec' +
-      '?row=' + (i + 2) +
-      '&value1=' + encodeURIComponent("") +
-      '&value2=' + "'" + year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second;
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.send();
-      flag = false;
-      break;
-    }else{
-      flag = true;
-    }
-  }
-  if(flag == true){
-    setTimeout(function(){
+  //パラメーターが無い場合、ログイン画面へ遷移．　2023年4月25日　有田海斗
+  if (params == "" || params == null) {
+    setTimeout(function () {
       location.href = "indexLogin.html";
     }, 100);
   }
-}).catch((error) => {
-  showError("ユーザー情報の取得に失敗しました.", error);
-});
-};
 
+  //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
+  let userData = [];
+  const user_data =
+    "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
+
+  const fetchData = () => {
+    return new Promise((resolve, reject) => {
+      fetch(user_data)
+        .then((response) => response.json())
+        .then((data) => {
+          userData = data;
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  fetchData()
+    .then(() => {
+      const user = params.get("user");
+
+      //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
+      let flag = false;
+      for (var i = 0; i < userData.length; i++) {
+        if (userData[i]["Access_Code"] == user) {
+          //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
+          var now = new Date();
+          var year = now.getFullYear();
+          var month = ("0" + (now.getMonth() + 1)).slice(-2);
+          var day = ("0" + now.getDate()).slice(-2);
+          var hour = ("0" + now.getHours()).slice(-2);
+          var minute = ("0" + now.getMinutes()).slice(-2);
+          var second = ("0" + now.getSeconds()).slice(-2);
+          var url =
+            "https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec" +
+            "?row=" +
+            (i + 2) +
+            "&value1=" +
+            encodeURIComponent("") +
+            "&value2=" +
+            "'" +
+            year +
+            "/" +
+            month +
+            "/" +
+            day +
+            " " +
+            hour +
+            ":" +
+            minute +
+            ":" +
+            second;
+          var xhr = new XMLHttpRequest();
+          xhr.open("GET", url);
+          xhr.send();
+          flag = false;
+          break;
+        } else {
+          flag = true;
+        }
+      }
+      if (flag == true) {
+        setTimeout(function () {
+          location.href = "indexLogin.html";
+        }, 100);
+      }
+    })
+    .catch((error) => {
+      showError("ユーザー情報の取得に失敗しました.", error);
+    });
+  //スレッド検索：ワードを入れるたびに動作
+  document
+    .querySelector("#searchByWord")
+    .addEventListener("input", function () {
+      console.log(this.value);
+      console.log(searchThread(this.value, 0));
+    });
+  //コメント検索：ワードを入れるたびに動作
+  document
+    .querySelector("#searchByComment")
+    .addEventListener("input", function () {
+      console.log(this.value);
+      console.log(searchComment(this.value));
+    });
+};
 //スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
 var tN = 0; //threadNumber
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
@@ -120,12 +151,18 @@ fetch(thread_data)
       "回生";
     document.getElementById("dateAndTimeEtc").innerHTML =
       data[tN]["date(yyyy/mm/dd)"] + "　" + data[tN]["time(hh:mm:dd)"];
+    ScrollReveal().reveal("#threadTitle", {
+      delay: 200,
+      origin: "left",
+      distance: "60px",
+    });
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
   });
 
 var chat_load = "";
+var chat_load2 = "";
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
@@ -153,6 +190,7 @@ fetch(comment_data)
         '</li> <li class="comment">' +
         data[i]["Comment"] +
         "</li> </div>";
+      chat_load2 = chat_load.replace("commentDetail", "trueCommentDetail");
     }
     //リファクタリングを行いました．(今後，スレッド番号による変更がありそうなのでコメント化しています．)   2023.04.23(日)　山口慶大
     //  data.forEach((e) => {
@@ -176,6 +214,17 @@ fetch(comment_data)
     //     "</li> </div>";
     // });
     document.getElementById("chat").innerHTML = chat_load;
+    ScrollReveal().reveal("#chat, .commentDetail", {
+      delay: 200,
+      origin: "left",
+      distance: "28px",
+      interval: 100,
+      afterReveal: function () {
+        window.setTimeout(function () {
+          document.getElementById("chat").innerHTML = chat_load2;
+        }, 450);
+      },
+    });
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
@@ -241,9 +290,9 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 //optionボタンが押された時の動作
 function option() {
   const inputOptions = {
-    0: "create",
-    1: "searchByTitle",
-    2: "searchByComment",
+    0: "TitleSearch",
+    1: "CommentSearch",
+    2: "CreateThread",
   };
   Swal.fire({
     title: "About threads",
@@ -255,28 +304,30 @@ function option() {
     inputValidator: (value) => {
       if (!value) return "optionを選択してください．";
       else if (value == 0) {
-        document.querySelector("#createThread").style.display = "block";
-        document.querySelector("#searchByTitle").style.display = "none";
-        document.querySelector("#searchByTag").style.display = "none";
-      } else if (value == 1) {
         document.querySelector("#createThread").style.display = "none";
         document.querySelector("#searchByTitle").style.display = "block";
         document.querySelector("#searchByTag").style.display = "none";
-      } else if (value == 2) {
+      } else if (value == 1) {
         document.querySelector("#createThread").style.display = "none";
         document.querySelector("#searchByTitle").style.display = "none";
         document.querySelector("#searchByTag").style.display = "block";
+      } else if (value == 2) {
+        document.querySelector("#createThread").style.display = "block";
+        document.querySelector("#searchByTitle").style.display = "none";
+        document.querySelector("#searchByTag").style.display = "none";
       }
     },
   });
 }
 //アカウント情報の変更　　2023/04/23(日) 山口慶大
 //バリデーションチェックはまだ
+//'<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="changeUsername">Username</option><option value="changePassword">Password</option></select><input type="text" class="swal2-input" id="changeUsername" style="align-items: center"><input type="password" class="swal2-input" id="changePassword" style="  display:flex, flex-direction: column,align-items:center">'
 function changeAccountDate() {
+  let tmp = "";
   Swal.fire({
-    title: "ChangeAccountDate",
+    title: "ChangeAccountData",
     input: "checkbox",
-    html: '<select name="example" class="swal2-input" id="changeContents"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
+    html: '<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
     backdrop: "none",
     inputPlaceholder: "ChangeYourAccountDate?",
     showCancelButton: true,
@@ -287,11 +338,31 @@ function changeAccountDate() {
       else if (document.getElementById("changeContents").value == "select")
         return "項目が選択されていません．";
       else {
-        console.log(
-          document.getElementById("changeContents").value,
-          document.getElementById("changeAccount").value
-        );
-        showMessage("変更しました．");
+        tmp = document.getElementById("changeAccount").value;
+        if (document.getElementById("changeContents").value == "Username") {
+          showMessage(
+            "変更しました．",
+            "変更：" + document.getElementById("changeAccount").value
+          );
+          console.log(
+            document.getElementById("changeContents").value,
+            document.getElementById("changeAccount").value
+          );
+        } else {
+          Swal.fire({
+            title: "ReEnterPassword",
+            input: "password",
+            showCancelButton: true,
+            inputValidator: (value) => {
+              value == tmp
+                ? showMessage("変更しました．")
+                : showError(
+                    "変更できませんでした．",
+                    "パスワードが合致しません．"
+                  );
+            },
+          });
+        }
       }
     },
   });
@@ -505,7 +576,8 @@ function searchThread(words, fnc) {
     output.push(threadsStorage[e]["Thread_ID"]);
   });
   if (output.length == 0)
-    showError("スレッドが見つかりませんでした．", "検索：" + words);
+    // showError("スレッドが見つかりませんでした．", "検索：" + words);
+    return "スレッドが見つかりませんでした． 検索：" + words;
   else return output;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
@@ -530,6 +602,7 @@ function searchComment(words) {
     .fill()
     .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
   if (output.length == 0)
-    showError("コメントが見つかりませんでした．", "検索：" + words);
+    // showError("コメントが見つかりませんでした．", "検索：" + words);
+    return "コメントが見つかりませんでした． 検索：" + words;
   else return output;
 }

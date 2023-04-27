@@ -83,7 +83,8 @@ li {
   margin-top: -2px;
 }
 
-textarea {
+textarea,
+.message-form {
   resize: none;
   background: none;
   outline: none;
@@ -260,7 +261,9 @@ header ul li {
   border-radius: 20px;
 }
 
-.commentDetail {
+.commentDetail,
+.trueCommentDetail,
+.threadsDetail {
   width: 95%;
   border-bottom: 1px solid #f4ede4;
   margin-bottom: 15px;
@@ -383,12 +386,12 @@ header ul li {
   border-radius: 20px;
 }
 
-#result > .commentDetail {
+#result > .threadsDetail {
   cursor: pointer;
   transition: all 0.3s;
 }
 
-#result > .commentDetail:hover {
+#result > .threadsDetail:hover {
   opacity: 0.5;
 }
 /* footer */

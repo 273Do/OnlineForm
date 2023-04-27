@@ -160,11 +160,12 @@ function showError(value, error) {
   });
 }
 //メッセージ表示
-function showMessage(value) {
+function showMessage(value, message) {
   Swal.fire({
     icon: "success",
     title: value,
     toast: "true",
     width: "400px",
+    text: message,
   });
 }

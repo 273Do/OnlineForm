@@ -89,7 +89,12 @@
             </div>-->
             </ul>
             <form class="messageArea">
-              <textarea class="message-form" rows="1" cols="40"></textarea>
+              <textarea
+                class="message-form"
+                rows="1"
+                cols="40"
+                wrap="soft"
+              ></textarea>
               <button type="submit" class="btn">
                 <span tooltip="コメント送信" flow="up">
                   <ion-icon id="sndIcon" name="send-outline"></ion-icon
@@ -113,7 +118,7 @@
                 >
                   <ion-icon name="options-outline"></ion-icon> </ion-button
               ></span>
-              <textarea class="message-form" rows="1" cols="40"></textarea>
+              <input type="text" class="message-form" rows="1" cols="40"></input>
               <span tooltip="作成" flow="down">
                 <button type="submit" class="btn">
                   <ion-icon
@@ -135,7 +140,12 @@
                 >
                   <ion-icon name="options-outline"></ion-icon> </ion-button
               ></span>
-              <textarea class="message-form" rows="1" cols="40"></textarea
+              <input type="text"
+                id="searchByWord"
+                class="message-form"
+                rows="1"
+                cols="40"
+              ></input
               ><span tooltip="検索フィルター" flow="down">
                 <ion-button
                   aria-label="Favorite"
@@ -160,7 +170,12 @@
                 >
                   <ion-icon name="options-outline"></ion-icon> </ion-button
               ></span>
-              <textarea class="message-form" rows="1" cols="40"> </textarea>
+              <input type="text"
+                id="searchByComment"
+                class="message-form"
+                rows="1"
+                cols="40"
+              ></input>
               <ion-icon name="chatbox-ellipses-outline"></ion-icon>
             </form>
           </div>
@@ -177,57 +192,57 @@
               </div>
             </span>
             <ul id="result">
-              <div class="commentDetail" onclick="info0()">
+              <div class="threadsDetail" onclick="info0()">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
               </div>
-              <div class="commentDetail">
+              <div class="threadsDetail">
                 <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
                 <li class="chatDetail2">yyyy/mmm/dd time</li>
                 <li class="comment">1testComment</li>
@@ -277,26 +292,26 @@
     <script src="scriptCommon.js"></script>
     <script>
       ScrollReveal({ reset: false, duration: 1800 });
-      ScrollReveal().reveal("#threadTitle", {
+      // ScrollReveal().reveal("#searchOptions", {
+      //   delay: 200,
+      //   origin: "left",
+      //   distance: "40px",
+      // });
+      ScrollReveal().reveal("#mainChatSpace", {
         delay: 200,
-        origin: "left",
+        origin: "right",
         distance: "40px",
         afterReveal: function () {
           // ScrollReveal().destroy();
           console.log("アニメーション終了");
         },
       });
-      ScrollReveal().reveal("#mainChatSpace", {
-        delay: 200,
-        origin: "right",
-        distance: "40px",
-      });
-      ScrollReveal().reveal("header nav ul,header > div,footer p,#footerIcon", {
+      ScrollReveal().reveal("header nav ul", {
         delay: 200,
         origin: "bottom",
         distance: "10px",
         interval: 150,
-      });
+      });  
     </script>
   </body>
 </html>

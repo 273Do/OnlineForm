@@ -232,13 +232,19 @@ header ul li {
   width: 350px; */
 }
 
-#registerIcon,
 #loginIcon {
   position: absolute;
   margin-top: -10px;
   line-height: 57px;
   cursor: pointer;
   transition: all 0.3s;
+}
+
+#demoRegisterIcon {
+  position: absolute;
+  margin-top: -10px;
+  line-height: 57px;
+  cursor: pointer;
 }
 
 .viewOnly {
@@ -254,7 +260,6 @@ header ul li {
   color: #7a7aff;
 }
 
-#registerIcon:hover,
 #loginIcon:hover {
   opacity: 0.5;
 }

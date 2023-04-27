@@ -33,15 +33,22 @@ function loginBtn() {
         if (password[0].value == userData[i]["Password"]) {
           //ログイン処理
           //アクセスコード生成　2023年4月25日　有田海斗
-          
+
           //アクセスコードをデータベースに書き込み．　2023年4月25日　有田海斗
-          var access_code = (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2) + (Math.random() + 1).toString(36).substring(2);
-          var url = 'https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec' +
-          '?row=' + (i + 2) +
-          '&value1=' + encodeURIComponent(access_code) +
-          '&value2=' + "";
+          var access_code =
+            (Math.random() + 1).toString(36).substring(2) +
+            (Math.random() + 1).toString(36).substring(2) +
+            (Math.random() + 1).toString(36).substring(2);
+          var url =
+            "https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec" +
+            "?row=" +
+            (i + 2) +
+            "&value1=" +
+            encodeURIComponent(access_code) +
+            "&value2=" +
+            "";
           var xhr = new XMLHttpRequest();
-          xhr.open('GET', url);
+          xhr.open("GET", url);
           xhr.send();
 
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
@@ -50,7 +57,7 @@ function loginBtn() {
           //studentIDAndGradeAnalysis(userData[i]["Mail"]);
 
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
-          setTimeout(function(){
+          setTimeout(function () {
             location.href = "index.html?user=" + access_code;
           }, 1000);
         } else {
@@ -120,22 +127,17 @@ function registerBtn() {
   }
 }
 
-//registerボタンが押された時の動作
-document.querySelector("#registerIcon").addEventListener("click", function () {
-  document.querySelector("#login").style.display = "none";
-  document.querySelector("#register").style.display = "block";
-});
-
-//loginボタンが押された時の動作
-document.querySelector("#loginIcon").addEventListener("click", function () {
-  document.querySelector("#register").style.display = "none";
-  document.querySelector("#login").style.display = "block";
-});
-
 //viewOnlyボタンが押された時の動作
-document.querySelector(".viewOnly").addEventListener("click", function () {
-  console.log("test");
-});
+function viewOnly() {
+  Swal.fire({
+    icon: "question",
+    title: "閲覧モードに移行しますか?",
+    footer: "スレッド作成や書き込みはできません．",
+    showCancelButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) location = "index.html";
+  });
+}
 
 //学籍番号から，学部学科と学年を解析する関数
 //学部・学科・学年の3つをリターンするように改良．　2023.04.21(金)　有田海斗
