@@ -49,14 +49,14 @@ window.onload = function () {
   fetchData()
     .then(() => {
       const user = params.get("user");
-      login_user_name = userData[i]["Name"];
-      login_user_email = userData[i]["Mail"];
-
+      
       //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
       let flag = false;
       for (var i = 0; i < userData.length; i++) {
         if (userData[i]["Access_Code"] == user) {
           //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
+          login_user_name = userData[i]["Name"];
+          login_user_email = userData[i]["Mail"];
           var now = new Date();
           var year = now.getFullYear();
           var month = ("0" + (now.getMonth() + 1)).slice(-2);
