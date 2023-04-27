@@ -1,6 +1,9 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 1;
 
+//スレッド番号を指定するとそのスレッドが表示される．
+var threadID = 1000;
+
 let userData = [];
 var i = 0;
 
@@ -489,6 +492,10 @@ function searchGrades() {
 //fncが0の場合，フリーワード検索
 //fncが属性の場合，各フィルター検索が可能
 //スレッドが見つからない場合はエラー表示
+
+//スレッド番号を指定するとそのスレッドが表示される．
+var threadIDTest = 1001;
+
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log(searchThread("2023/04/21　19:20:21", "0"));
   console.log(searchThread("テストスレッド２", "Thread_Title"));
@@ -501,6 +508,10 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   console.log(searchThread("エラー用のワード", "0")); //エラー出力
   console.log(searchComment("ゲーム"));
   console.log(searchComment("エラー用のワード")); //エラー出力
+
+  showThread(commonCommentData, threadIDTest);
+  showTitle(commonThreadData, threadIDTest);
+  console.log(commonCommentData);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
