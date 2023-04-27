@@ -81,12 +81,7 @@
             </span>
 
             <ul id="chat">
-              <!--
-            <div class="commentDetail">
-              <li class="chatDetail1">1:testUser1(学部/学科/n回生)</li>
-              <li class="chatDetail2">yyyy/mmm/dd time</li>
-              <li class="comment">testComment</li>
-            </div>-->
+           <!-- ここにチャット入る -->
             </ul>
             <form class="messageArea">
               <textarea
@@ -192,60 +187,7 @@
               </div>
             </span>
             <ul id="result">
-              <div class="threadsDetail" onclick="info0()">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
+              <!-- ここにスレタイ入る -->
               </div>
             </ul>
           </div>
@@ -292,26 +234,34 @@
     <script src="scriptCommon.js"></script>
     <script>
       ScrollReveal({ reset: false, duration: 1800 });
-      // ScrollReveal().reveal("#searchOptions", {
-      //   delay: 200,
-      //   origin: "left",
-      //   distance: "40px",
-      // });
-      ScrollReveal().reveal("#mainChatSpace", {
+  //      ScrollReveal().reveal("#result, .threadsDetail", {
+  //   delay: 200,
+  //   origin: "left",
+  //   distance: "28px",
+  //   interval: 100,
+  //   afterReveal: function () {
+  //     window.setTimeout(function () {
+  //       // document.getElementById("chat").innerHTML = chat_load2;
+  //     }, 450);
+  //   },
+  // });
+  ScrollReveal().reveal("#mainResultSpace", {
         delay: 200,
         origin: "right",
         distance: "40px",
-        afterReveal: function () {
-          // ScrollReveal().destroy();
-          console.log("アニメーション終了");
-        },
       });
+      ScrollReveal().reveal("#searchOptions", {
+    delay: 200,
+    origin: "left",
+    distance: "60px",
+  });
       ScrollReveal().reveal("header nav ul", {
         delay: 200,
         origin: "bottom",
         distance: "10px",
         interval: 150,
       });  
+      // #searchByTitle
     </script>
   </body>
 </html>

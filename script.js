@@ -9,10 +9,10 @@ var i = 0;
 
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
-  document.querySelector("#searchByTitle").style.display = "none";
+  document.querySelector("#searchByTitle").style.display = "block";
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
-  document.querySelector("#page2").style.display = "none";
+  document.querySelector("#page1").style.display = "none";
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
@@ -133,6 +133,7 @@ fetch(thread_data)
   .then((data) => {
     commonThreadData = data;
     showTitle(data, threadID);
+    showSearchedTitle(data);
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
@@ -596,17 +597,18 @@ function showThread(commentData, thread_ID) {
     }
   });
   document.getElementById("chat").innerHTML = chat_load;
-  ScrollReveal().reveal("#chat, .commentDetail", {
-    delay: 200,
-    origin: "left",
-    distance: "28px",
-    interval: 100,
-    afterReveal: function () {
-      window.setTimeout(function () {
-        document.getElementById("chat").innerHTML = chat_load2;
-      }, 450);
-    },
-  });
+  // ScrollReveal().reveal("#chat, .commentDetail", {
+  //   delay: 200,
+  //   origin: "left",
+  //   distance: "28px",
+  //   interval: 100,
+  //   afterReveal: function () {
+  //     window.setTimeout(function () {
+  //       document.getElementById("chat").innerHTML = chat_load2;
+  //     }, 450);
+  //   },
+  // });
+  document.getElementById("chat").innerHTML = chat_load2;
 }
 //スレッドIDを指定したらタイトルを表示する関数
 function showTitle(threadData, thread_ID) {
@@ -647,9 +649,49 @@ function showTitle(threadData, thread_ID) {
     }
     i++;
   });
-  ScrollReveal().reveal("#threadTitle", {
+
+  // ScrollReveal().reveal("#threadTitle", {
+  //   delay: 200,
+  //   origin: "left",
+  //   distance: "60px",
+  // });
+}
+//スレッドタイトルを表示する関数
+function showSearchedTitle(threadData) {
+  var title_load = "";
+  var title_load2 = "";
+  threadData.forEach((e) => {
+    title_load +=
+      '<div class="threadsDetail" onclick="info0()"> <li class="chatDetail1" style="font-size:30px">' +
+      e["Thread_Title"] +
+      "</li>" +
+      e["Creator_Name"] +
+      "(" +
+      e["Undergraduate"] +
+      " " +
+      e["Department"] +
+      " " +
+      e["Grade"] +
+      "回生)" +
+      ' <li class="chatDetail2">' +
+      e["date(yyyy/mm/dd)"] +
+      "　" +
+      e["time(hh:mm:dd)"] +
+      "　" +
+      "</li> </div>";
+    title_load2 = title_load.replace(/"threadsDetail"/g, "trueThreadsDetail");
+  });
+  document.getElementById("result").innerHTML = title_load;
+  console.log(title_load);
+  ScrollReveal().reveal("#result, .threadsDetail", {
     delay: 200,
     origin: "left",
-    distance: "60px",
+    distance: "28px",
+    interval: 100,
+    afterReveal: function () {
+      window.setTimeout(function () {
+        document.getElementById("result").innerHTML = title_load2;
+      }, 450);
+    },
   });
 }
