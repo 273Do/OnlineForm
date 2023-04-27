@@ -1,4 +1,10 @@
 /* common */
+html,
+body {
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 ul {
   padding: 0;
@@ -12,7 +18,9 @@ li {
 }
 
 h1,
-h2 {
+h2,
+h3,
+p {
   padding: 0;
   margin: 0;
 }
@@ -44,13 +52,6 @@ img {
   src: url("font/NotoSansJP-Thin.otf") format("opentype");
 }
 
-html,
-body {
-  font-size: 100%;
-  margin: 0;
-  padding: 0;
-
-}
 
 /* body {
     color: #f4ede4;
@@ -367,7 +368,26 @@ header ul li {
 }
 
 /* footer */
+
 footer {
+  margin-top: 64px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #202023;
+}
+
+#footerIcon {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+
+
+/* footer {
   background-color: #202023;
   position: fixed;
   bottom: 0;
@@ -407,7 +427,7 @@ footer p {
 #developerIcon:hover,
 #themeIcon:hover {
   opacity: 0.5;
-}
+} */
 
 /* ツールチップ表示 */
 [tooltip] {
