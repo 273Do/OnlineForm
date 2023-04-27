@@ -22,10 +22,6 @@ img {
   object-fit: cover;
 }
 
-
-
-
-
 @font-face {
   font-family: "Objective-Medium";
   src: url("font/Objective-Medium.woff2") format("woff2");
@@ -49,7 +45,6 @@ body {
   font-size: 100%;
   margin: 0;
   padding: 0;
-
 }
 
 /* body {
@@ -104,7 +99,6 @@ body {
   }
 } */
 
-
 textarea {
   resize: none;
   background: none;
@@ -155,7 +149,9 @@ header ul li {
   font-size: 0.9rem;
 }
 
-
+#headerSpace {
+  height: 45px;
+}
 
 .mainTitle {
   display: flex;
@@ -523,7 +519,6 @@ footer p {
 
 /* (スマホ対応)レスポンシブ */
 @media screen and (max-width: 720px) {
-
   body {
     overflow: scroll;
   }
