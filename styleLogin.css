@@ -502,6 +502,11 @@ footer p {
 
 /* (スマホ対応)レスポンシブ */
 @media screen and (max-width: 720px) {
+
+  body {
+    overflow: scroll;
+  }
+
   header {
     height: 78px;
     flex-direction: column;
