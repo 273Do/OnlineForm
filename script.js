@@ -247,15 +247,15 @@ function vOnly() {
 
 //Accountボタンが押された時の動作
 document.querySelector("#Account").addEventListener("click", function () {
-  let testName = "たち　ばな";
-  let testEmail = "a600000000@st.tachibana-u.ac.jp";
+  let login_user_name = userData[i]["Name"];
+  let login_user_email = userData[i]["Mail"];
   Swal.fire({
     title: "YourAccount",
     // toast: "true",
     backdrop: "none",
-    html: "アカウント名：" + testName + "<br>メールアドレス：" + testEmail,
+    html: "アカウント名：" + login_user_name + "<br>メールアドレス：" + login_user_email,
     footer:
-      "<p onclick=changeAccountDate() style='cursor:pointer'>変更はこちら</p>",
+      "<p onclick=changeAccountData() style='cursor:pointer'>変更はこちら</p>",
     showCancelButton: true,
   });
 });
@@ -270,7 +270,9 @@ document.querySelector("#Logout").addEventListener("click", function () {
     showCancelButton: true,
   }).then((result) => {
     if (result.isConfirmed) {
-      console.log("ログインページへ移動．");
+      setTimeout(function(){
+        location.href = "indexLogin.html";
+      }, 100);
     }
   });
 });
