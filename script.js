@@ -1,5 +1,8 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 1;
+
+var login_user_name;
+var login_user_email;
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "none";
@@ -81,6 +84,10 @@ window.onload = function () {
           var xhr = new XMLHttpRequest();
           xhr.open("GET", url);
           xhr.send();
+          
+          login_user_name = userData[i]["Name"];
+          login_user_email = userData[i]["Mail"];
+
           flag = false;
           break;
         } else {
@@ -247,8 +254,6 @@ function vOnly() {
 
 //Accountボタンが押された時の動作
 document.querySelector("#Account").addEventListener("click", function () {
-  let login_user_name = userData[i]["Name"];
-  let login_user_email = userData[i]["Mail"];
   Swal.fire({
     title: "YourAccount",
     // toast: "true",
