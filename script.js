@@ -1,8 +1,9 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 1;
 
-var login_user_name;
-var login_user_email;
+let userData = [];
+var i = 0
+
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "none";
@@ -28,7 +29,6 @@ window.onload = function () {
   }
 
   //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
-  let userData = [];
   const user_data =
     "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
 
@@ -52,11 +52,9 @@ window.onload = function () {
       
       //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
       let flag = false;
-      for (var i = 0; i < userData.length; i++) {
+      for (i = 0; i < userData.length; i++) {
         if (userData[i]["Access_Code"] == user) {
           //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
-          login_user_name = userData[i]["Name"];
-          login_user_email = userData[i]["Mail"];
           var now = new Date();
           var year = now.getFullYear();
           var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -257,7 +255,7 @@ document.querySelector("#Account").addEventListener("click", function () {
     title: "YourAccount",
     // toast: "true",
     backdrop: "none",
-    html: "アカウント名：" + login_user_name + "<br>メールアドレス：" + login_user_email,
+    html: "アカウント名：" + userData[i]["Name"] + "<br>メールアドレス：" + userData[i]["Mail"],
     footer:
       "<p onclick=changeAccountData() style='cursor:pointer'>変更はこちら</p>",
     showCancelButton: true,
@@ -328,7 +326,7 @@ function option() {
 //アカウント情報の変更　　2023/04/23(日) 山口慶大
 //バリデーションチェックはまだ
 //'<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="changeUsername">Username</option><option value="changePassword">Password</option></select><input type="text" class="swal2-input" id="changeUsername" style="align-items: center"><input type="password" class="swal2-input" id="changePassword" style="  display:flex, flex-direction: column,align-items:center">'
-function changeAccountDate() {
+function changeAccountData() {
   let tmp = "";
   Swal.fire({
     title: "ChangeAccountData",
