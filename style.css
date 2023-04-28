@@ -264,7 +264,8 @@ header ul li {
 .commentDetail,
 .trueCommentDetail,
 .threadsDetail,
-.trueThreadsDetail {
+.trueThreadsDetail,
+.noneThreadsDetail {
   width: 95%;
   border-bottom: 1px solid #f4ede4;
   margin-bottom: 15px;

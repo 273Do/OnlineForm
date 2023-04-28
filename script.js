@@ -143,6 +143,7 @@ fetch(thread_data)
 
 var chat_load = "";
 var chat_load2 = "";
+var commonCommentData;
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
@@ -529,7 +530,7 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   // console.log(searchComment("ゲーム"));
   // console.log(searchComment("エラー用のワード")); //エラー出力
 
-  // showThread(commonCommentData, threadIDTest);
+  showThread(commonCommentData, threadIDTest);
   showTitle(commonThreadData, threadIDTest);
   // document.querySelector("#page1").style.display = "block";
   // document.querySelector("#page2").style.display = "none";
@@ -559,7 +560,7 @@ function searchThread(words, fnc) {
   });
   if (output.length == 0)
     // showError("スレッドが見つかりませんでした．", "検索：" + words);
-    return words + "が含まれるスレッドが見つかりません．";
+    return ["noThread", words];
   else return output;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
@@ -597,6 +598,8 @@ function showThread(commentData, thread_ID) {
     if (e["Thread_ID"] == thread_ID) {
       chat_load +=
         '<div class="commentDetail"> <li class="chatDetail1">' +
+        e["Comment_ID"] +
+        "：" +
         e["Wrote_Name"] +
         "(" +
         e["Undergraduate"] +
@@ -675,7 +678,7 @@ function showTitle(threadData, thread_ID) {
   //   distance: "60px",
   // });
 }
-//スレッドタイトルを表示する関数
+//スレッドタイトル一覧を表示する関数
 //第一引数：commonThreadData
 //第二引数：mode = 0：全スレッド表示，1：スレッド検索，2：コメント検索
 //第三引数：スレッド番号が格納された配列
@@ -689,17 +692,28 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     });
   else if (mode == 1) {
     {
-      var i = 0;
-      threadData.forEach((e) => {
-        if (threadIDArray[i] == e["Thread_ID"]) {
-          title_load += titleLoad(e);
-          title_load2 = title_load.replace(
-            /"threadsDetail"/g,
-            "trueThreadsDetail"
-          );
-          i++;
-        }
-      });
+      if (threadIDArray[0] == "noThread") {
+        title_load =
+          '<div class="threadsDetail"><li class="chatDetail1" style="font-size:18px">スレッドが見つかりませんでした．</li>検索：' +
+          threadIDArray[1] +
+          "</div>";
+        title_load2 = title_load.replace(
+          /"threadsDetail"/g,
+          "noneThreadsDetail"
+        );
+      } else {
+        var i = 0;
+        threadData.forEach((e) => {
+          if (threadIDArray[i] == e["Thread_ID"]) {
+            title_load += titleLoad(e);
+            title_load2 = title_load.replace(
+              /"threadsDetail"/g,
+              "trueThreadsDetail"
+            );
+            i++;
+          }
+        });
+      }
     }
   } else if (mode == 2) {
   }
@@ -742,5 +756,8 @@ function titleLoad(e) {
 }
 //選択したスレッドの表示を行う関数
 function viewThread(threadID) {
-  console.log(threadID);
+  document.querySelector("#page2").style.display = "none";
+  document.querySelector("#page1").style.display = "block";
+  showThread(commonCommentData, threadID);
+  showTitle(commonThreadData, threadID);
 }
