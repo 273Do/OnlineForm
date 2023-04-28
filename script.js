@@ -90,6 +90,10 @@ window.onload = function () {
           xhr.open("GET", url);
           xhr.send();
 
+          BGImageAndPE(userData[i]["BackGround"], 0);
+          BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+          console.log(i, userData[i]["ParallaxEffect"]);
+
           flag = false;
           break;
         } else {
@@ -99,7 +103,7 @@ window.onload = function () {
       if (flag == true) {
         setTimeout(function () {
           //一旦無効化
-          // location.href = "indexLogin.html";
+          location.href = "indexLogin.html";
         }, 100);
       }
     })
