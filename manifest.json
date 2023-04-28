@@ -1,15 +1,15 @@
 {
-  "name": "京都橘大学生 掲示板",
-  "short_name": "京都橘大掲示板",
-  "theme_color": "#E8EBFF",
-  "background_color": "#E8EBFF",
-  "display": "standalone",
-  "start_url": "./indexLogin.html",
-  "icons": [
-    {
-      "src": "./img/OnlineForm.png",
-      "sizes": "1046x1080",
-      "type": "image/png"
-    }
-  ]
-}
+    "name": "京都橘大学生 掲示板",
+    "short_name": "京都橘大掲示板",
+    "theme_color": "#E8EBFF",
+    "background_color": "#E8EBFF",
+    "display": "standalone",
+    "start_url": "./indexLogin.html",
+    "icons": [
+      {
+        "src": "./img/OnlineForm.png",
+        "sizes": "1046x1080",
+        "type": "image/png"
+      }
+    ]
+  }
