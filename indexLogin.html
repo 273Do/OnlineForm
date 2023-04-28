@@ -6,6 +6,7 @@
     <meta name="description" content="京都橘大学生限定の掲示板サイトです．" />
     <link rel="stylesheet" href="styleLogin.css" />
     <link rel="stylesheet" href="./lib/sweetalert2Dark.css" />
+    <link rel="manifest" href="./manifest.json">
     <link rel="icon" href="./img/favicon.ico" />
     <title>京都橘大学生掲示板</title>
   </head>
@@ -230,6 +231,14 @@
           },
         }
       );
+
+      if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(registration => {
+      console.log('ServiceWorker registration successful.');
+    }).catch(err => {
+      console.log('ServiceWorker registration failed.');
+    });
+  }
     </script>
   </body>
 </html>
