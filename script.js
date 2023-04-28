@@ -16,9 +16,6 @@ window.onload = function () {
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
-  //データ引渡しができてからコメント解除
-  // BGImageAndPE(userData[i]["BackGround"], 0);
-  // BGImageAndPE(userData[i]["ParallaxEffect"], 1);
 
   //パラーメーターの有無を確認．　2023年4月25日　有田海斗
   const url = new URL(window.location.href);
@@ -92,7 +89,6 @@ window.onload = function () {
 
           BGImageAndPE(userData[i]["BackGround"], 0);
           BGImageAndPE(userData[i]["ParallaxEffect"], 1);
-          console.log(i, userData[i]["ParallaxEffect"]);
 
           flag = false;
           break;
@@ -103,7 +99,7 @@ window.onload = function () {
       if (flag == true) {
         setTimeout(function () {
           //一旦無効化
-          location.href = "indexLogin.html";
+          // location.href = "indexLogin.html";
         }, 100);
       }
     })
@@ -116,6 +112,8 @@ window.onload = function () {
     .addEventListener("input", function () {
       console.log(this.value);
       console.log(searchThread(this.value, 0));
+
+      showSearchedTitle(commonThreadData, 1, searchThread(this.value, 0));
     });
   //コメント検索：ワードを入れるたびに動作
   document
@@ -137,7 +135,7 @@ fetch(thread_data)
   .then((data) => {
     commonThreadData = data;
     showTitle(data, threadID);
-    showSearchedTitle(data);
+    showSearchedTitle(data, 0);
   })
   .catch((error) => {
     showError("タイトル取得に失敗しました.", error);
@@ -370,7 +368,9 @@ function searchDate() {
         .getElementById("date")
         .value.replace("-", "/")
         .replace("-", "/") !== ""
-        ? console.log(
+        ? showSearchedTitle(
+            commonThreadData,
+            1,
             searchThread(
               document
                 .getElementById("date")
@@ -421,7 +421,13 @@ function searchUndergraduate() {
     },
     inputValidator: (result) => {
       if (!result) return "Please select a undergraduate.";
-      else console.log(searchThread(result, "Undergraduate"));
+      else {
+        showSearchedTitle(
+          commonThreadData,
+          1,
+          searchThread(result, "Undergraduate")
+        );
+      }
     },
   });
 }
@@ -462,7 +468,12 @@ function searchDepartment() {
     },
     inputValidator: (result) => {
       if (!result) return "Please select a department.";
-      else console.log(searchThread(result, "Department"));
+      else
+        showSearchedTitle(
+          commonThreadData,
+          1,
+          searchThread(result, "Department")
+        );
     },
   });
 }
@@ -491,7 +502,8 @@ function searchGrades() {
     },
     inputValidator: (result) => {
       if (!result) return "Please select a grade.";
-      else console.log(searchThread(result, "Grade"));
+      else
+        showSearchedTitle(commonThreadData, 1, searchThread(result, "Grade"));
     },
   });
 }
@@ -505,21 +517,24 @@ function searchGrades() {
 var threadIDTest = 1001;
 
 document.getElementById("debugBtn").addEventListener("click", function () {
-  console.log(searchThread("2023/04/21　19:20:21", "0"));
-  console.log(searchThread("テストスレッド２", "Thread_Title"));
-  console.log(searchThread("ﾔﾏｸﾞﾁｹ", "Creator_Name"));
-  console.log(searchThread("2023/04/21", "date(yyyy/mm/dd)"));
-  console.log(searchThread("17:12:12", "time(hh:mm:dd)"));
-  console.log(searchThread("文学部", "Undergraduate"));
-  console.log(searchThread("経済学科", "Department"));
-  console.log(searchThread("１", "Grade"));
-  console.log(searchThread("エラー用のワード", "0")); //エラー出力
-  console.log(searchComment("ゲーム"));
-  console.log(searchComment("エラー用のワード")); //エラー出力
+  // console.log(searchThread("2023/04/21　19:20:21", "0"));
+  // console.log(searchThread("テストスレッド２", "Thread_Title"));
+  // console.log(searchThread("ﾔﾏｸﾞﾁｹ", "Creator_Name"));
+  // console.log(searchThread("2023/04/21", "date(yyyy/mm/dd)"));
+  // console.log(searchThread("17:12:12", "time(hh:mm:dd)"));
+  // console.log(searchThread("文学部", "Undergraduate"));
+  // console.log(searchThread("経済学科", "Department"));
+  // console.log(searchThread("１", "Grade"));
+  // console.log(searchThread("エラー用のワード", "0")); //エラー出力
+  // console.log(searchComment("ゲーム"));
+  // console.log(searchComment("エラー用のワード")); //エラー出力
 
-  showThread(commonCommentData, threadIDTest);
+  // showThread(commonCommentData, threadIDTest);
   showTitle(commonThreadData, threadIDTest);
-  console.log(commonCommentData);
+  // document.querySelector("#page1").style.display = "block";
+  // document.querySelector("#page2").style.display = "none";
+  // console.log(commonCommentData);
+  showSearchedTitle(commonThreadData, 1, [1000, 1003, 1006, 1009]);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -544,7 +559,7 @@ function searchThread(words, fnc) {
   });
   if (output.length == 0)
     // showError("スレッドが見つかりませんでした．", "検索：" + words);
-    return "スレッドが見つかりませんでした． 検索：" + words;
+    return words + "が含まれるスレッドが見つかりません．";
   else return output;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
@@ -570,7 +585,7 @@ function searchComment(words) {
     .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
   if (output.length == 0)
     // showError("コメントが見つかりませんでした．", "検索：" + words);
-    return "コメントが見つかりませんでした． 検索：" + words;
+    return words + "が含まれるコメントが見つかりません．";
   else return output;
 }
 //スレッドIDを指定したらコメントを表示する関数
@@ -661,32 +676,34 @@ function showTitle(threadData, thread_ID) {
   // });
 }
 //スレッドタイトルを表示する関数
-function showSearchedTitle(threadData) {
+//第一引数：commonThreadData
+//第二引数：mode = 0：全スレッド表示，1：スレッド検索，2：コメント検索
+//第三引数：スレッド番号が格納された配列
+function showSearchedTitle(threadData, mode, threadIDArray) {
   var title_load = "";
   var title_load2 = "";
-  threadData.forEach((e) => {
-    title_load +=
-      '<div class="threadsDetail" onclick="info0()"> <li class="chatDetail1" style="font-size:30px">' +
-      e["Thread_Title"] +
-      "</li>" +
-      e["Creator_Name"] +
-      "(" +
-      e["Undergraduate"] +
-      " " +
-      e["Department"] +
-      " " +
-      e["Grade"] +
-      "回生)" +
-      ' <li class="chatDetail2">' +
-      e["date(yyyy/mm/dd)"] +
-      "　" +
-      e["time(hh:mm:dd)"] +
-      "　" +
-      "</li> </div>";
-    title_load2 = title_load.replace(/"threadsDetail"/g, "trueThreadsDetail");
-  });
+  if (mode == 0)
+    threadData.forEach((e) => {
+      title_load += titleLoad(e);
+      title_load2 = title_load.replace(/"threadsDetail"/g, "trueThreadsDetail");
+    });
+  else if (mode == 1) {
+    {
+      var i = 0;
+      threadData.forEach((e) => {
+        if (threadIDArray[i] == e["Thread_ID"]) {
+          title_load += titleLoad(e);
+          title_load2 = title_load.replace(
+            /"threadsDetail"/g,
+            "trueThreadsDetail"
+          );
+          i++;
+        }
+      });
+    }
+  } else if (mode == 2) {
+  }
   document.getElementById("result").innerHTML = title_load;
-  console.log(title_load);
   ScrollReveal().reveal("#result, .threadsDetail", {
     delay: 200,
     origin: "left",
@@ -698,4 +715,32 @@ function showSearchedTitle(threadData) {
       }, 450);
     },
   });
+}
+//タイトル表示の要素を返す関数
+function titleLoad(e) {
+  return (
+    '<div class="threadsDetail" onclick="viewThread(' +
+    e["Thread_ID"] +
+    ')"> <li class="chatDetail1" style="font-size:30px">' +
+    e["Thread_Title"] +
+    "</li>" +
+    e["Creator_Name"] +
+    "(" +
+    e["Undergraduate"] +
+    " " +
+    e["Department"] +
+    " " +
+    e["Grade"] +
+    "回生)" +
+    ' <li class="chatDetail2">' +
+    e["date(yyyy/mm/dd)"] +
+    "　" +
+    e["time(hh:mm:dd)"] +
+    "　" +
+    "</li> </div>"
+  );
+}
+//選択したスレッドの表示を行う関数
+function viewThread(threadID) {
+  console.log(threadID);
 }
