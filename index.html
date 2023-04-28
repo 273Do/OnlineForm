@@ -15,7 +15,7 @@
     <header>
       <div class="mainTitle">
         <img src="./img/OnlineForm.png" alt="siteImg" id="logo" />
-        <h1> 掲示板</h1>
+        <h1>京都橘大学生 掲示板</h1>
       </div>
       <nav>
         <ul>
@@ -81,7 +81,12 @@
             </span>
 
             <ul id="chat">
-           <!-- ここにチャット入る -->
+              <!--
+            <div class="commentDetail">
+              <li class="chatDetail1">1:testUser1(学部/学科/n回生)</li>
+              <li class="chatDetail2">yyyy/mmm/dd time</li>
+              <li class="comment">testComment</li>
+            </div>-->
             </ul>
             <form class="messageArea">
               <textarea
@@ -187,7 +192,7 @@
               </div>
             </span>
             <ul id="result">
-              <!-- ここにスレタイ入る -->
+             
               </div>
             </ul>
           </div>
@@ -220,6 +225,8 @@
     <!-- タグ検索アイコン -->
     <!-- <ion-icon name="pricetags-outline"></ion-icon> -->
 
+    <script src="script.js"></script>
+    <script src="scriptCommon.js"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -230,38 +237,29 @@
     ></script>
     <script src="./lib/sweetalert2.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="script.js"></script>
-    <script src="scriptCommon.js"></script>
+    
     <script>
       ScrollReveal({ reset: false, duration: 1800 });
-  //      ScrollReveal().reveal("#result, .threadsDetail", {
-  //   delay: 200,
-  //   origin: "left",
-  //   distance: "28px",
-  //   interval: 100,
-  //   afterReveal: function () {
-  //     window.setTimeout(function () {
-  //       // document.getElementById("chat").innerHTML = chat_load2;
-  //     }, 450);
-  //   },
-  // });
-  ScrollReveal().reveal("#mainResultSpace", {
+      // ScrollReveal().reveal("#searchOptions", {
+      //   delay: 200,
+      //   origin: "left",
+      //   distance: "40px",
+      // });
+      ScrollReveal().reveal("#mainChatSpace", {
         delay: 200,
         origin: "right",
         distance: "40px",
+        afterReveal: function () {
+          // ScrollReveal().destroy();
+          console.log("アニメーション終了");
+        },
       });
-      ScrollReveal().reveal("#searchOptions", {
-    delay: 200,
-    origin: "left",
-    distance: "60px",
-  });
       ScrollReveal().reveal("header nav ul", {
         delay: 200,
         origin: "bottom",
         distance: "10px",
         interval: 150,
       });  
-      // #searchByTitle
     </script>
   </body>
 </html>
