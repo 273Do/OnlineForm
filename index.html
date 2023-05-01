@@ -16,7 +16,8 @@
     <header>
       <div class="mainTitle">
         <img src="./img/OnlineForm.png" alt="siteImg" id="logo" />
-        <h1>京都橘大学生 掲示板</h1>
+        <h1>掲示板</h1>
+        <!-- 京都橘大学生 -->
       </div>
       <nav>
         <ul>
@@ -193,60 +194,7 @@
               </div>
             </span>
             <ul id="result">
-              <div class="threadsDetail" onclick="info0()">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
-              </div>
-              <div class="threadsDetail">
-                <li class="chatDetail1">1:testThread1(学部/学科/n回生)</li>
-                <li class="chatDetail2">yyyy/mmm/dd time</li>
-                <li class="comment">1testComment</li>
+             
               </div>
             </ul>
           </div>
@@ -279,6 +227,8 @@
     <!-- タグ検索アイコン -->
     <!-- <ion-icon name="pricetags-outline"></ion-icon> -->
 
+    <script src="script.js"></script>
+    <script src="scriptCommon.js"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
@@ -289,16 +239,15 @@
     ></script>
     <script src="./lib/sweetalert2.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="script.js"></script>
-    <script src="scriptCommon.js"></script>
+    
     <script>
       ScrollReveal({ reset: false, duration: 1800 });
-      // ScrollReveal().reveal("#searchOptions", {
-      //   delay: 200,
-      //   origin: "left",
-      //   distance: "40px",
-      // });
-      ScrollReveal().reveal("#mainChatSpace", {
+      ScrollReveal().reveal("#searchOptions", {
+        delay: 200,
+        origin: "left",
+        distance: "40px",
+      });
+      ScrollReveal().reveal("#mainResultSpace", {
         delay: 200,
         origin: "right",
         distance: "40px",

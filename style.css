@@ -263,7 +263,9 @@ header ul li {
 
 .commentDetail,
 .trueCommentDetail,
-.threadsDetail {
+.threadsDetail,
+.trueThreadsDetail,
+.noneThreadsDetail {
   width: 95%;
   border-bottom: 1px solid #f4ede4;
   margin-bottom: 15px;
@@ -386,12 +388,11 @@ header ul li {
   border-radius: 20px;
 }
 
-#result > .threadsDetail {
+#result > .trueThreadsDetail {
   cursor: pointer;
   transition: all 0.3s;
 }
-
-#result > .threadsDetail:hover {
+#result > .trueThreadsDetail:hover {
   opacity: 0.5;
 }
 /* footer */

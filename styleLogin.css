@@ -1,12 +1,12 @@
 /* common */
 
-ul {
+/* ul {
   padding: 0;
   margin: 0;
   list-style: none;
-}
+} */
 
-li {
+/* li {
   padding: 0;
   margin: 0;
 }
@@ -20,11 +20,7 @@ h2 {
 img {
   vertical-align: bottom;
   object-fit: cover;
-}
-
-
-
-
+} */
 
 @font-face {
   font-family: "Objective-Medium";
@@ -47,9 +43,8 @@ img {
 html,
 body {
   font-size: 100%;
-  margin: 0;
-  padding: 0;
-
+  /* margin: 0;
+  padding: 0; */
 }
 
 /* body {
@@ -104,6 +99,11 @@ body {
   }
 } */
 
+li {
+  list-style: none;
+  font-size: 1.2rem;
+  margin-top: -2px;
+}
 
 textarea {
   resize: none;
@@ -145,30 +145,36 @@ header {
 
 header ul {
   display: flex;
-  /* padding: 10px 0; */
+  padding: 10px 0;
   align-items: center;
-  /* margin-right: 15px; */
-  gap: 30px;
+  margin-right: 15px;
+  /* gap: 30px; */
 }
 
 header ul li {
   font-size: 0.9rem;
+  margin-left: 30px;
 }
 
-
+#headerSpace {
+  height: 45px;
+}
 
 .mainTitle {
   display: flex;
-  align-items: center;
+  margin-top: 5px;
+  margin-left: 15px;
 }
 
 .mainTitle h1 {
   font-size: 25px;
+  margin-bottom: 22px;
 }
 
 .mainTitle img {
   width: 50px; /*画像サイズ指定*/
   height: 50px;
+  margin-top: 9px;
   overflow: hidden;
   position: relative;
 }
@@ -523,7 +529,6 @@ footer p {
 
 /* (スマホ対応)レスポンシブ */
 @media screen and (max-width: 720px) {
-
   body {
     overflow: scroll;
   }
