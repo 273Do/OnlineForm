@@ -26,7 +26,7 @@ window.onload = function () {
   if (params == "" || params == null) {
     setTimeout(function () {
       //一旦無効化 無効化するとaccountボタン押せなくなる
-      //location.href = "indexLogin.html";
+      location.href = "indexLogin.html";
     }, 100);
   }
 
@@ -98,8 +98,7 @@ window.onload = function () {
       }
       if (flag == true) {
         setTimeout(function () {
-          //一旦無効化
-          // location.href = "indexLogin.html";
+          location.href = "indexLogin.html";
         }, 100);
       }
     })
