@@ -1,7 +1,7 @@
 //ポップアップウィンドのhtml要素など
 //BGのクレジット表記
 var BGDisc =
-  "<ul><li>BG Pink made by <a href='https://www.reddit.com/user/MatrixRetoastet/' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>MatrixRetoastet</a></font></li><li>BG Green made by <a href='https://www.deviantart.com/ncoll36' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>ncoll36</a></font></li><li>BG Black made by <a href='https://www.wallpaperflare.com/artistic-mountain-minimalist-moon-nature-night-wallpaper-gktsx' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>Unknown</a></font></li></ui>";
+  "<div style='text-align:center'><h1>CreatedBy</h1><ul><li>有田海斗</li><li>木村遥敬</li><li>山口慶大</li></ul><h1>BGSource</h1><ul><li>BG Pink made by <a href='https://www.reddit.com/user/MatrixRetoastet/' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>MatrixRetoastet</a></font></li><li>BG Green made by <a href='https://www.deviantart.com/ncoll36' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>ncoll36</a></font></li><li>BG Black made by <a href='https://www.wallpaperflare.com/artistic-mountain-minimalist-moon-nature-night-wallpaper-gktsx' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>Unknown</a></font></li></ui></div>";
 //視差効果
 var PE = 1; //ParallaxEffect(視差効果)
 let background = document.querySelector("body");
@@ -42,15 +42,15 @@ usageIcon();
 function info0() {
   Swal.fire({
     icon: "info",
-    title: "BGSource",
+    title: "更新情報",
     backdrop: "none",
     showDenyButton: true,
     showCancelButton: true,
-    html: BGDisc,
-    // width: "42rem",
+    // toast: true,
+    // width: "47rem",
     confirmButtonText: "◀",
     denyButtonText: "▶",
-    // html: '<iframe src="https://www.tachibana-u.ac.jp" width="600" height="800"></iframe><br><iframe width="600" height="120" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=135.82554638385776%2C34.96764072683185%2C135.82750439643863%2C34.969319985844336&amp;layer=mapnik&amp;marker=34.96848036064079%2C135.82652539014816" style="border: 0px solid black"></iframe>',
+    // html:,
     // footer:
     //   '<a href="https://goo.gl/maps/C4BHkpzHDBdJTVZc9">〒607-8175 京都市山科区大宅山田町34</a>　TEL:075-571-111',
   }).then((result) => {
@@ -61,12 +61,12 @@ function info0() {
 function info1() {
   Swal.fire({
     icon: "info",
-    title: "info1",
     backdrop: "none",
     showDenyButton: true,
     showCancelButton: true,
     confirmButtonText: "◀",
     denyButtonText: "▶",
+    html: BGDisc,
     // imageUrl: "img/MadeBy.png",
     // footer: "2022_情報工学実践Ⅳ<ｂ>",
   }).then((result) => {
@@ -76,16 +76,16 @@ function info1() {
 }
 function info2() {
   Swal.fire({
-    icon: "info",
-    title: "info2",
+    // icon: "info",
+    title: "大学ページ",
     backdrop: "none",
     showDenyButton: true,
     showCancelButton: true,
+    // toast: true,
+    width: "47rem",
     confirmButtonText: "◀",
     denyButtonText: "▶",
-    // imageUrl: "img/creditLogo.png",
-    // footer:
-    //   '<a href="https://azure.microsoft.com/ja-jp/products/visual-studio-code/">VisualStudioCode</a>　<a href="https://getbootstrap.jp">Bootstrap</a>　<a href="https://jquery.com">jQuery</a>　<a href="https://sweetalert2.github.io">sweetalert2</a>　<a href="https://www.mamp.info/en/mamp-pro/windows/">MAMP PRO</a>',
+    html: '<iframe src="https://www.tachibana-u.ac.jp" width="600" height="800"></iframe>',
   }).then((result) => {
     if (result.isConfirmed) info1();
     else if (result.isDenied) info0();

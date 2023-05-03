@@ -16,7 +16,7 @@
     <header>
       <div class="mainTitle">
         <img src="./img/OnlineForm.png" alt="siteImg" id="logo" />
-        <h1>京都橘大学生</h1>
+        <h1>京都橘大学 掲示板</h1>
         <!-- 京都橘大学生 -->
       </div>
       <nav>
@@ -73,7 +73,7 @@
         <section id="chatArea">
           <div id="mainChatSpace">
             <span
-              tooltip="スレッド関連"
+              tooltip="チャット"
               flow="down"
               style="margin-left: calc(95% - 90px)"
             >
@@ -218,15 +218,6 @@
       </div>
     </footer>
 
-    <!-- page2からpage1に遷移する時のアイコン -->
-    <!-- <ion-icon name="chatbox-outline"></ion-icon> -->
-    <!-- スレッド作成アイコン -->
-    <!-- <ion-icon name="create-outline"></ion-icon> -->
-    <!-- スレッド検索アイコン -->
-    <!-- <ion-icon name="search-outline"></ion-icon> -->
-    <!-- タグ検索アイコン -->
-    <!-- <ion-icon name="pricetags-outline"></ion-icon> -->
-
     <script src="script.js"></script>
     <script src="scriptCommon.js"></script>
     <script
@@ -263,13 +254,13 @@
         interval: 150,
       });  
 
-      if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').then(registration => {
-      console.log('ServiceWorker registration successful.');
-    }).catch(err => {
-      console.log('ServiceWorker registration failed.');
-    });
-  }
+  //     if ('serviceWorker' in navigator) {
+  //   navigator.serviceWorker.register('./sw.js').then(registration => {
+  //     console.log('ServiceWorker registration successful.');
+  //   }).catch(err => {
+  //     console.log('ServiceWorker registration failed.');
+  //   });
+  // }
     </script>
   </body>
 </html>
