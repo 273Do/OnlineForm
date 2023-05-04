@@ -356,20 +356,31 @@ header ul li {
   border-radius: 40px;
 } */
 
-#page1Icon {
-  margin-left: calc(100% - 47px);
+#page1IconArea {
+  display: flex;
+  margin-left: calc(100% + 45px);
+  margin-top: 15px;
+}
+
+#page1Icon,
+#historyIcon {
   margin-top: 15px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-#page1Icon:hover {
+#historyIcon {
+  margin-left: calc(100% - 2px);
+}
+
+#page1Icon:hover,
+#historyIcon:hover {
   opacity: 0.5;
 }
 
 #result {
   /* background-color: #202023; */
-  margin-top: -2px;
+  margin-top: 1px;
   margin-left: -15px;
   height: calc(100% - 80px);
   overflow: scroll;
