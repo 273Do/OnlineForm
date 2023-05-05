@@ -229,6 +229,23 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
   document.querySelector("#page1").style.display = "block";
 });
 
+//historyIconボタンが押された時の動作
+let showHistory =
+  "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
+document.querySelector("#historyIcon").addEventListener("click", function () {
+  Swal.fire({
+    title: "History",
+    html: showHistory,
+    footer: "スレッドの閲覧履歴です",
+    showCancelButton: true,
+    toast: true,
+    backdrop: "none",
+    preConfirm: () => {
+      console.log("history");
+    },
+  });
+});
+
 //optionボタンが押された時の動作
 function option() {
   const inputOptions = {
