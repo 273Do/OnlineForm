@@ -894,3 +894,4 @@ function viewThread(threadID, mode) {
     }
   }, 800);
 }
+//ターミナル上コミットテスト
