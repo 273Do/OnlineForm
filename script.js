@@ -231,6 +231,7 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 
 //historyIconボタンが押された時の動作
 var historyTmp = []; //ここにスレッドIDをスタックする．
+//そのスレッドIDを利用してポップアップ表示の部分に反映させるようにする．
 let showHistory =
   "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
 document.querySelector("#historyIcon").addEventListener("click", function () {
