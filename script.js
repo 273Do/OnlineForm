@@ -547,25 +547,7 @@ function searchGrades() {
 var threadIDTest = 1001;
 
 document.getElementById("debugBtn").addEventListener("click", function () {
-  // console.log(searchThread("2023/04/21　19:20:21", "0"));
-  // console.log(searchThread("テストスレッド２", "Thread_Title"));
-  // console.log(searchThread("ﾔﾏｸﾞﾁｹ", "Creator_Name"));
-  // console.log(searchThread("2023/04/21", "date(yyyy/mm/dd)"));
-  // console.log(searchThread("17:12:12", "time(hh:mm:dd)"));
-  // console.log(searchThread("文学部", "Undergraduate"));
-  // console.log(searchThread("経済学科", "Department"));
-  // console.log(searchThread("１", "Grade"));
-  // console.log(searchThread("エラー用のワード", "0")); //エラー出力
-  // console.log(searchComment("ゲーム"));
-  // console.log(searchComment("エラー用のワード")); //エラー出力
-
-  // showThread(commonCommentData, threadIDTest);
-  // showTitle(commonThreadData, threadIDTest);
-  // document.querySelector("#page1").style.display = "block";
-  // document.querySelector("#page2").style.display = "none";
-  // console.log(commonCommentData);
-  // showSearchedTitle(commonThreadData, 1, [1000, 1003, 1006, 1009]);
-  showSearchedTitle(commonThreadData, 0);
+  console.log("デバッグボタン");
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
