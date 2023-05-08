@@ -156,7 +156,7 @@ var commonCommentData;
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
-const comment_data =
+const comment_data = //たまに複数回読み込まれるバグあり
   "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
 fetch(comment_data)
   .then((response) => response.json())
@@ -612,8 +612,10 @@ function searchComment(words) {
   output = new Array(Math.ceil(resultTmp.length / 2))
     .fill()
     .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
-  if (output.length == 0) return ["noThread", words];
-  else return output;
+  if (output.length == 0) {
+    console.log(words);
+    return ["noThread", words];
+  } else return output;
 }
 //スレッドIDを指定したらコメントを表示する関数
 function showThread(commentData, thread_ID) {
@@ -867,10 +869,9 @@ function viewThread(threadID, mode) {
       //     }
       //   }, intervalTime);
       // }
-
+      //以下ChatGPTによる
       const chat = document.getElementById("chat");
       const target = document.getElementById("chat" + String(mode - 1));
-      const step = 50; // スクロール量を分割する数
       const duration = 1000; // スクロールを完了するまでの時間（ミリ秒）
       const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
       const currentTop = chat.scrollTop;
@@ -892,6 +893,6 @@ function viewThread(threadID, mode) {
       };
       window.requestAnimationFrame(scrollToTarget);
     }
-  }, 800);
+  }, 400);
 }
 //ターミナル上コミットテスト
