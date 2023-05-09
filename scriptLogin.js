@@ -90,40 +90,52 @@ function registerBtn() {
     //大学のメールアドレスかチェック．
     showError("大学から付与されたメールアドレスを入力してください.");
   } else {
-    let Analysis = studentIDAndGradeAnalysis(email[1].value);
-    var data = {
-      Mail: email[1].value,
-      Password: password[1].value,
-      Name: username[0].value,
-      Undergraduate: Analysis[0],
-      Department: Analysis[1],
-      Grade: Analysis[2],
-      BackGround: "0",
-      ParallaxEffect: "1",
-    }; // POSTするデータを定義
-    var url =
-      "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(data),
-    }).then((response) => {});
-    showMessage("登録しました．\nログインしてください．");
-
-    //ログインタブへ切り替え
-    document.querySelector("#register").style.display = "none";
-    document.querySelector("#login").style.display = "block";
-
-    //データベース再読み込み
-    const user_data =
-      "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
-    fetch(user_data)
-      .then((response) => response.json())
-      .then((data) => {
-        userData = data;
-      })
-      .catch((error) => {
-        showError("ユーザー情報の取得に失敗しました.", error);
-      });
+    //利用規約画面を追加
+    Swal.fire({
+      icon: "warning",
+      title: "利用規約",
+      input: "checkbox",
+      html: "", //下までスクロールしたら102行目のelseで通過できるようにする．
+      inputPlaceholder: "利用規約に同意しますか?",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) return "登録するには利用規約に同意する必要があります.";
+        else {
+          let Analysis = studentIDAndGradeAnalysis(email[1].value);
+          var data = {
+            Mail: email[1].value,
+            Password: password[1].value,
+            Name: username[0].value,
+            Undergraduate: Analysis[0],
+            Department: Analysis[1],
+            Grade: Analysis[2],
+            BackGround: "0",
+            ParallaxEffect: "1",
+          }; // POSTするデータを定義
+          var url =
+            "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+          }).then((response) => {});
+          showMessage("登録しました．\nログインしてください．");
+          //ログインタブへ切り替え
+          document.querySelector("#register").style.display = "none";
+          document.querySelector("#login").style.display = "block";
+          //データベース再読み込み
+          const user_data =
+            "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
+          fetch(user_data)
+            .then((response) => response.json())
+            .then((data) => {
+              userData = data;
+            })
+            .catch((error) => {
+              showError("ユーザー情報の取得に失敗しました.", error);
+            });
+        }
+      },
+    });
   }
 }
 
