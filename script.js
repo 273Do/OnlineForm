@@ -2,7 +2,7 @@
 var viewOnly = 1;
 
 //スレッド番号を指定するとそのスレッドが表示される．
-var threadID = 1000;
+var nowThreadID = 1000;
 
 let userData = [];
 var i = 0;
@@ -143,7 +143,6 @@ fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
     commonThreadData = data;
-    showTitle(data, threadID);
     showSearchedTitle(data, 0);
   })
   .catch((error) => {
@@ -162,7 +161,6 @@ fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     commonCommentData = data;
-    showThread(data, threadID);
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
@@ -542,9 +540,6 @@ function searchGrades() {
 //fncが0の場合，フリーワード検索
 //fncが属性の場合，各フィルター検索が可能
 //スレッドが見つからない場合はエラー表示
-
-//スレッド番号を指定するとそのスレッドが表示される．
-var threadIDTest = 1001;
 
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
