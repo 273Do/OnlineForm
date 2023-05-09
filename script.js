@@ -143,6 +143,7 @@ fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
     commonThreadData = data;
+    showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
   .catch((error) => {
@@ -161,6 +162,7 @@ fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     commonCommentData = data;
+    showThread(data, nowThreadID);
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
@@ -225,6 +227,12 @@ document.querySelector("#page2Icon").addEventListener("click", function () {
 document.querySelector("#page1Icon").addEventListener("click", function () {
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
+});
+
+//sortingIconボタンが押された時の動作
+
+document.querySelector("#sortingIcon").addEventListener("click", function () {
+  console.log("昇順降順を切り替えるボタンです．");
 });
 
 //historyIconボタンが押された時の動作

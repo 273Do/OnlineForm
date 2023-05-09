@@ -363,18 +363,25 @@ header ul li {
 }
 
 #page1Icon,
-#historyIcon {
+#historyIcon,
+#sortingIcon {
   margin-top: 15px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-#historyIcon {
+#historyIcon,
+#sortingIcon {
   margin-left: calc(100% - 2px);
 }
 
+#sortingIcon {
+  margin-left: calc(100% + 11px);
+}
+
 #page1Icon:hover,
-#historyIcon:hover {
+#historyIcon:hover,
+#sortingIcon:hover {
   opacity: 0.5;
 }
 
