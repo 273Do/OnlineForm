@@ -1,2 +1,4 @@
-## Mac OS X
+## Mac OS X 
+#.DS_Storeの差分を読み込まない
+
 .DS_Store
