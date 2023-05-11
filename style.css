@@ -356,22 +356,40 @@ header ul li {
   border-radius: 40px;
 } */
 
-#page1Icon {
-  margin-left: calc(100% - 47px);
+#page1IconArea {
+  display: flex;
+  margin-left: calc(100% + 45px);
+  margin-top: 15px;
+}
+
+#page1Icon,
+#historyIcon,
+#sortingIcon {
   margin-top: 15px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-#page1Icon:hover {
+#historyIcon,
+#sortingIcon {
+  margin-left: calc(100% - 2px);
+}
+
+#sortingIcon {
+  margin-left: calc(100% + 11px);
+}
+
+#page1Icon:hover,
+#historyIcon:hover,
+#sortingIcon:hover {
   opacity: 0.5;
 }
 
 #result {
   /* background-color: #202023; */
-  margin-top: -2px;
+  margin-top: 1px;
   margin-left: -15px;
-  height: calc(100% - 80px);
+  height: calc(100% - 97px);
   overflow: scroll;
   overflow-x: hidden;
 }

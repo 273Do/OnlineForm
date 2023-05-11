@@ -1,2 +1,8 @@
+<<<<<<< HEAD
 ## Mac OS
+=======
+## Mac OS X 
+#.DS_Storeの差分を読み込まない
+
+>>>>>>> Dev273Do3
 .DS_Store

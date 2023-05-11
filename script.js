@@ -2,7 +2,7 @@
 var viewOnly = 1;
 
 //スレッド番号を指定するとそのスレッドが表示される．
-var threadID = 1000;
+var nowThreadID = 1000;
 
 let userData = [];
 var i = 0;
@@ -26,7 +26,7 @@ window.onload = function () {
   if (params == "" || params == null) {
     setTimeout(function () {
       //一旦無効化 無効化するとaccountボタン押せなくなる
-      location.href = "indexLogin.html";
+      // location.href = "indexLogin.html";
     }, 100);
   }
 
@@ -98,7 +98,7 @@ window.onload = function () {
       }
       if (flag == true) {
         setTimeout(function () {
-          location.href = "indexLogin.html";
+          // location.href = "indexLogin.html";
         }, 100);
       }
     })
@@ -111,7 +111,11 @@ window.onload = function () {
     .addEventListener("input", function () {
       console.log(this.value);
       console.log(searchThread(this.value, 0));
-
+      if (
+        document.getElementById("searchByWord").value == "" ||
+        document.getElementById("searchByWord").value == null
+      )
+        return showSearchedTitle(commonThreadData, 0);
       showSearchedTitle(commonThreadData, 1, searchThread(this.value, 0));
     });
   //コメント検索：ワードを入れるたびに動作
@@ -120,6 +124,12 @@ window.onload = function () {
     .addEventListener("input", function () {
       console.log(this.value);
       console.log(searchComment(this.value));
+      if (
+        document.getElementById("searchByComment").value == "" ||
+        document.getElementById("searchByComment").value == null
+      )
+        return showSearchedTitle(commonThreadData, 0);
+      showSearchedTitle(commonThreadData, 2, searchComment(this.value));
     });
 };
 //スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
@@ -133,7 +143,7 @@ fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
     commonThreadData = data;
-    showTitle(data, threadID);
+    showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
   .catch((error) => {
@@ -146,13 +156,13 @@ var commonCommentData;
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
-const comment_data =
+const comment_data = //たまに複数回読み込まれるバグあり
   "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
 fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     commonCommentData = data;
-    showThread(data, threadID);
+    showThread(data, nowThreadID);
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
@@ -217,6 +227,32 @@ document.querySelector("#page2Icon").addEventListener("click", function () {
 document.querySelector("#page1Icon").addEventListener("click", function () {
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
+});
+
+//sortingIconボタンが押された時の動作
+
+document.querySelector("#sortingIcon").addEventListener("click", function () {
+  console.log("昇順降順を切り替えるボタンです．");
+});
+
+//historyIconボタンが押された時の動作
+var historyTmp = []; //ここにスレッドIDをスタックする．
+//そのスレッドIDを利用してポップアップ表示の部分に反映させるようにする．
+let showHistory =
+  "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
+document.querySelector("#historyIcon").addEventListener("click", function () {
+  Swal.fire({
+    title: "History",
+    html: showHistory,
+    footer: "スレッドの閲覧履歴です",
+    showCancelButton: true,
+    toast: true,
+    backdrop: "none",
+    confirmButtonText: "Clear",
+    preConfirm: () => {
+      console.log("history");
+    },
+  });
 });
 
 //optionボタンが押された時の動作
@@ -513,28 +549,8 @@ function searchGrades() {
 //fncが属性の場合，各フィルター検索が可能
 //スレッドが見つからない場合はエラー表示
 
-//スレッド番号を指定するとそのスレッドが表示される．
-var threadIDTest = 1001;
-
 document.getElementById("debugBtn").addEventListener("click", function () {
-  // console.log(searchThread("2023/04/21　19:20:21", "0"));
-  // console.log(searchThread("テストスレッド２", "Thread_Title"));
-  // console.log(searchThread("ﾔﾏｸﾞﾁｹ", "Creator_Name"));
-  // console.log(searchThread("2023/04/21", "date(yyyy/mm/dd)"));
-  // console.log(searchThread("17:12:12", "time(hh:mm:dd)"));
-  // console.log(searchThread("文学部", "Undergraduate"));
-  // console.log(searchThread("経済学科", "Department"));
-  // console.log(searchThread("１", "Grade"));
-  // console.log(searchThread("エラー用のワード", "0")); //エラー出力
-  // console.log(searchComment("ゲーム"));
-  // console.log(searchComment("エラー用のワード")); //エラー出力
-
-  showThread(commonCommentData, threadIDTest);
-  showTitle(commonThreadData, threadIDTest);
-  // document.querySelector("#page1").style.display = "block";
-  // document.querySelector("#page2").style.display = "none";
-  // console.log(commonCommentData);
-  showSearchedTitle(commonThreadData, 1, [1000, 1003, 1006, 1009]);
+  console.log("デバッグボタン");
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -557,9 +573,7 @@ function searchThread(words, fnc) {
   searchTmp.forEach((e) => {
     output.push(threadsStorage[e]["Thread_ID"]);
   });
-  if (output.length == 0)
-    // showError("スレッドが見つかりませんでした．", "検索：" + words);
-    return ["noThread", words];
+  if (output.length == 0) return ["noThread", words];
   else return output;
 }
 //コメントの検索関数   2023.04.23(日)　山口慶大
@@ -583,10 +597,10 @@ function searchComment(words) {
   output = new Array(Math.ceil(resultTmp.length / 2))
     .fill()
     .map((_, i) => resultTmp.slice(i * 2, (i + 1) * 2));
-  if (output.length == 0)
-    // showError("コメントが見つかりませんでした．", "検索：" + words);
-    return words + "が含まれるコメントが見つかりません．";
-  else return output;
+  if (output.length == 0) {
+    console.log(words);
+    return ["noThread", words];
+  } else return output;
 }
 //スレッドIDを指定したらコメントを表示する関数
 function showThread(commentData, thread_ID) {
@@ -596,7 +610,9 @@ function showThread(commentData, thread_ID) {
     commentStorage.push(e);
     if (e["Thread_ID"] == thread_ID) {
       chat_load +=
-        '<div class="commentDetail"> <li class="chatDetail1">' +
+        '<div id="chat' +
+        e["Comment_ID"] +
+        '" class="commentDetail"> <li class="chatDetail1">' +
         e["Comment_ID"] +
         "：" +
         e["Wrote_Name"] +
@@ -677,11 +693,14 @@ function showTitle(threadData, thread_ID) {
   //   distance: "60px",
   // });
 }
+
 //スレッドタイトル一覧を表示する関数
 //第一引数：commonThreadData
 //第二引数：mode = 0：全スレッド表示，1：スレッド検索，2：コメント検索
 //第三引数：スレッド番号が格納された配列
 function showSearchedTitle(threadData, mode, threadIDArray) {
+  //ここで，threadIDArrayの順番を変えるようにする
+  console.log(commentStorage);
   var title_load = "";
   var title_load2 = "";
   if (mode == 0)
@@ -689,32 +708,69 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
       title_load += titleLoad(e);
       title_load2 = title_load.replace(/"threadsDetail"/g, "trueThreadsDetail");
     });
-  else if (mode == 1) {
-    {
-      if (threadIDArray[0] == "noThread") {
-        title_load =
-          '<div class="threadsDetail"><li class="chatDetail1" style="font-size:18px">スレッドが見つかりませんでした．</li>検索：' +
-          threadIDArray[1] +
-          "</div>";
+  else if (threadIDArray[0] == "noThread") {
+    title_load = titleLoadError(threadIDArray);
+    title_load2 = title_load.replace(/"threadsDetail"/g, "noneThreadsDetail");
+  } else if (mode == 1) {
+    var i = 0;
+    threadData.forEach((e) => {
+      if (threadIDArray[i] == e["Thread_ID"]) {
+        title_load += titleLoad(e);
         title_load2 = title_load.replace(
           /"threadsDetail"/g,
-          "noneThreadsDetail"
+          "trueThreadsDetail"
         );
-      } else {
-        var i = 0;
-        threadData.forEach((e) => {
-          if (threadIDArray[i] == e["Thread_ID"]) {
-            title_load += titleLoad(e);
-            title_load2 = title_load.replace(
-              /"threadsDetail"/g,
-              "trueThreadsDetail"
-            );
-            i++;
-          }
-        });
+        i++;
       }
-    }
+    });
   } else if (mode == 2) {
+    var sortThreadIDArray;
+    var i = 0;
+    var commentTmp = [];
+    sortThreadIDArray = threadIDArray.sort(
+      (a, b) => a[0] - b[0] || a[1] - b[1]
+    );
+    sortThreadIDArray.forEach((e) => {
+      commentStorage.forEach((e2) => {
+        if (e[0] == e2["Thread_ID"] && e[1] == e2["Comment_ID"])
+          commentTmp.push(e2["Comment"]);
+      });
+      threadData.forEach((e3) => {
+        if (e[0] == e3["Thread_ID"]) {
+          title_load +=
+            '<div class="threadsDetail" onclick="viewThread(' +
+            e3["Thread_ID"] +
+            "," +
+            e[1] +
+            ')"> <li class="chatDetail1" style="font-size:30px">' +
+            e3["Thread_Title"] +
+            "</li>" +
+            e3["Creator_Name"] +
+            "(" +
+            e3["Undergraduate"] +
+            " " +
+            e3["Department"] +
+            " " +
+            e3["Grade"] +
+            "回生)" +
+            '<li class="chatDetail2">' +
+            e3["date(yyyy/mm/dd)"] +
+            "　" +
+            e3["time(hh:mm:dd)"] +
+            "　" +
+            '</li><li class="chatDetail2" style="font-size:22px">' +
+            e[1] +
+            "：" +
+            commentTmp[i] +
+            "</li></div>";
+          title_load2 = title_load.replace(
+            /"threadsDetail"/g,
+            "trueThreadsDetail"
+          );
+          i++;
+        }
+      });
+    });
   }
   document.getElementById("result").innerHTML = title_load;
   ScrollReveal().reveal("#result, .threadsDetail", {
@@ -734,7 +790,7 @@ function titleLoad(e) {
   return (
     '<div class="threadsDetail" onclick="viewThread(' +
     e["Thread_ID"] +
-    ')"> <li class="chatDetail1" style="font-size:30px">' +
+    ',0)"><li class="chatDetail1" style="font-size:30px">' +
     e["Thread_Title"] +
     "</li>" +
     e["Creator_Name"] +
@@ -745,7 +801,7 @@ function titleLoad(e) {
     " " +
     e["Grade"] +
     "回生)" +
-    ' <li class="chatDetail2">' +
+    '<li class="chatDetail2">' +
     e["date(yyyy/mm/dd)"] +
     "　" +
     e["time(hh:mm:dd)"] +
@@ -753,10 +809,75 @@ function titleLoad(e) {
     "</li> </div>"
   );
 }
+//タイトル表示のエラー要素を返す関数
+function titleLoadError(e) {
+  return (
+    '<div class="threadsDetail"><li class="chatDetail1" style="font-size:18px">スレッドが見つかりませんでした．</li>検索：' +
+    e[1] +
+    "</div>"
+  );
+}
 //選択したスレッドの表示を行う関数
-function viewThread(threadID) {
+function viewThread(threadID, mode) {
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
   showThread(commonCommentData, threadID);
   showTitle(commonThreadData, threadID);
+
+  window.setTimeout(function () {
+    if (mode != 0) {
+      //   document.getElementById("chat").scrollTop =
+      //     document
+      //       .getElementById("chat" + String(mode - 1))
+      //       .getBoundingClientRect().top + window.pageYOffset;
+      // const chat = document.getElementById("chat");
+      // const target = document.getElementById("chat" + String(mode - 1));
+      // target.scrollIntoView({
+      //   behavior: "smooth",
+      //   block: "start",
+      //   inline: "nearest",
+      // });
+
+      //   const chat = document.getElementById("chat");
+      //   const target = document.getElementById("chat" + String(mode - 1));
+      //   const step = 35; // スクロール量を分割する数
+      //   const intervalTime = 10; // スクロールを行う間隔（ミリ秒）
+      //   const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+      //   const currentTop = chat.scrollTop;
+      //   const distance = targetTop - currentTop;
+      //   let count = 0;
+      //   const interval = setInterval(() => {
+      //     count++;
+      //     const scrollTop = currentTop + (distance * count) / step;
+      //     chat.scrollTop = scrollTop;
+      //     if (count >= step) {
+      //       clearInterval(interval);
+      //     }
+      //   }, intervalTime);
+      // }
+      //以下ChatGPTによる
+      const chat = document.getElementById("chat");
+      const target = document.getElementById("chat" + String(mode - 1));
+      const duration = 1000; // スクロールを完了するまでの時間（ミリ秒）
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
+      const currentTop = chat.scrollTop;
+      const distance = targetTop - currentTop;
+      let startTime = null;
+      const easeInOutCubic = (t) => {
+        return t < 0.5 ? 4 * t ** 3 : (t - 1) * (2 * t - 2) ** 2 + 1;
+      };
+      const scrollToTarget = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const elapsedTime = timestamp - startTime;
+        const scrollAmount = easeInOutCubic(elapsedTime / duration) * distance;
+        chat.scrollTop = currentTop + scrollAmount;
+        if (elapsedTime < duration) {
+          window.requestAnimationFrame(scrollToTarget);
+        } else {
+          chat.scrollTop = targetTop;
+        }
+      };
+      window.requestAnimationFrame(scrollToTarget);
+    }
+  }, 400);
 }

@@ -15,7 +15,7 @@
     <header>
       <div class="mainTitle">
         <img src="./img/OnlineForm.png" alt="siteImg" id="logo" />
-        <h1>京都橘大学生</h1>
+        <h1>京都橘大学 掲示板</h1>
       </div>
       <nav>
         <ul>
@@ -232,16 +232,16 @@
         }
       );
 
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("./sw.js")
-          .then((registration) => {
-            console.log("ServiceWorker registration successful.");
-          })
-          .catch((err) => {
-            console.log("ServiceWorker registration failed.");
-          });
-      }
+      // if ("serviceWorker" in navigator) {
+      //   navigator.serviceWorker
+      //     .register("./sw.js")
+      //     .then((registration) => {
+      //       console.log("ServiceWorker registration successful.");
+      //     })
+      //     .catch((err) => {
+      //       console.log("ServiceWorker registration failed.");
+      //     });
+      // }
     </script>
   </body>
 </html>
