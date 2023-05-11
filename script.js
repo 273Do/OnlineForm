@@ -33,7 +33,7 @@ window.onload = function () {
   //ViewMode処理．　2023年5月11日　有田海斗
   const user = params.get("user");
   if (params == "viewonly"){
-      showMessage("ViewModeログイン成功．")
+      showMessage("ViewModeログイン成功．");
   }else{
   //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
   const user_data =
