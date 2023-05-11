@@ -15,8 +15,8 @@ document.addEventListener("mousemove", (event) => {
 //Usageボタンを押すと，ツールチップのOn，Offを切り替えることができる．このツールチップは<span>タグで実装されており，cssで操作すると，それに囲まれている要素にも影響が出てしまう．文字を空白{""}にすることにより回避している．
 //このコードは，いくらツールチップを追加削除しても書き換える必要はない．
 var UsageFlg = -1;
-var tooltipTmp = [];
 var tooltipCounter = 0;
+var tooltipTmp = [];
 function usageIcon() {
   const spanElements = document.querySelectorAll("span[tooltip]");
   UsageFlg *= -1;
@@ -30,11 +30,11 @@ function usageIcon() {
         document.querySelector("#Usage").style.color = "#f4ede4";
       })
     : spanElements.forEach(() => {
-        tooltipCounter++;
         document
           .querySelector("span[tooltip='']")
-          .setAttribute("tooltip", tooltipTmp[tooltipCounter - 1]);
+          .setAttribute("tooltip", tooltipTmp[tooltipCounter]);
         document.querySelector("#Usage").style.color = "lime";
+        tooltipCounter++;
       });
 }
 usageIcon();

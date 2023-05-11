@@ -699,6 +699,7 @@ function showTitle(threadData, thread_ID) {
 //第二引数：mode = 0：全スレッド表示，1：スレッド検索，2：コメント検索
 //第三引数：スレッド番号が格納された配列
 function showSearchedTitle(threadData, mode, threadIDArray) {
+  //ここで，threadIDArrayの順番を変えるようにする
   console.log(commentStorage);
   var title_load = "";
   var title_load2 = "";
@@ -880,4 +881,3 @@ function viewThread(threadID, mode) {
     }
   }, 400);
 }
-//ターミナル上コミットテスト

@@ -91,11 +91,12 @@ function registerBtn() {
     showError("大学から付与されたメールアドレスを入力してください.");
   } else {
     //利用規約画面を追加
+    let TermsOfUse = "hello"; //利用規約html
     Swal.fire({
       icon: "warning",
       title: "利用規約",
       input: "checkbox",
-      html: "", //下までスクロールしたら102行目のelseで通過できるようにする．
+      html: TermsOfUse, //下までスクロールしたら102行目のelseで通過できるようにする．
       inputPlaceholder: "利用規約に同意しますか?",
       showCancelButton: true,
       inputValidator: (value) => {
