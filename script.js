@@ -31,6 +31,7 @@ window.onload = function () {
   }
 
   //ViewMode処理．　2023年5月11日　有田海斗
+  const user = params.get("user");
   if (params == "viewonly"){
       showMessage("ViewModeログイン成功．")
   }else{
@@ -54,7 +55,7 @@ window.onload = function () {
 
   fetchData()
     .then(() => {
-      const user = params.get("user");
+      user = params.get("user");
 
       //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
       let flag = false;
