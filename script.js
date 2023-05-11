@@ -20,6 +20,7 @@ window.onload = function () {
   //パラーメーターの有無を確認．　2023年4月25日　有田海斗
   const url = new URL(window.location.href);
   const params = url.searchParams;
+  const user = params.get("user");
 
   //パラメーターが無い場合、ログイン画面へ遷移．　2023年4月25日　有田海斗
 
@@ -31,8 +32,7 @@ window.onload = function () {
   }
 
   //ViewMode処理．　2023年5月11日　有田海斗
-  const user = params.get("user");
-  if (params == "viewonly"){
+  if (user == "viewonly"){
       showMessage("ViewModeログイン成功．");
   }else{
   //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
