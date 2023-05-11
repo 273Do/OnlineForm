@@ -55,8 +55,6 @@ window.onload = function () {
 
   fetchData()
     .then(() => {
-      user = params.get("user");
-
       //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
       let flag = false;
       for (i = 0; i < userData.length; i++) {
