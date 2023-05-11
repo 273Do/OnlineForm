@@ -229,12 +229,6 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
   document.querySelector("#page1").style.display = "block";
 });
 
-//sortingIconボタンが押された時の動作
-
-document.querySelector("#sortingIcon").addEventListener("click", function () {
-  console.log("昇順降順を切り替えるボタンです．");
-});
-
 //historyIconボタンが押された時の動作
 var historyTmp = []; //ここにスレッドIDをスタックする．
 //そのスレッドIDを利用してポップアップ表示の部分に反映させるようにする．
@@ -253,6 +247,18 @@ document.querySelector("#historyIcon").addEventListener("click", function () {
       console.log("history");
     },
   });
+});
+
+//sortingIconボタンが押された時の動作 //html要素を並び替える
+var sorting = 1;
+var sortFlg = 0;
+document.querySelector("#sortingIcon").addEventListener("click", function () {
+  console.log("昇順降順を切り替えるボタンです．");
+  sorting *= -1;
+  sorting == 1
+    ? (sortFlg = 0) //"降順を切り替えるボタンです
+    : (sortFlg = 1); //昇順を切り替えるボタンです
+  console.log(sortFlg);
 });
 
 //optionボタンが押された時の動作
@@ -699,8 +705,6 @@ function showTitle(threadData, thread_ID) {
 //第二引数：mode = 0：全スレッド表示，1：スレッド検索，2：コメント検索
 //第三引数：スレッド番号が格納された配列
 function showSearchedTitle(threadData, mode, threadIDArray) {
-  //ここで，threadIDArrayの順番を変えるようにする
-  console.log(commentStorage);
   var title_load = "";
   var title_load2 = "";
   if (mode == 0)
