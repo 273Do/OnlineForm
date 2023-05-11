@@ -21,11 +21,6 @@ window.onload = function () {
   const url = new URL(window.location.href);
   const params = url.searchParams;
 
-//view-source判定．2023年5月11日　有田海斗
-  if (url.match(/view-source:/)) {
-    showError("ソースコードの表示はできません．")    
-    }
-
   //パラメーターが無い場合、ログイン画面へ遷移．　2023年4月25日　有田海斗
 
   if (params == "" || params == null) {
@@ -35,6 +30,10 @@ window.onload = function () {
     }, 100);
   }
 
+  //ViewMode処理．　2023年5月11日　有田海斗
+  if (params == "viewonly"){
+      showMessage("ViewModeログイン成功．")
+  }else{
   //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
   const user_data =
     "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
@@ -110,6 +109,8 @@ window.onload = function () {
     .catch((error) => {
       showError("ユーザー情報の取得に失敗しました.", error);
     });
+  }
+
   //スレッド検索：ワードを入れるたびに動作
   document
     .querySelector("#searchByWord")
