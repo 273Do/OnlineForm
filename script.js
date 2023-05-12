@@ -142,7 +142,7 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    commonThreadData = data;
+    commonThreadData = data.reverse(); //ここ消せば昇順になる
     showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
@@ -249,16 +249,11 @@ document.querySelector("#historyIcon").addEventListener("click", function () {
   });
 });
 
-//sortingIconボタンが押された時の動作 //html要素を並び替える
-var sorting = 1;
-var sortFlg = 0;
+//sortingIconボタンが押された時の動作
 document.querySelector("#sortingIcon").addEventListener("click", function () {
-  console.log("昇順降順を切り替えるボタンです．");
-  sorting *= -1;
-  sorting == 1
-    ? (sortFlg = 0) //"降順を切り替えるボタンです
-    : (sortFlg = 1); //昇順を切り替えるボタンです
-  console.log(sortFlg);
+  const children = Array.from(document.querySelector("#result").children);
+  for (var i = children.length - 1; i >= 0; i--)
+    document.querySelector("#result").appendChild(children[i]);
 });
 
 //optionボタンが押された時の動作
@@ -731,9 +726,9 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     var sortThreadIDArray;
     var i = 0;
     var commentTmp = [];
-    sortThreadIDArray = threadIDArray.sort(
-      (a, b) => a[0] - b[0] || a[1] - b[1]
-    );
+    sortThreadIDArray = threadIDArray
+      .sort((a, b) => a[0] - b[0] || a[1] - b[1])
+      .reverse(); //ここ消せば昇順になる
     sortThreadIDArray.forEach((e) => {
       commentStorage.forEach((e2) => {
         if (e[0] == e2["Thread_ID"] && e[1] == e2["Comment_ID"])
