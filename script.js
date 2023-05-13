@@ -1,5 +1,5 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
-var viewOnly = 1;
+// var viewOnly = 1;この変数要らなくなった
 
 //スレッド番号を指定するとそのスレッドが表示される．
 var nowThreadID = 1000;
@@ -13,9 +13,9 @@ window.onload = function () {
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page1").style.display = "none";
-  viewOnly == 1
-    ? (document.querySelector("#view").style.display = "block")
-    : (document.querySelector("#view").style.display = "none");
+  // viewOnly == 1
+  //   ? (document.querySelector("#view").style.display = "block")
+  //   : (document.querySelector("#view").style.display = "none");
 
   //パラーメーターの有無を確認．　2023年4月25日　有田海斗
   const url = new URL(window.location.href);
@@ -36,6 +36,7 @@ window.onload = function () {
     showMessage("ViewModeログイン成功．");
   } else {
     //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
+    document.querySelector("#view").style.display = "none";
     const user_data =
       "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
 
