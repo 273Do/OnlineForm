@@ -14,8 +14,8 @@ window.onload = function () {
   document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page1").style.display = "none";
   viewOnly == 1
-    ? (document.querySelector("#view div").style.display = "block")
-    : (document.querySelector("#view div").style.display = "none");
+    ? (document.querySelector("#view").style.display = "block")
+    : (document.querySelector("#view").style.display = "none");
 
   //パラーメーターの有無を確認．　2023年4月25日　有田海斗
   const url = new URL(window.location.href);
