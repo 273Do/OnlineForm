@@ -13,6 +13,7 @@ window.onload = function () {
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page1").style.display = "none";
+  document.querySelector("#view").style.display = "none";
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
@@ -32,82 +33,83 @@ window.onload = function () {
   }
 
   //ViewMode処理．　2023年5月11日　有田海斗
-  if (user == "viewonly"){
-      showMessage("ViewModeログイン成功．");
-  }else{
-  //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
-  const user_data =
-    "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
+  if (user == "viewonly") {
+    document.querySelector("#view").style.display = "block";
+    showMessage("ViewModeログイン成功．");
+  } else {
+    //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
+    const user_data =
+      "https://script.google.com/macros/s/AKfycbxzclUMPdnA98fdRGw7fjzt2Chb_BzSzJoQYaWIA4WPe8pOgwT3MfNCjEq6bvTxoxTMDw/exec";
 
-  const fetchData = () => {
-    return new Promise((resolve, reject) => {
-      fetch(user_data)
-        .then((response) => response.json())
-        .then((data) => {
-          userData = data;
-          resolve();
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
+    const fetchData = () => {
+      return new Promise((resolve, reject) => {
+        fetch(user_data)
+          .then((response) => response.json())
+          .then((data) => {
+            userData = data;
+            resolve();
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    };
 
-  fetchData()
-    .then(() => {
-      //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
-      let flag = false;
-      for (i = 0; i < userData.length; i++) {
-        if (userData[i]["Access_Code"] == user) {
-          //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
-          var now = new Date();
-          var year = now.getFullYear();
-          var month = ("0" + (now.getMonth() + 1)).slice(-2);
-          var day = ("0" + now.getDate()).slice(-2);
-          var hour = ("0" + now.getHours()).slice(-2);
-          var minute = ("0" + now.getMinutes()).slice(-2);
-          var second = ("0" + now.getSeconds()).slice(-2);
-          var url =
-            "https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec" +
-            "?row=" +
-            (i + 2) +
-            "&value1=" +
-            encodeURIComponent("") +
-            "&value2=" +
-            "'" +
-            year +
-            "/" +
-            month +
-            "/" +
-            day +
-            " " +
-            hour +
-            ":" +
-            minute +
-            ":" +
-            second;
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", url);
-          xhr.send();
+    fetchData()
+      .then(() => {
+        //パラメーターが偽造である場合、ログイン画面へ遷移   2023/04/19(水) 有田海斗
+        let flag = false;
+        for (i = 0; i < userData.length; i++) {
+          if (userData[i]["Access_Code"] == user) {
+            //パラメーターが一致した場合、データベースからパラメーターを削除．　2023年4月25日　有田海斗
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var day = ("0" + now.getDate()).slice(-2);
+            var hour = ("0" + now.getHours()).slice(-2);
+            var minute = ("0" + now.getMinutes()).slice(-2);
+            var second = ("0" + now.getSeconds()).slice(-2);
+            var url =
+              "https://script.google.com/macros/s/AKfycbwTuVY4UJ2_YNV2Ps0hQPVMAJSvvozrvb7Wpvg9Dw4-naYdXM0a27F-r6BEfywDNOCMrQ/exec" +
+              "?row=" +
+              (i + 2) +
+              "&value1=" +
+              encodeURIComponent("") +
+              "&value2=" +
+              "'" +
+              year +
+              "/" +
+              month +
+              "/" +
+              day +
+              " " +
+              hour +
+              ":" +
+              minute +
+              ":" +
+              second;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.send();
 
-          BGImageAndPE(userData[i]["BackGround"], 0);
-          BGImageAndPE(userData[i]["ParallaxEffect"], 1);
+            BGImageAndPE(userData[i]["BackGround"], 0);
+            BGImageAndPE(userData[i]["ParallaxEffect"], 1);
 
-          flag = false;
-          break;
-        } else {
-          flag = true;
+            flag = false;
+            break;
+          } else {
+            flag = true;
+          }
         }
-      }
-      if (flag == true) {
-        setTimeout(function () {
-          // location.href = "indexLogin.html";
-        }, 100);
-      }
-    })
-    .catch((error) => {
-      showError("ユーザー情報の取得に失敗しました.", error);
-    });
+        if (flag == true) {
+          setTimeout(function () {
+            // location.href = "indexLogin.html";
+          }, 100);
+        }
+      })
+      .catch((error) => {
+        showError("ユーザー情報の取得に失敗しました.", error);
+      });
   }
 
   //スレッド検索：ワードを入れるたびに動作
