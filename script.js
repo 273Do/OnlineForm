@@ -7,13 +7,13 @@ var nowThreadID = 1000;
 let userData = [];
 var i = 0;
 
+document.querySelector("#view").style.display = "none";
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "block";
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page1").style.display = "none";
-  document.querySelector("#view").style.display = "none";
   viewOnly == 1
     ? (document.querySelector("#view").style.display = "block")
     : (document.querySelector("#view").style.display = "none");
