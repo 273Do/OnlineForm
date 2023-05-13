@@ -7,7 +7,6 @@ var nowThreadID = 1000;
 let userData = [];
 var i = 0;
 
-document.querySelector("#view").style.display = "none";
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "block";
@@ -15,8 +14,8 @@ window.onload = function () {
   document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page1").style.display = "none";
   viewOnly == 1
-    ? (document.querySelector("#view").style.display = "block")
-    : (document.querySelector("#view").style.display = "none");
+    ? (document.querySelector("#view div").style.display = "block")
+    : (document.querySelector("#view div").style.display = "none");
 
   //パラーメーターの有無を確認．　2023年4月25日　有田海斗
   const url = new URL(window.location.href);
@@ -34,7 +33,6 @@ window.onload = function () {
 
   //ViewMode処理．　2023年5月11日　有田海斗
   if (user == "viewonly") {
-    document.querySelector("#view").style.display = "block";
     showMessage("ViewModeログイン成功．");
   } else {
     //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
