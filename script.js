@@ -1,6 +1,9 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 var viewOnly = 1;
 
+//スレッドの閲覧履歴スレッドIDをスタックする．
+var historyTmp = [];
+
 //スレッド番号を指定するとそのスレッドが表示される．
 var nowThreadID = 1000;
 
@@ -230,8 +233,6 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 });
 
 //historyIconボタンが押された時の動作
-var historyTmp = []; //ここにスレッドIDをスタックする．
-//そのスレッドIDを利用してポップアップ表示の部分に反映させるようにする．
 let showHistory =
   "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
 document.querySelector("#historyIcon").addEventListener("click", function () {
@@ -245,6 +246,8 @@ document.querySelector("#historyIcon").addEventListener("click", function () {
     confirmButtonText: "Clear",
     preConfirm: () => {
       console.log("history");
+      showHistory = "";
+      historyTmp = [];
     },
   });
 });
@@ -818,6 +821,13 @@ function titleLoadError(e) {
 }
 //選択したスレッドの表示を行う関数
 function viewThread(threadID, mode) {
+  if (historyTmp.indexOf(threadID) != -1) {
+    delete historyTmp[historyTmp.indexOf(threadID)];
+    historyTmp = historyTmp.filter(Boolean);
+  }
+  historyTmp.push(threadID);
+  console.log(historyTmp);
+
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
   showThread(commonCommentData, threadID);
