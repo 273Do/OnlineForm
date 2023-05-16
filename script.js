@@ -8,7 +8,7 @@ var historyTmp = [];
 var nowThreadID = 1000;
 
 let userData = [];
-var i = 0;
+// var i = 0;
 
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
@@ -136,7 +136,6 @@ window.onload = function () {
     });
 };
 //スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
-var tN = 0; //threadNumber
 var commonThreadData;
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
@@ -236,21 +235,23 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 let showHistory =
   "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
 document.querySelector("#historyIcon").addEventListener("click", function () {
+  historyClear();
+});
+function historyClear() {
   Swal.fire({
     title: "History",
     html: showHistory,
-    footer: "スレッドの閲覧履歴です",
+    footer: "スレッドの閲覧履歴です", //<p onclick=historyClear() style='cursor:pointer'>履歴をクリア</p>
     showCancelButton: true,
     toast: true,
-    backdrop: "none",
     confirmButtonText: "Clear",
     preConfirm: () => {
-      console.log("history");
-      showHistory = "";
+      showHistory = "閲覧履歴がありません．";
       historyTmp = [];
+      historyClear();
     },
   });
-});
+}
 
 //sortingIconボタンが押された時の動作
 document.querySelector("#sortingIcon").addEventListener("click", function () {
