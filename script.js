@@ -1,11 +1,14 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 // var viewOnly = 1;この変数要らなくなった
 
+//スレッドの閲覧履歴スレッドIDをスタックする．
+var historyTmp = [];
+
 //スレッド番号を指定するとそのスレッドが表示される．
 var nowThreadID = 1000;
 
 let userData = [];
-var i = 0;
+// var i = 0;
 
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
@@ -139,7 +142,6 @@ window.onload = function () {
     });
 };
 //スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
-var tN = 0; //threadNumber
 var commonThreadData;
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
@@ -148,7 +150,7 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    commonThreadData = data;
+    commonThreadData = data.reverse(); //ここ消せば昇順になる
     showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
@@ -235,30 +237,33 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
   document.querySelector("#page1").style.display = "block";
 });
 
-//sortingIconボタンが押された時の動作
-
-document.querySelector("#sortingIcon").addEventListener("click", function () {
-  console.log("昇順降順を切り替えるボタンです．");
-});
-
 //historyIconボタンが押された時の動作
-var historyTmp = []; //ここにスレッドIDをスタックする．
-//そのスレッドIDを利用してポップアップ表示の部分に反映させるようにする．
 let showHistory =
   "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
 document.querySelector("#historyIcon").addEventListener("click", function () {
+  historyClear();
+});
+function historyClear() {
   Swal.fire({
     title: "History",
     html: showHistory,
-    footer: "スレッドの閲覧履歴です",
+    footer: "スレッドの閲覧履歴です", //<p onclick=historyClear() style='cursor:pointer'>履歴をクリア</p>
     showCancelButton: true,
     toast: true,
-    backdrop: "none",
     confirmButtonText: "Clear",
     preConfirm: () => {
-      console.log("history");
+      showHistory = "閲覧履歴がありません．";
+      historyTmp = [];
+      historyClear();
     },
   });
+}
+
+//sortingIconボタンが押された時の動作
+document.querySelector("#sortingIcon").addEventListener("click", function () {
+  const children = Array.from(document.querySelector("#result").children);
+  for (var i = children.length - 1; i >= 0; i--)
+    document.querySelector("#result").appendChild(children[i]);
 });
 
 //optionボタンが押された時の動作
@@ -705,8 +710,6 @@ function showTitle(threadData, thread_ID) {
 //第二引数：mode = 0：全スレッド表示，1：スレッド検索，2：コメント検索
 //第三引数：スレッド番号が格納された配列
 function showSearchedTitle(threadData, mode, threadIDArray) {
-  //ここで，threadIDArrayの順番を変えるようにする
-  console.log(commentStorage);
   var title_load = "";
   var title_load2 = "";
   if (mode == 0)
@@ -733,9 +736,9 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     var sortThreadIDArray;
     var i = 0;
     var commentTmp = [];
-    sortThreadIDArray = threadIDArray.sort(
-      (a, b) => a[0] - b[0] || a[1] - b[1]
-    );
+    sortThreadIDArray = threadIDArray
+      .sort((a, b) => a[0] - b[0] || a[1] - b[1])
+      .reverse(); //ここ消せば昇順になる
     sortThreadIDArray.forEach((e) => {
       commentStorage.forEach((e2) => {
         if (e[0] == e2["Thread_ID"] && e[1] == e2["Comment_ID"])
@@ -825,6 +828,13 @@ function titleLoadError(e) {
 }
 //選択したスレッドの表示を行う関数
 function viewThread(threadID, mode) {
+  if (historyTmp.indexOf(threadID) != -1) {
+    delete historyTmp[historyTmp.indexOf(threadID)];
+    historyTmp = historyTmp.filter(Boolean);
+  }
+  historyTmp.push(threadID);
+  console.log(historyTmp);
+
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
   showThread(commonCommentData, threadID);
