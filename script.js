@@ -238,6 +238,7 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 });
 
 //historyIconボタンが押された時の動作
+//閲覧履歴
 document.querySelector("#historyIcon").addEventListener("click", function () {
   showThreadHistory();
 });
