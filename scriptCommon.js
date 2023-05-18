@@ -132,23 +132,23 @@ function BGImageAndPE(value, Flg) {
 //管理者がログインしている場合のみ，押せるようにし，それ以外のユーザーが押すとエラーが出るようにする，フラグで管理．
 document.querySelector("#developerIcon").addEventListener("click", function () {
   window.location.href = "./developer/developer-index.html";
-  Swal.fire({
-    icon: "warning",
-    title: "DeveloperToolLogin",
-    html: '<input type="email" class="swal2-input" placeholder="Email" name="selectTime" id="dtEmail"><input type="password" class="swal2-input" placeholder="Password" name="selectTime" id="dtPassword">',
-    toast: "true",
-    width: "400px", //ここの値で幅が変わる．
-    showCancelButton: true,
-    preConfirm: () => {
-      var dtEmail = document.getElementById("dtEmail").value;
-      var dtPassword = document.getElementById("dtPassword").value;
-      console.log(
-        dtEmail && dtPassword
-          ? dtEmail + "&" + dtPassword
-          : "Please choose a date."
-      );
-    },
-  });
+  // Swal.fire({
+  //   icon: "warning",
+  //   title: "DeveloperToolLogin",
+  //   html: '<input type="email" class="swal2-input" placeholder="Email" name="selectTime" id="dtEmail"><input type="password" class="swal2-input" placeholder="Password" name="selectTime" id="dtPassword">',
+  //   toast: "true",
+  //   width: "400px", //ここの値で幅が変わる．
+  //   showCancelButton: true,
+  //   preConfirm: () => {
+  //     var dtEmail = document.getElementById("dtEmail").value;
+  //     var dtPassword = document.getElementById("dtPassword").value;
+  //     console.log(
+  //       dtEmail && dtPassword
+  //         ? dtEmail + "&" + dtPassword
+  //         : "Please choose a date."
+  //     );
+  //   },
+  // });
 });
 //エラー出力
 function showError(value, error) {
