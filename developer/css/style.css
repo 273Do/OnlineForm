@@ -1,0 +1,99 @@
+@charset "utf-8";
+
+
+/* common */
+
+html{
+    margin: 0;
+    margin: 0;
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    /* background: rgb(235, 193, 212); */
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+
+/* header */
+
+header {
+    width: 100%;
+    background: rgb(45, 44, 44);
+}
+
+header h1 {
+    color: white;
+}
+
+
+
+/* main */
+
+
+
+.menu {
+    margin: 0 auto;
+    margin-top: 350px;
+}
+
+.menu ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.menu li {
+    margin: 0 auto;
+
+}
+
+.menu li a {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    font-size: 24px;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 48px) / 4;
+
+    transition: opacity .3s;
+}
+
+.menu li a:hover {
+    opacity: 0.5;
+}
+
+
+
+.menu i {
+    font-size: 64px;
+}
+
