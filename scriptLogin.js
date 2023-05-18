@@ -148,9 +148,7 @@ function viewOnly() {
     footer: "スレッド作成や書き込みはできません．",
     showCancelButton: true,
   }).then((result) => {
-    if (result.isConfirmed) {
-      location = "index.html?user=viewonly"
-    };
+    if (result.isConfirmed) location = "index.html?user=viewonly";
   });
 }
 
