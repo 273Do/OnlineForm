@@ -238,23 +238,31 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 });
 
 //historyIconボタンが押された時の動作
-let showHistory =
-  "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
 document.querySelector("#historyIcon").addEventListener("click", function () {
-  historyClear();
+  showThreadHistory();
 });
-function historyClear() {
+function showThreadHistory() {
+  var showHistory = "";
+  var tmp = "";
+  historyTmp.reverse().forEach((e) => {
+    tmp += '<li onclick="viewThread(' + e + ',0)">' + e + "</li>";
+  });
+  showHistory =
+    "<ul style='height: 100px;overflow-y: scroll;'>" + tmp + "</ul>";
+  //onclick="viewThread(' + e + ,0)"
+  console.log(showHistory);
+
   Swal.fire({
     title: "History",
     html: showHistory,
-    footer: "スレッドの閲覧履歴です", //<p onclick=historyClear() style='cursor:pointer'>履歴をクリア</p>
+    footer: "スレッドの閲覧履歴です", //<p onclick=showThreadHistory() style='cursor:pointer'>履歴をクリア</p>
     showCancelButton: true,
     toast: true,
     confirmButtonText: "Clear",
     preConfirm: () => {
       showHistory = "閲覧履歴がありません．";
       historyTmp = [];
-      historyClear();
+      showThreadHistory();
     },
   });
 }
@@ -562,6 +570,7 @@ function searchGrades() {
 
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
+  showMessageTimer("test");
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {

@@ -169,3 +169,21 @@ function showMessage(value, message) {
     text: message,
   });
 }
+//時間制限メッセージ表示
+function showMessageTimer(message) {
+  const Toast = Swal.mixin({
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  Toast.fire({
+    icon: "success",
+    title: message,
+    toast: true,
+    position: "top-end",
+  });
+}
