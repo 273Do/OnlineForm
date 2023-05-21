@@ -253,6 +253,11 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <script>
+      //操作性改善のため、戻るボタン禁止．　2023年5月18日　有田海斗
+      history.pushState(null, null, location.href);
+      window.addEventListener('popstate', (e) => {
+        history.go(1);
+      });
       ScrollReveal({ reset: false, duration: 1800 });
       ScrollReveal().reveal("#searchOptions", {
         delay: 200,
