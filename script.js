@@ -1,8 +1,9 @@
 //閲覧モード状態   2023/04/23(日) 山口慶大
 // var viewOnly = 1;この変数要らなくなった
 
-//スレッドの閲覧履歴スレッドIDをスタックする．
+//スレッドの閲覧履歴スレッドIDとそのスレッドタイトルをスタックする．
 var historyTmp = [];
+var titleHistory = [];
 
 //スレッド番号を指定するとそのスレッドが表示される．
 var nowThreadID = 1000;
@@ -242,28 +243,43 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 document.querySelector("#historyIcon").addEventListener("click", function () {
   showThreadHistory();
 });
+var showHistoryFlg = 0;
 function showThreadHistory() {
   var showHistory = "";
   var tmp = "";
-  historyTmp.reverse().forEach((e) => {
-    tmp += '<li onclick="viewThread(' + e + ',0)">' + e + "</li>";
-  });
-  showHistory =
-    "<ul style='height: 100px;overflow-y: scroll;'>" + tmp + "</ul>";
-  //onclick="viewThread(' + e + ,0)"
-  console.log(showHistory);
-
+  var i = 0;
+  if (showHistoryFlg == 0) showHistory = "閲覧履歴がありません．";
+  else {
+    historyTmp.reverse().forEach((e) => {
+      i++;
+      tmp +=
+        '<li style="cursor:pointer; border-bottom: 2px solid #f4ede4;" onclick="viewThread(' +
+        e +
+        ",0,'" +
+        titleHistory[titleHistory.length - i] +
+        "'" +
+        ')">' +
+        i +
+        "：" +
+        titleHistory[titleHistory.length - i] +
+        "</li>";
+    });
+    showHistory =
+      "<ul style='height: 100px; overflow-y: scroll;'>" + tmp + "</ul>";
+    historyTmp.reverse();
+  }
   Swal.fire({
-    title: "History",
+    title: "スレッドの閲覧履歴",
     html: showHistory,
-    footer: "スレッドの閲覧履歴です", //<p onclick=showThreadHistory() style='cursor:pointer'>履歴をクリア</p>
+    footer: "クリックで移動できます．", //<p onclick=showThreadHistory() style='cursor:pointer'>履歴をクリア</p>
     showCancelButton: true,
     toast: true,
     confirmButtonText: "Clear",
     preConfirm: () => {
-      showHistory = "閲覧履歴がありません．";
+      showHistoryFlg = 0;
       historyTmp = [];
-      showThreadHistory();
+      titleHistory = [];
+      showMessageTimer("履歴を削除しました．", 1000);
     },
   });
 }
@@ -571,7 +587,7 @@ function searchGrades() {
 
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
-  showMessageTimer("test");
+  showMessageTimer("test", 2000);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -761,6 +777,10 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
             e3["Thread_ID"] +
             "," +
             e[1] +
+            "," +
+            "'" +
+            e3["Thread_Title"] +
+            "'" +
             ')"> <li class="chatDetail1" style="font-size:30px">' +
             e3["Thread_Title"] +
             "</li>" +
@@ -809,7 +829,11 @@ function titleLoad(e) {
   return (
     '<div class="threadsDetail" onclick="viewThread(' +
     e["Thread_ID"] +
-    ',0)"><li class="chatDetail1" style="font-size:30px">' +
+    ",0," +
+    "'" +
+    e["Thread_Title"] +
+    "'" +
+    ')"><li class="chatDetail1" style="font-size:30px">' +
     e["Thread_Title"] +
     "</li>" +
     e["Creator_Name"] +
@@ -837,18 +861,24 @@ function titleLoadError(e) {
   );
 }
 //選択したスレッドの表示を行う関数
-function viewThread(threadID, mode) {
+function viewThread(threadID, mode, title) {
   if (historyTmp.indexOf(threadID) != -1) {
     delete historyTmp[historyTmp.indexOf(threadID)];
     historyTmp = historyTmp.filter(Boolean);
   }
+  if (titleHistory.indexOf(title) != -1) {
+    delete titleHistory[titleHistory.indexOf(title)];
+    titleHistory = titleHistory.filter(Boolean);
+  }
+  showHistoryFlg = 1;
   historyTmp.push(threadID);
-  console.log(historyTmp);
+  titleHistory.push(title);
 
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
   showThread(commonCommentData, threadID);
   showTitle(commonThreadData, threadID);
+  showMessageTimer(title, 2000);
 
   window.setTimeout(function () {
     if (mode != 0) {

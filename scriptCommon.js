@@ -170,10 +170,10 @@ function showMessage(value, message) {
   });
 }
 //時間制限メッセージ表示
-function showMessageTimer(message) {
+function showMessageTimer(message, sec) {
   const Toast = Swal.mixin({
     showConfirmButton: false,
-    timer: 2000,
+    timer: sec,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -184,6 +184,6 @@ function showMessageTimer(message) {
     icon: "success",
     title: message,
     toast: true,
-    position: "top-end",
+    position: "top", //top-end：右上
   });
 }
