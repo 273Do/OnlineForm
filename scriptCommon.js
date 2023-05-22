@@ -187,3 +187,21 @@ function showMessageTimer(message, sec) {
     position: "top", //top-end：右上
   });
 }
+//時間制限メッセージエラー表示を行う関数
+function showErrorTimer(error, sec) {
+  const Toast = Swal.mixin({
+    showConfirmButton: false,
+    timer: sec,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  Toast.fire({
+    icon: "error",
+    title: error,
+    toast: true,
+    position: "top", //top-end：右上
+  });
+}

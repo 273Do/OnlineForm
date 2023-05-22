@@ -587,7 +587,8 @@ function searchGrades() {
 
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
-  showMessageTimer("test", 2000);
+  // showMessageTimer("test", 2000);
+  showErrorTimer("errorTest", 2000);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -764,7 +765,7 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     var commentTmp = [];
     sortThreadIDArray = threadIDArray
       .sort((a, b) => a[0] - b[0] || a[1] - b[1])
-      .reverse(); //ここ消せば昇順になる
+      .reverse();
     sortThreadIDArray.forEach((e) => {
       commentStorage.forEach((e2) => {
         if (e[0] == e2["Thread_ID"] && e[1] == e2["Comment_ID"])
