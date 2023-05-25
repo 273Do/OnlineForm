@@ -125,8 +125,12 @@ function BGImageAndPE(value, Flg) {
       if (PE == 0) PE = 1;
       else PE = 0;
     }
-    //ここにでデータベースに値を書き換えるコードを書く．
   } else if (Flg == 1) PE = value;
+  if (value == 3 || Flg == 1) {
+    //視差効果の値：PEをDBに保存する．
+  } else {
+    //背景画像の値：valueをDBに保存する．
+  }
 }
 //developerボタンが押された時の動作  更新：2023/04/15(土) 山口慶大
 //管理者がログインしている場合のみ，押せるようにし，それ以外のユーザーが押すとエラーが出るようにする，フラグで管理．
@@ -168,5 +172,41 @@ function showMessage(value, message) {
     toast: "true",
     width: "400px",
     text: message,
+  });
+}
+//時間制限メッセージ表示
+function showMessageTimer(message, sec) {
+  const Toast = Swal.mixin({
+    showConfirmButton: false,
+    timer: sec,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  Toast.fire({
+    icon: "success",
+    title: message,
+    toast: true,
+    position: "top-end", //top-end：右上
+  });
+}
+//時間制限メッセージエラー表示を行う関数
+function showErrorTimer(error, sec) {
+  const Toast = Swal.mixin({
+    showConfirmButton: false,
+    timer: sec,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+  Toast.fire({
+    icon: "error",
+    title: error,
+    toast: true,
+    position: "top-end", //top-end：右上
   });
 }

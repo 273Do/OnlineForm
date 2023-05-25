@@ -58,13 +58,8 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   background: url("./img/backgroundBlack.jpg"), no-repeat;
-<<<<<<< HEAD
-  /*  url("./img/backgroundGreen.jpg"),
-    url("./img/backgroundPink.jpg"),  */
-=======
   /* background: url("./img/backgroundBlack.jpg"),　url("./img/backgroundGreen.jpg"),
     url("./img/backgroundPink.jpg"), no-repeat; */
->>>>>>> Dev273Do4
   /* black(既定値)のみの読み込みの方が軽いが，初回，変更する際に，一瞬ちらつきが起きる． */
   background-size: cover;
   background-position: center;

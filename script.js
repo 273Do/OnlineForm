@@ -1,14 +1,12 @@
-//閲覧モード状態   2023/04/23(日) 山口慶大
-// var viewOnly = 1;この変数要らなくなった
-
-//スレッドの閲覧履歴スレッドIDをスタックする．
+//スレッドの閲覧履歴スレッドIDとそのスレッドタイトルをスタックする．
 var historyTmp = [];
+var titleHistory = [];
 
 //スレッド番号を指定するとそのスレッドが表示される．
 var nowThreadID = 1000;
 
+//ユーザーデータ
 let userData = [];
-// var i = 0;
 
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
@@ -16,9 +14,6 @@ window.onload = function () {
   document.querySelector("#searchByTag").style.display = "none";
   document.querySelector("#createThread").style.display = "none";
   document.querySelector("#page1").style.display = "none";
-  // viewOnly == 1
-  //   ? (document.querySelector("#view").style.display = "block")
-  //   : (document.querySelector("#view").style.display = "none");
 
   //パラーメーターの有無を確認．　2023年4月25日　有田海斗
   const url = new URL(window.location.href);
@@ -34,6 +29,7 @@ window.onload = function () {
     }, 100);
   }
 
+  //ここの処理をGAS側で行うようにする．．．．？．
   //ViewMode処理．　2023年5月11日　有田海斗
   if (user == "viewonly") {
     showMessage("ViewModeログイン成功．");
@@ -150,7 +146,7 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    commonThreadData = data.reverse(); //ここ消せば昇順になる
+    commonThreadData = data.reverse();
     showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
@@ -238,23 +234,47 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 });
 
 //historyIconボタンが押された時の動作
-let showHistory =
-  "<ul style='height: 100px;overflow-y: scroll;'><li>test1</li><li>test2</li><li>test3</li><li>test4</li><li>test5</li><li>test6</li><li>test7</li><li>test8</li></ul>";
+//閲覧履歴
 document.querySelector("#historyIcon").addEventListener("click", function () {
-  historyClear();
+  showThreadHistory();
 });
-function historyClear() {
+var showHistoryFlg = 0;
+function showThreadHistory() {
+  var showHistory = "";
+  var tmp = "";
+  var i = 0;
+  if (showHistoryFlg == 0) showHistory = "閲覧履歴がありません．";
+  else {
+    historyTmp.reverse().forEach((e) => {
+      i++;
+      tmp +=
+        '<li style="cursor:pointer; border-bottom: 2px solid #f4ede4;" onclick="viewThread(' +
+        e +
+        ",0,'" +
+        titleHistory[titleHistory.length - i] +
+        "'" +
+        ')">' +
+        i +
+        "：" +
+        titleHistory[titleHistory.length - i] +
+        "</li>";
+    });
+    showHistory =
+      "<ul style='height: 100px; overflow-y: scroll;'>" + tmp + "</ul>";
+    historyTmp.reverse();
+  }
   Swal.fire({
-    title: "History",
+    title: "スレッドの閲覧履歴",
     html: showHistory,
-    footer: "スレッドの閲覧履歴です", //<p onclick=historyClear() style='cursor:pointer'>履歴をクリア</p>
+    footer: "クリックで移動できます．", //<p onclick=showThreadHistory() style='cursor:pointer'>履歴をクリア</p>
     showCancelButton: true,
     toast: true,
     confirmButtonText: "Clear",
     preConfirm: () => {
-      showHistory = "閲覧履歴がありません．";
+      showHistoryFlg = 0;
       historyTmp = [];
-      historyClear();
+      titleHistory = [];
+      showMessageTimer("履歴を削除しました．", 1000);
     },
   });
 }
@@ -554,14 +574,11 @@ function searchGrades() {
     },
   });
 }
-//スレッドのテスト   2023.04.19(水)　山口慶大
-//debugBtnと連動しています．
-//fncが0の場合，フリーワード検索
-//fncが属性の場合，各フィルター検索が可能
-//スレッドが見つからない場合はエラー表示
-
+//デバッグボタン
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
+  // showMessageTimer("test", 2000);
+  showErrorTimer("errorTest", 2000);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -645,17 +662,6 @@ function showThread(commentData, thread_ID) {
     }
   });
   document.getElementById("chat").innerHTML = chat_load;
-  // ScrollReveal().reveal("#chat, .commentDetail", {
-  //   delay: 200,
-  //   origin: "left",
-  //   distance: "28px",
-  //   interval: 100,
-  //   afterReveal: function () {
-  //     window.setTimeout(function () {
-  //       document.getElementById("chat").innerHTML = chat_load2;
-  //     }, 450);
-  //   },
-  // });
   document.getElementById("chat").innerHTML = chat_load2;
 }
 //スレッドIDを指定したらタイトルを表示する関数
@@ -738,7 +744,7 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     var commentTmp = [];
     sortThreadIDArray = threadIDArray
       .sort((a, b) => a[0] - b[0] || a[1] - b[1])
-      .reverse(); //ここ消せば昇順になる
+      .reverse();
     sortThreadIDArray.forEach((e) => {
       commentStorage.forEach((e2) => {
         if (e[0] == e2["Thread_ID"] && e[1] == e2["Comment_ID"])
@@ -751,6 +757,10 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
             e3["Thread_ID"] +
             "," +
             e[1] +
+            "," +
+            "'" +
+            e3["Thread_Title"] +
+            "'" +
             ')"> <li class="chatDetail1" style="font-size:30px">' +
             e3["Thread_Title"] +
             "</li>" +
@@ -799,7 +809,11 @@ function titleLoad(e) {
   return (
     '<div class="threadsDetail" onclick="viewThread(' +
     e["Thread_ID"] +
-    ',0)"><li class="chatDetail1" style="font-size:30px">' +
+    ",0," +
+    "'" +
+    e["Thread_Title"] +
+    "'" +
+    ')"><li class="chatDetail1" style="font-size:30px">' +
     e["Thread_Title"] +
     "</li>" +
     e["Creator_Name"] +
@@ -827,50 +841,27 @@ function titleLoadError(e) {
   );
 }
 //選択したスレッドの表示を行う関数
-function viewThread(threadID, mode) {
+function viewThread(threadID, mode, title) {
   if (historyTmp.indexOf(threadID) != -1) {
     delete historyTmp[historyTmp.indexOf(threadID)];
     historyTmp = historyTmp.filter(Boolean);
   }
+  if (titleHistory.indexOf(title) != -1) {
+    delete titleHistory[titleHistory.indexOf(title)];
+    titleHistory = titleHistory.filter(Boolean);
+  }
+  showHistoryFlg = 1;
   historyTmp.push(threadID);
-  console.log(historyTmp);
+  titleHistory.push(title);
 
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
   showThread(commonCommentData, threadID);
   showTitle(commonThreadData, threadID);
+  showMessageTimer(title, 2000);
 
   window.setTimeout(function () {
     if (mode != 0) {
-      //   document.getElementById("chat").scrollTop =
-      //     document
-      //       .getElementById("chat" + String(mode - 1))
-      //       .getBoundingClientRect().top + window.pageYOffset;
-      // const chat = document.getElementById("chat");
-      // const target = document.getElementById("chat" + String(mode - 1));
-      // target.scrollIntoView({
-      //   behavior: "smooth",
-      //   block: "start",
-      //   inline: "nearest",
-      // });
-
-      //   const chat = document.getElementById("chat");
-      //   const target = document.getElementById("chat" + String(mode - 1));
-      //   const step = 35; // スクロール量を分割する数
-      //   const intervalTime = 10; // スクロールを行う間隔（ミリ秒）
-      //   const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
-      //   const currentTop = chat.scrollTop;
-      //   const distance = targetTop - currentTop;
-      //   let count = 0;
-      //   const interval = setInterval(() => {
-      //     count++;
-      //     const scrollTop = currentTop + (distance * count) / step;
-      //     chat.scrollTop = scrollTop;
-      //     if (count >= step) {
-      //       clearInterval(interval);
-      //     }
-      //   }, intervalTime);
-      // }
       //以下ChatGPTによる
       const chat = document.getElementById("chat");
       const target = document.getElementById("chat" + String(mode - 1));
@@ -897,3 +888,4 @@ function viewThread(threadID, mode) {
     }
   }, 400);
 }
+//Dev273Do5test
