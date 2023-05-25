@@ -52,6 +52,7 @@ body {
   /* background: linear-gradient(201deg, #aecadd, #584c82, #8c5c8b);
   background-size: 600% 600%;
   animation: GradientBackground 15s ease infinite; */
+
   justify-content: center;
   align-items: center;
   min-height: 100vh;
