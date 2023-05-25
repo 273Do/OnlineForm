@@ -19,9 +19,6 @@ fetch(thread_data)
     showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
-  .catch((error) => {
-    showError("タイトル取得に失敗しました.", error);
-  });
 
 var chat_load = "";
 var chat_load2 = "";
