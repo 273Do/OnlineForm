@@ -110,7 +110,7 @@ function registerBtn() {
             Undergraduate: Analysis[0],
             Department: Analysis[1],
             Grade: Analysis[2],
-            BackGround: "0",
+            BackGround: "2",
             ParallaxEffect: "1",
           }; // POSTするデータを定義
           var url =
@@ -179,12 +179,8 @@ function studentIDAndGradeAnalysis(UniEmail) {
   };
 
   const grade = { 0: "１", 1: "２", 2: "３", 3: "４" };
-  //console.log(grade[yearCount - (str.charAt(5) + str.charAt(6))]);
-  //console.log(
   var Number =
     faculty[str.charAt(1) + str.charAt(2) + str.charAt(3) + str.charAt(4)];
-  //);
-
   var Undergraduate = Number.substr(0, Number.indexOf("/"));
   var Department = Number.substr(Number.indexOf("/") + 1);
 

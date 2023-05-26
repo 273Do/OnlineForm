@@ -198,11 +198,17 @@ document.querySelector("#Account").addEventListener("click", function () {
       userData[i]["Name"] +
       "<br>メールアドレス：" +
       userData[i]["Mail"],
-    footer:
-      "<p onclick=changeAccountData() style='cursor:pointer'>変更はこちら</p>",
+    // footer:
+    //   "<p onclick=changeAccountData() style='cursor:pointer'>変更はこちら</p>",
     showCancelButton: true,
+    confirmButtonText: "Change",
+    cancelButtonText: "OK",
+  }).then((result) => {
+    if (result.isConfirmed) changeAccountData();
+    // else if (result.isDenied) info0();
   });
 });
+// });
 
 //Logoutボタンが押された時の動作
 document.querySelector("#Logout").addEventListener("click", function () {
