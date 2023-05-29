@@ -247,6 +247,7 @@ document.querySelector("#historyIcon").addEventListener("click", function () {
 var showHistoryFlg = 0;
 function showThreadHistory() {
   var showHistory = "";
+  // var showHistory2;
   var tmp = "";
   var i = 0;
   if (showHistoryFlg == 0) showHistory = "閲覧履歴がありません．";
@@ -254,7 +255,7 @@ function showThreadHistory() {
     historyTmp.reverse().forEach((e) => {
       i++;
       tmp +=
-        '<li style="cursor:pointer; border-bottom: 2px solid #f4ede4;" onclick="viewThread(' +
+        '<li id = "history" style="cursor:pointer; border-bottom: 2px solid #f4ede4;" onclick="viewThread(' +
         e +
         ",0,'" +
         titleHistory[titleHistory.length - i] +
@@ -268,6 +269,7 @@ function showThreadHistory() {
     showHistory =
       "<ul style='height: 100px; overflow-y: scroll;'>" + tmp + "</ul>";
     historyTmp.reverse();
+    // showHistory2 = showHistory.replace(/"id = "history""/g, "");
   }
   Swal.fire({
     title: "スレッドの閲覧履歴",
@@ -283,6 +285,17 @@ function showThreadHistory() {
       showMessageTimer("履歴を削除しました．", 1000);
     },
   });
+  // ScrollReveal().reveal("#history", {
+  //   delay: 200,
+  //   origin: "left",
+  //   distance: "28px",
+  //   interval: 100,
+  //   afterReveal: function () {
+  //     window.setTimeout(function () {
+  //       showHistory = showHistory2;
+  //     }, 450);
+  //   },
+  // });
 }
 
 //sortingIconボタンが押された時の動作
@@ -894,4 +907,3 @@ function viewThread(threadID, mode, title) {
     }
   }, 400);
 }
-//Dev273Do5test
