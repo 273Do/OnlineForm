@@ -25,12 +25,15 @@ function loginBtn() {
   const email = document.getElementsByClassName("email");
   const password = document.getElementsByClassName("password");
 
-  if (email[0].value == "" || password[0].value == "") {
+  if (
+    validationCheck(email[0].value, 0) == false ||
+    validationCheck(password[0].value, 0) == false
+  ) {
     flag = true;
   } else {
     for (var i = 0; i < userData.length; i++) {
-      if (email[0].value == userData[i]["Mail"]) {
-        if (password[0].value == userData[i]["Password"]) {
+      if (validationCheck(email[0].value, 0) == userData[i]["Mail"]) {
+        if (validationCheck(password[0].value, 0) == userData[i]["Password"]) {
           //ログイン処理
           //アクセスコード生成　2023年4月25日　有田海斗
 
@@ -78,9 +81,9 @@ function registerBtn() {
   const username = document.getElementsByClassName("username");
 
   if (
-    email[1].value == "" ||
-    password[1].value == "" ||
-    username[0].value == ""
+    validationCheck(email[1].value, 0) == false ||
+    validationCheck(password[1].value, 0) == false ||
+    validationCheck(username[0].value, 0) == false
   ) {
     //入力不備がある場合は実行しない．
   } else if (email[1].value.indexOf("@st.tachibana-u.ac.jp") == -1) {
@@ -183,7 +186,10 @@ function studentIDAndGradeAnalysis(UniEmail) {
   var Undergraduate = Number.substr(0, Number.indexOf("/"));
   var Department = Number.substr(Number.indexOf("/") + 1);
 
-  if (Undergraduate == "" || Department == "") {
+  if (
+    validationCheck(Undergraduate, 0) == false ||
+    validationCheck(Department, 0) == false
+  ) {
     showError("学籍番号に誤りがあります.");
   } else {
     return [

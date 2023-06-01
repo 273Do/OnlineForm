@@ -117,7 +117,8 @@ window.onload = function () {
       console.log(this.value);
       console.log(searchThread(this.value, 0));
       if (
-        document.getElementById("searchByWord").value == "" ||
+        validationCheck(document.getElementById("searchByWord").value, 1) ==
+          false ||
         document.getElementById("searchByWord").value == null
       )
         return showSearchedTitle(commonThreadData, 0);
@@ -130,7 +131,8 @@ window.onload = function () {
       console.log(this.value);
       console.log(searchComment(this.value));
       if (
-        document.getElementById("searchByComment").value == "" ||
+        validationCheck(document.getElementById("searchByComment").value, 1) ==
+          false ||
         document.getElementById("searchByComment").value == null
       )
         return showSearchedTitle(commonThreadData, 0);
@@ -351,7 +353,10 @@ function changeAccountData() {
     showCancelButton: true,
     inputValidator: (value) => {
       if (!value) return "You need to agree.";
-      else if (document.getElementById("changeAccount").value == "")
+      else if (
+        validationCheck(document.getElementById("changeAccount").value, 1) ==
+        false
+      )
         return "入力欄が空です．";
       else if (document.getElementById("changeContents").value == "select")
         return "項目が選択されていません．";
@@ -597,7 +602,10 @@ function searchGrades() {
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
   // showMessageTimer("test", 2000);
-  showErrorTimer("errorTest", 2000);
+  // showErrorTimer("errorTest", 2000);
+  let str = "";
+
+  validationCheck(str);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -882,6 +890,7 @@ function viewThread(threadID, mode, title) {
   window.setTimeout(function () {
     if (mode != 0) {
       //以下ChatGPTによる
+      //連続で使用すると正常に動作しない．
       const chat = document.getElementById("chat");
       const target = document.getElementById("chat" + String(mode - 1));
       const duration = 1000; // スクロールを完了するまでの時間（ミリ秒）

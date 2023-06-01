@@ -65,7 +65,6 @@ function info1() {
     confirmButtonText: "◀",
     denyButtonText: "▶",
     html: BGDisc,
-    // imageUrl: "img/MadeBy.png",
     // footer: "2022_情報工学実践Ⅳ<ｂ>",
   }).then((result) => {
     if (result.isConfirmed) info0();
@@ -207,4 +206,17 @@ function showErrorTimer(error, sec) {
     toast: true,
     position: "top-end", //top-end：右上
   });
+}
+//バリデーションチェック関数(空文字，xss対策)
+function validationCheck(str, mode) {
+  if (str.replace(/^[\s\u3000]*$/g, "") === "") {
+    if (mode == 0) showError("空文字は使用できません．");
+    return false;
+  } else
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 }
