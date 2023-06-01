@@ -435,7 +435,7 @@ footer {
 
 footer small {
   position: fixed;
-  bottom: 10px;
+  bottom: 11px;
   right: 0;
   left: 0;
   text-align: center;
@@ -686,8 +686,5 @@ footer small {
     margin-left: 7%;
   }
 
-  /* footer */
-  footer p {
-    margin-left: 35%;
-  }
+
 }

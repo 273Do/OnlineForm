@@ -15,18 +15,17 @@ const thread_data =
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    commonThreadData = data.reverse(); //ここ消せば昇順になる
+    commonThreadData = data.reverse();
     showTitle(data, nowThreadID);
     showSearchedTitle(data, 0);
   })
+  .catch((error) => {
+    showError("タイトル取得に失敗しました.", error);
+  });
 
 var chat_load = "";
 var chat_load2 = "";
 var commonCommentData;
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
-
-
-console.log(commonThreadData);
-
 
