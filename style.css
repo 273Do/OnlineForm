@@ -434,8 +434,10 @@ footer {
 }
 
 footer p {
-  margin-left: 48%;
-  position: absolute;
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 10px;
   text-align: center;
 }
 
