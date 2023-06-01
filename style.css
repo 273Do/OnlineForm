@@ -433,7 +433,7 @@ footer {
   font-family: "Objective-Thin", "NotoSansJP-Thin";
 }
 
-footer p {
+footer small {
   position: fixed;
   right: 0;
   left: 0;
