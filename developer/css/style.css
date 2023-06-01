@@ -97,3 +97,36 @@ header h1 {
     font-size: 64px;
 }
 
+
+/*レスポンシブル  */
+
+@media screen and (max-width: 1080px) {
+
+    .menu ul {
+        border: 2px solid skyblue;
+    }
+
+    .thread {
+        border-bottom: 2px solid skyblue;
+        border-right: 2px solid skyblue;
+        border-left: 2px solid skyblue;
+    }
+
+    .log {
+        border-bottom: 2px solid skyblue;
+        border-right: 2px solid skyblue;
+        border-left: 2px solid skyblue;
+    }
+
+    .account{
+        border-bottom: 2px solid skyblue;
+        border-right: 2px solid skyblue;
+        border-left: 2px solid skyblue;
+    }
+
+    .maintenance {
+        border-top: 2px solid skyblue;
+        border-right: 2px solid skyblue;
+        border-left: 2px solid skyblue;
+    }
+}
