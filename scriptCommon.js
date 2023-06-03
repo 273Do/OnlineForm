@@ -4,6 +4,7 @@ var BGDisc =
   "<div style='text-align:center'><h1>CreatedBy</h1><ul><li>有田海斗</li><li>木村遥敬</li><li>山口慶大</li></ul><h1>BGSource</h1><ul><li>BG Pink made by <a href='https://www.reddit.com/user/MatrixRetoastet/' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>MatrixRetoastet</a></font></li><li>BG Green made by <a href='https://www.deviantart.com/ncoll36' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>ncoll36</a></font></li><li>BG Black made by <a href='https://www.wallpaperflare.com/artistic-mountain-minimalist-moon-nature-night-wallpaper-gktsx' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>Unknown</a></font></li></ui></div>";
 //視差効果
 var PE = 1; //ParallaxEffect(視差効果)
+var BG = 2; //BackGround(背景画像)
 let background = document.querySelector("body");
 document.addEventListener("mousemove", (event) => {
   var x = Math.round(event.pageX / 70) * PE;
@@ -112,13 +113,16 @@ document.querySelector("#themeIcon").addEventListener("click", function () {
 function BGImageAndPE(value, Flg) {
   //Flgの値で背景画像変更，視差効果のスイッチを行っている．
   if (Flg == 0) {
-    if (value == 0)
+    if (value == 0) {
       document.body.style.backgroundImage = 'url("./img/backgroundPink.jpg")';
-    else if (value == 1)
+      BG = value;
+    } else if (value == 1) {
       document.body.style.backgroundImage = 'url("./img/backgroundGreen.jpg")';
-    else if (value == 2)
+      BG = value;
+    } else if (value == 2) {
       document.body.style.backgroundImage = 'url("./img/backgroundBlack.jpg")';
-    else if (value == 3) {
+      BG = value;
+    } else if (value == 3) {
       if (PE == 0) PE = 1;
       else PE = 0;
     }

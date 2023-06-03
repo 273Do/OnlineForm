@@ -112,8 +112,8 @@ function registerBtn() {
             Undergraduate: Analysis[0],
             Department: Analysis[1],
             Grade: Analysis[2],
-            BackGround: "2",
-            ParallaxEffect: "1",
+            BackGround: BG,
+            ParallaxEffect: PE,
           }; // POSTするデータを定義
           var url =
             "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
