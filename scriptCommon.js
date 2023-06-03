@@ -4,6 +4,7 @@ var BGDisc =
   "<div style='text-align:center'><h1>CreatedBy</h1><ul><li>有田海斗</li><li>木村遥敬</li><li>山口慶大</li></ul><h1>BGSource</h1><ul><li>BG Pink made by <a href='https://www.reddit.com/user/MatrixRetoastet/' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>MatrixRetoastet</a></font></li><li>BG Green made by <a href='https://www.deviantart.com/ncoll36' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>ncoll36</a></font></li><li>BG Black made by <a href='https://www.wallpaperflare.com/artistic-mountain-minimalist-moon-nature-night-wallpaper-gktsx' target='_blank' rer='noopener noreferrer'><font color='#f4ede4'>Unknown</a></font></li></ui></div>";
 //視差効果
 var PE = 1; //ParallaxEffect(視差効果)
+var BG = 2; //BackGround(背景画像)
 let background = document.querySelector("body");
 document.addEventListener("mousemove", (event) => {
   var x = Math.round(event.pageX / 70) * PE;
@@ -11,9 +12,7 @@ document.addEventListener("mousemove", (event) => {
   background.style.marginLeft = x + "px";
   background.style.marginTop = y + "px";
 });
-//Usageボタンが押されたときの動作  更新：2023/04/21(金) 山口慶大
-//Usageボタンを押すと，ツールチップのOn，Offを切り替えることができる．このツールチップは<span>タグで実装されており，cssで操作すると，それに囲まれている要素にも影響が出てしまう．文字を空白{""}にすることにより回避している．
-//このコードは，いくらツールチップを追加削除しても書き換える必要はない．
+//Usageボタン動作  更新：2023/04/21(金) 山口慶大
 var UsageFlg = -1;
 var tooltipCounter = 0;
 var tooltipTmp = [];
@@ -67,7 +66,6 @@ function info1() {
     confirmButtonText: "◀",
     denyButtonText: "▶",
     html: BGDisc,
-    // imageUrl: "img/MadeBy.png",
     // footer: "2022_情報工学実践Ⅳ<ｂ>",
   }).then((result) => {
     if (result.isConfirmed) info0();
@@ -115,13 +113,16 @@ document.querySelector("#themeIcon").addEventListener("click", function () {
 function BGImageAndPE(value, Flg) {
   //Flgの値で背景画像変更，視差効果のスイッチを行っている．
   if (Flg == 0) {
-    if (value == 0)
+    if (value == 0) {
       document.body.style.backgroundImage = 'url("./img/backgroundPink.jpg")';
-    else if (value == 1)
+      BG = value;
+    } else if (value == 1) {
       document.body.style.backgroundImage = 'url("./img/backgroundGreen.jpg")';
-    else if (value == 2)
+      BG = value;
+    } else if (value == 2) {
       document.body.style.backgroundImage = 'url("./img/backgroundBlack.jpg")';
-    else if (value == 3) {
+      BG = value;
+    } else if (value == 3) {
       if (PE == 0) PE = 1;
       else PE = 0;
     }
@@ -209,4 +210,17 @@ function showErrorTimer(error, sec) {
     toast: true,
     position: "top-end", //top-end：右上
   });
+}
+//バリデーションチェック関数(空文字，xss対策)
+function validationCheck(str, mode) {
+  if (str.replace(/^[\s\u3000]*$/g, "") === "") {
+    if (mode == 0) showError("空文字は使用できません．");
+    return false;
+  } else
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 }

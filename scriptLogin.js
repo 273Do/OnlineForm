@@ -25,12 +25,15 @@ function loginBtn() {
   const email = document.getElementsByClassName("email");
   const password = document.getElementsByClassName("password");
 
-  if (email[0].value == "" || password[0].value == "") {
+  if (
+    validationCheck(email[0].value, 0) == false ||
+    validationCheck(password[0].value, 0) == false
+  ) {
     flag = true;
   } else {
     for (var i = 0; i < userData.length; i++) {
-      if (email[0].value == userData[i]["Mail"]) {
-        if (password[0].value == userData[i]["Password"]) {
+      if (validationCheck(email[0].value, 0) == userData[i]["Mail"]) {
+        if (validationCheck(password[0].value, 0) == userData[i]["Password"]) {
           //ログイン処理
           //アクセスコード生成　2023年4月25日　有田海斗
 
@@ -52,9 +55,6 @@ function loginBtn() {
           xhr.send();
 
           // loginページでは，black，PE=1を初期値とし，登録時に一緒に登録，それを掲示板本体に引き渡す．
-          //BGImageAndPE(userData[i]["BackGround"], 0); //いずれはここ消します．
-          //BGImageAndPE(userData[i]["ParallaxEffect"], 1);
-          //studentIDAndGradeAnalysis(userData[i]["Mail"]);
 
           //アクセスコードを用いてページ遷移．　2023年4月25日　有田海斗
           setTimeout(function () {
@@ -81,9 +81,9 @@ function registerBtn() {
   const username = document.getElementsByClassName("username");
 
   if (
-    email[1].value == "" ||
-    password[1].value == "" ||
-    username[0].value == ""
+    validationCheck(email[1].value, 0) == false ||
+    validationCheck(password[1].value, 0) == false ||
+    validationCheck(username[0].value, 0) == false
   ) {
     //入力不備がある場合は実行しない．
   } else if (email[1].value.indexOf("@st.tachibana-u.ac.jp") == -1) {
@@ -112,8 +112,8 @@ function registerBtn() {
             Undergraduate: Analysis[0],
             Department: Analysis[1],
             Grade: Analysis[2],
-            BackGround: "2",
-            ParallaxEffect: "1",
+            BackGround: BG,
+            ParallaxEffect: PE,
           }; // POSTするデータを定義
           var url =
             "https://script.google.com/macros/s/AKfycbx9FQI6LbVNUAthnwX_iRxY8vOQTUdyIxoBU5vLh35G0khyGT2V4AyO2oKl07z0fhxB/exec";
@@ -186,7 +186,10 @@ function studentIDAndGradeAnalysis(UniEmail) {
   var Undergraduate = Number.substr(0, Number.indexOf("/"));
   var Department = Number.substr(Number.indexOf("/") + 1);
 
-  if (Undergraduate == "" || Department == "") {
+  if (
+    validationCheck(Undergraduate, 0) == false ||
+    validationCheck(Department, 0) == false
+  ) {
     showError("学籍番号に誤りがあります.");
   } else {
     return [
@@ -196,4 +199,4 @@ function studentIDAndGradeAnalysis(UniEmail) {
     ];
   }
 }
-//test
+//branch6
