@@ -96,7 +96,7 @@ function registerBtn() {
     //利用規約html
     Swal.fire({
       icon: "warning",
-      title: "利用規約",
+      // title: "利用規約",
       input: "checkbox",
       html: TermsOfUse, //下までスクロールしたら102行目のelseで通過できるようにする．
       inputPlaceholder: "利用規約に同意しますか?",
@@ -199,4 +199,3 @@ function studentIDAndGradeAnalysis(UniEmail) {
     ];
   }
 }
-//branch6
