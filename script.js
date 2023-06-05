@@ -603,9 +603,8 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
   // showMessageTimer("test", 2000);
   // showErrorTimer("errorTest", 2000);
-  let str = "";
-
-  validationCheck(str);
+  // let str = "";
+  // validationCheck(str);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -691,6 +690,7 @@ function showThread(commentData, thread_ID) {
   document.getElementById("chat").innerHTML = chat_load;
   document.getElementById("chat").innerHTML = chat_load2;
 }
+
 //スレッドIDを指定したらタイトルを表示する関数
 function showTitle(threadData, thread_ID) {
   var i = 0;
@@ -831,6 +831,7 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     },
   });
 }
+
 //タイトル表示の要素を返す関数
 function titleLoad(e) {
   return (
