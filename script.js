@@ -8,6 +8,9 @@ var nowThreadID = 1000;
 //ユーザーデータ
 let userData = [];
 
+//閲覧モードステータス
+var viewOnlyFlg = 0;
+
 //ロード時の動作　　023/04/25(火) 山口慶大
 window.onload = function () {
   document.querySelector("#searchByTitle").style.display = "block";
@@ -33,6 +36,7 @@ window.onload = function () {
   //ViewMode処理．　2023年5月11日　有田海斗
   if (user == "viewonly") {
     showMessage("ViewModeログイン成功．");
+    viewOnlyFlg = 1;
   } else {
     //データベースからアカウント情報を取得．　2023年4月25日　有田海斗
     document.querySelector("#view").style.display = "none";
@@ -191,26 +195,30 @@ function vOnly() {
 
 //Accountボタンが押された時の動作
 document.querySelector("#Account").addEventListener("click", function () {
-  Swal.fire({
-    title: "YourAccount",
-    // toast: "true",
-    backdrop: "none",
-    html:
-      "アカウント名：" +
-      userData[i]["Name"] +
-      "<br>メールアドレス：" +
-      userData[i]["Mail"],
-    // footer:
-    //   "<p onclick=changeAccountData() style='cursor:pointer'>変更はこちら</p>",
-    showCancelButton: true,
-    confirmButtonText: "Change",
-    cancelButtonText: "OK",
-  }).then((result) => {
-    if (result.isConfirmed) changeAccountData();
-    // else if (result.isDenied) info0();
-  });
+  if (viewOnlyFlg == 0)
+    Swal.fire({
+      title: "YourAccount",
+      // toast: "true",
+      backdrop: "none",
+      html:
+        "アカウント名：" +
+        userData[i]["Name"] +
+        "<br>メールアドレス：" +
+        userData[i]["Mail"],
+      showCancelButton: true,
+      confirmButtonText: "Change",
+      cancelButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) changeAccountData();
+    });
+  else {
+    Swal.fire({
+      title: "YourAccount",
+      text: "現在，閲覧モードです．",
+      backdrop: "none",
+    });
+  }
 });
-// });
 
 //Logoutボタンが押された時の動作
 document.querySelector("#Logout").addEventListener("click", function () {
@@ -603,9 +611,8 @@ document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
   // showMessageTimer("test", 2000);
   // showErrorTimer("errorTest", 2000);
-  let str = "";
-
-  validationCheck(str);
+  // let str = "";
+  // validationCheck(str);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
@@ -691,6 +698,7 @@ function showThread(commentData, thread_ID) {
   document.getElementById("chat").innerHTML = chat_load;
   document.getElementById("chat").innerHTML = chat_load2;
 }
+
 //スレッドIDを指定したらタイトルを表示する関数
 function showTitle(threadData, thread_ID) {
   var i = 0;
@@ -831,6 +839,7 @@ function showSearchedTitle(threadData, mode, threadIDArray) {
     },
   });
 }
+
 //タイトル表示の要素を返す関数
 function titleLoad(e) {
   return (

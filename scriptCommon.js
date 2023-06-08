@@ -113,6 +113,7 @@ document.querySelector("#themeIcon").addEventListener("click", function () {
 function BGImageAndPE(value, Flg) {
   //Flgの値で背景画像変更，視差効果のスイッチを行っている．
   if (Flg == 0) {
+    //テーマ変更
     if (value == 0) {
       document.body.style.backgroundImage = 'url("./img/backgroundPink.jpg")';
       BG = value;
@@ -126,11 +127,13 @@ function BGImageAndPE(value, Flg) {
       if (PE == 0) PE = 1;
       else PE = 0;
     }
-  } else if (Flg == 1) PE = value;
-  if (value == 3 || Flg == 1) {
-    //視差効果の値：PEをDBに保存する．
-  } else {
-    //背景画像の値：valueをDBに保存する．
+  } else if (Flg == 1) {
+    //テーマ変数の書き込み
+    if (value == 3) {
+      //視差効果の値：PEをDBに保存する．
+    } else {
+      //背景画像の値：valueをDBに保存する．
+    }
   }
 }
 //developerボタンが押された時の動作  更新：2023/04/15(土) 山口慶大
