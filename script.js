@@ -2,9 +2,6 @@
 var historyTmp = [];
 var titleHistory = [];
 
-//スレッド番号を指定するとそのスレッドが表示される．
-var nowThreadID = 1000;
-
 //ユーザーデータ
 let userData = [];
 
@@ -103,11 +100,14 @@ window.onload = function () {
 
             userData[i]["History"]
               .split("，")
-              .forEach((e) => historyTmp.push(e));
+              .forEach((e) => historyTmp.push(Number(e)));
 
             userData[i]["TitleHistory"]
               .split("，")
               .forEach((e) => titleHistory.push(e));
+
+            console.log(historyTmp, titleHistory);
+            console.log(historyTmp.slice(-1)[0]);
 
             flag = false;
             break;
@@ -165,7 +165,7 @@ fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
     commonThreadData = data.reverse();
-    showTitle(data, nowThreadID);
+    showTitle(data, historyTmp.slice(-1)[0]);
     showSearchedTitle(data, 0);
   })
   .catch((error) => {
@@ -184,7 +184,7 @@ fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     commonCommentData = data;
-    showThread(data, nowThreadID);
+    showThread(data, historyTmp.slice(-1)[0]);
   })
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
@@ -304,6 +304,7 @@ function showThreadHistory() {
       showHistoryFlg = 0;
       historyTmp = [];
       titleHistory = [];
+      //ここにDBの方も削除するコードを追加
       showMessageTimer("履歴を削除しました．", 1000);
     },
   });
@@ -903,6 +904,7 @@ function viewThread(threadID, mode, title) {
   titleHistory.push(title);
   //ここにDBにhistoryTmpを保存するコードを記述
   //ここにDBにtitleHistoryを保存するコードを記述
+  console.log(historyTmp); //historyTmpの末尾が最新の閲覧履歴となる
   console.log(titleHistory);
 
   document.querySelector("#page2").style.display = "none";
