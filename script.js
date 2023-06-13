@@ -97,6 +97,18 @@ window.onload = function () {
             BGImageAndPE(userData[i]["BackGround"], 0);
             BGImageAndPE(userData[i]["ParallaxEffect"], 1);
 
+            //アカウントのhistoryを取得してhistoryTmpに格納
+            // historyTmp.push(userData[i]["History"].split("，"));
+            // titleHistory.push(userData[i]["TitleHistory"].split("，"));
+
+            userData[i]["History"]
+              .split("，")
+              .forEach((e) => historyTmp.push(e));
+
+            userData[i]["TitleHistory"]
+              .split("，")
+              .forEach((e) => titleHistory.push(e));
+
             flag = false;
             break;
           } else {
@@ -889,6 +901,9 @@ function viewThread(threadID, mode, title) {
   showHistoryFlg = 1;
   historyTmp.push(threadID);
   titleHistory.push(title);
+  //ここにDBにhistoryTmpを保存するコードを記述
+  //ここにDBにtitleHistoryを保存するコードを記述
+  console.log(titleHistory);
 
   document.querySelector("#page2").style.display = "none";
   document.querySelector("#page1").style.display = "block";
