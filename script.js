@@ -904,6 +904,7 @@ function viewThread(threadID, mode, title) {
   titleHistory.push(title);
   //ここにDBにhistoryTmpを保存するコードを記述
   //ここにDBにtitleHistoryを保存するコードを記述
+  //viewOnlyFlgの時はおDBに保存しない(できない)
   console.log(historyTmp);
   console.log(titleHistory);
 
