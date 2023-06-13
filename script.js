@@ -900,11 +900,11 @@ function viewThread(threadID, mode, title) {
     titleHistory = titleHistory.filter(Boolean);
   }
   showHistoryFlg = 1;
-  historyTmp.push(threadID);
+  historyTmp.push(threadID); //historyTmpの末尾が最新の閲覧履歴となる
   titleHistory.push(title);
   //ここにDBにhistoryTmpを保存するコードを記述
   //ここにDBにtitleHistoryを保存するコードを記述
-  console.log(historyTmp); //historyTmpの末尾が最新の閲覧履歴となる
+  console.log(historyTmp);
   console.log(titleHistory);
 
   document.querySelector("#page2").style.display = "none";
