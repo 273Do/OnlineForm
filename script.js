@@ -619,6 +619,48 @@ function searchGrades() {
     },
   });
 }
+
+
+
+
+//送信ボタン
+document.querySelector("#sndIcon").addEventListener("click", function () {
+
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = ("0" + (now.getMonth() + 1)).slice(-2);
+  var day = ("0" + now.getDate()).slice(-2);
+  var hour = ("0" + now.getHours()).slice(-2);
+  var minute = ("0" + now.getMinutes()).slice(-2);
+  var second = ("0" + now.getSeconds()).slice(-2);
+  var write_date = "'" + year + "/" + month + "/" + day;
+  var write_time = "'" + hour + ":" + minute + ":" + second;
+
+  var data = {
+    Thread_ID: "example",  //取得処理
+    Comment_ID: "example",  //取得処理
+    Date: write_date,
+    Time: write_time,
+    Wrote_Name: userData[i]["Name"],
+    Undergraduate: userData[i]["Undergraduate"],
+    Department: userData[i]["Department"],
+    Grade: userData[i]["Grade"],
+    Comment: "example"   //取得処理
+  }; // POSTするデータを定義
+  var url =
+    "https://script.google.com/macros/s/AKfycbw4SbXs5mCYfAe6AEHK2MMCQNgz4H2fX6KrYVucBHUeiTPMEupYsSOeOdNr-6RADxoRFQ/exec";
+  fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  }).then((response) => {});
+
+  window.alert("送信ボタンが押されました．");
+});
+
+
+
+
+
 //デバッグボタン
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
