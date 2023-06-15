@@ -155,16 +155,18 @@ window.onload = function () {
       showSearchedTitle(commonThreadData, 2, searchComment(this.value));
     });
 };
+
 //スプレッドシートよりスレッド取得．   2023/04/14(金) 有田海斗
 var commonThreadData;
 var threadsStorage = []; //全スレッドのタイトル等が格納されています．
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
-const thread_data =
-  "https://script.google.com/macros/s/AKfycbyLA7mP7nOgQvvVy9vGLWUmXC-T0wsDMk_bR6mYrHNwhPNh6Rn01pNAR2hQMm8SZgopBw/exec";
+var thread_data;
+
+thread_data = "https://script.google.com/macros/s/AKfycbyLA7mP7nOgQvvVy9vGLWUmXC-T0wsDMk_bR6mYrHNwhPNh6Rn01pNAR2hQMm8SZgopBw/exec";
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
-    commonThreadData = data.reverse();
+    commonThreadData = data;
     showTitle(data, historyTmp.slice(-1)[0]);
     showSearchedTitle(data, 0);
   })
@@ -178,8 +180,8 @@ var commonCommentData;
 var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
-const comment_data = //たまに複数回読み込まれるバグあり
-  "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
+var comment_data;
+comment_data = "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
 fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
@@ -189,6 +191,25 @@ fetch(comment_data)
   .catch((error) => {
     showError("チャット取得に失敗しました.", error);
   });
+
+
+//コメント再読み込み関数．　2023年6月15日　有田海斗
+var auto_reload = function(){
+  commonCommentData = "";
+  comment_data = "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
+  fetch(comment_data)
+    .then((response) => response.json())
+    .then((data) => {
+      commonCommentData = data;
+      showThread(data, historyTmp.slice(-1)[0]);
+    })
+    .catch((error) => {
+      showError("チャット取得に失敗しました.", error);
+    });
+    console.log("自動更新しました．");
+}
+setInterval(auto_reload, 30000); //30秒ごとに自動更新．
+
 
 //Viewボタンが押された時の動作   2023/04/23(日) 山口慶大
 function vOnly() {
@@ -625,7 +646,6 @@ function searchGrades() {
 
 //送信ボタン
 document.querySelector("#sndIcon").addEventListener("click", function () {
-
   var now = new Date();
   var year = now.getFullYear();
   var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -637,15 +657,15 @@ document.querySelector("#sndIcon").addEventListener("click", function () {
   var write_time = "'" + hour + ":" + minute + ":" + second;
 
   var data = {
-    Thread_ID: "example",  //取得処理
-    Comment_ID: "example",  //取得処理
+    Thread_ID: historyTmp.slice(-1)[0],
+    Comment_ID: comment_count + 1,
     Date: write_date,
     Time: write_time,
     Wrote_Name: userData[i]["Name"],
     Undergraduate: userData[i]["Undergraduate"],
     Department: userData[i]["Department"],
     Grade: userData[i]["Grade"],
-    Comment: "example"   //取得処理
+    Comment: document.getElementById("input_comment_send").value
   }; // POSTするデータを定義
   var url =
     "https://script.google.com/macros/s/AKfycbw4SbXs5mCYfAe6AEHK2MMCQNgz4H2fX6KrYVucBHUeiTPMEupYsSOeOdNr-6RADxoRFQ/exec";
@@ -654,7 +674,8 @@ document.querySelector("#sndIcon").addEventListener("click", function () {
     body: JSON.stringify(data),
   }).then((response) => {});
 
-  window.alert("送信ボタンが押されました．");
+  document.getElementById("input_comment_send").value = "";
+  showMessage("コメントを送信しました．");
 });
 
 
@@ -720,9 +741,11 @@ function searchComment(words) {
   } else return output;
 }
 //スレッドIDを指定したらコメントを表示する関数
+var comment_count;
 function showThread(commentData, thread_ID) {
   var chat_load = "";
   var chat_load2 = "";
+  comment_count = 0
   commentData.forEach((e) => {
     commentStorage.push(e);
     if (e["Thread_ID"] == thread_ID) {
@@ -748,6 +771,8 @@ function showThread(commentData, thread_ID) {
         e["Comment"] +
         "</li> </div>";
       chat_load2 = chat_load.replace("commentDetail", "trueCommentDetail");
+      comment_count++;
+      return comment_count;
     }
   });
   document.getElementById("chat").innerHTML = chat_load;
