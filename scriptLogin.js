@@ -1,6 +1,6 @@
 //ロード時の動作
 window.onload = function () {
-  // document.quergitySelector("#rgit egister").style.display = "none";
+  document.querySelector("#register").style.display = "none";
   BGImageAndPE(3, 0); //初期値
   BGImageAndPE(1, 1); //初期値
 };
