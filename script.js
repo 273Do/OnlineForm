@@ -186,6 +186,7 @@ fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     commonCommentData = data;
+    console.log(commonCommentData);
     showThread(data, historyTmp.slice(-1)[0]);
   })
   .catch((error) => {
