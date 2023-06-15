@@ -102,10 +102,14 @@ header h1 {
 
 @media screen and (max-width: 1080px) {
 
+    .menu {
+        margin-top: 300px;
+    }
 
     .menu li {
         width: calc((100% - 32px) / 2);
     }
+
 
     /* .menu ul {
         border: 2px solid skyblue;
@@ -140,8 +144,12 @@ header h1 {
 
 @media screen and (max-width: 760px) {
 
+     .menu {
+        margin-top: 150px;
+    }
+    
     .menu li {
         width: 100%;
-        
+        margin-bottom: 32px;
     }
 }
