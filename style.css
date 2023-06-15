@@ -365,15 +365,15 @@ header ul li {
 }
 
 #page1Icon,
-#reloadIcon,
-#historyIcon,
+.reloadIcon,
+.historyIcon,
 #sortingIcon {
   margin-top: 15px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-#historyIcon {
+.historyIcon {
   margin-left: calc(100% - 2px);
 }
 
@@ -382,8 +382,8 @@ header ul li {
 }
 
 #page1Icon:hover,
-#reloadIcon:hover,
-#historyIcon:hover,
+.reloadIcon:hover,
+.historyIcon:hover,
 #sortingIcon:hover {
   opacity: 0.5;
 }

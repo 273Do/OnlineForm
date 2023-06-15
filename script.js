@@ -286,11 +286,12 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 
 //historyIconボタンが押された時の動作
 //閲覧履歴
-document.querySelector("#historyIcon").addEventListener("click", function () {
-  showThreadHistory();
-});
+
+// document.querySelector(".historyIcon").addEventListener("click", function () {
+//   showThreadHistory();
+// });
 var showHistoryFlg = 0;
-function showThreadHistory() {
+var showThreadHistory = function () {
   var showHistory = "";
   // var showHistory2;
   var tmp = "";
@@ -342,7 +343,7 @@ function showThreadHistory() {
   //     }, 450);
   //   },
   // });
-}
+};
 
 //sortingIconボタンが押された時の動作
 document.querySelector("#sortingIcon").addEventListener("click", function () {

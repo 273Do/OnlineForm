@@ -77,8 +77,7 @@
             <span
               tooltip="スレッド関連"
               flow="down"
-              style="margin-left: calc(95% - 90px)"
-            >
+              style="margin-left: calc(95% - 90px)">
               <div id="page2Icon">
                 <ion-icon name="apps-outline"></ion-icon>
               </div>
@@ -86,29 +85,28 @@
             <span
             tooltip="更新"
             flow="down"
-            style="margin-left: calc(95% - 70px);"
-        >
-          <div id="reloadIcon">
+            style="margin-left: calc(95% - 70px);">
+          <div class="reloadIcon">
             <ion-button
             aria-label="Favorite"
             class="optionIcon"
-            onclick="auto_reload()"
-          >
-            <ion-icon name="refresh-outline"></ion-icon> </ion-button
-        >
+            onclick="auto_reload()">
+            <ion-icon name="refresh-outline"></ion-icon> </ion-button>
           </div>
         </span>
         <span
-              tooltip="閲覧履歴"
-              flow="down"
-              style="margin-left: calc(95% - 90px);"
-            >
-              <div id="historyIcon">
-                <ion-icon name="time-outline"></ion-icon>
-              </div>
-            </span>
+        tooltip="閲覧履歴"
+        flow="down"
+        style="margin-left: calc(95% - 90px);" >
+        <div class="historyIcon">
+          <ion-button
+          aria-label="Favorite"
+          class="optionIcon"
+          onclick="showThreadHistory()">
+          <ion-icon name="time-outline"></ion-icon> </ion-button>
         </div>
-            
+        </span>
+        </div>
 
             <ul id="chat">
               <!--
@@ -124,12 +122,12 @@
                 id = "input_comment_send"
                 rows="1"
                 cols="40"
-                wrap="soft"
-              ></textarea>
+                wrap="soft">
+              </textarea>
               <button type="button" class="btn">
                 <span tooltip="コメント送信" flow="up">
-                  <ion-icon id="sndIcon" name="send-outline"></ion-icon
-                ></span>
+                  <ion-icon id="sndIcon" name="send-outline"></ion-icon>
+                </span>
               </button>
             </form>
           </div>
@@ -145,18 +143,19 @@
                 <ion-button
                   aria-label="Favorite"
                   class="optionIcon"
-                  onclick="option()"
-                >
-                  <ion-icon name="options-outline"></ion-icon> </ion-button
-              ></span>
+                  onclick="option()">
+                <ion-icon name="options-outline"></ion-icon> 
+                </ion-button>
+              </span>
               <input type="text" class="message-form" rows="1" cols="40"></input>
               <span tooltip="作成" flow="down">
                 <button type="submit" class="btn">
                   <ion-icon
                     class="page2SubmitIcon"
-                    name="create-outline"
-                  ></ion-icon></button
-              ></span>
+                    name="create-outline">
+                  </ion-icon>
+                  </button>
+                </span>
             </form>
           </div>
 
@@ -228,36 +227,38 @@
               flow="down"
               style="margin-left: calc(95% - 70px);"
           >
-            <div id="reloadIcon">
+            <div class="reloadIcon">
               <ion-button
               aria-label="Favorite"
               class="optionIcon"
-              onclick="auto_reload()"
-            >
-              <ion-icon name="refresh-outline"></ion-icon> </ion-button
-          >
+              onclick="auto_reload()">
+              <ion-icon name="refresh-outline"></ion-icon>
+              </ion-button>
             </div>
           </span>
             <span
               tooltip="閲覧履歴"
               flow="down"
-              style="margin-left: calc(95% - 90px);"
-            >
-              <div id="historyIcon">
-                <ion-icon name="time-outline"></ion-icon>
-              </div>
-            </span>
+              style="margin-left: calc(95% - 90px);">
+            <div class="historyIcon">
+              <ion-button
+              aria-label="Favorite"
+              class="optionIcon"
+              onclick="showThreadHistory()">
+              <ion-icon name="time-outline"></ion-icon> 
+              </ion-button>
+            </div>
+          </span>
             <span
               tooltip="昇順降順"
               flow="down"
-              style="margin-left: calc(95% - 90px);"
-          >
+              style="margin-left: calc(95% - 90px);">
             <div id="sortingIcon">
               <ion-icon name="swap-vertical-outline"></ion-icon>
             </div>
           </span>
             </div>
-            
+      
             <ul id="result">
              
               </div>
