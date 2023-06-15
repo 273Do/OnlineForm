@@ -25,7 +25,7 @@ window.onload = function () {
   if (params == "" || params == null) {
     setTimeout(function () {
       //一旦無効化 無効化するとaccountボタン押せなくなる
-      location.href = "indexLogin.html";
+      // location.href = "indexLogin.html";
     }, 100);
   }
 
@@ -117,7 +117,7 @@ window.onload = function () {
         }
         if (flag == true) {
           setTimeout(function () {
-            location.href = "indexLogin.html";
+            // location.href = "indexLogin.html";
           }, 100);
         }
       })
@@ -138,7 +138,7 @@ window.onload = function () {
         document.getElementById("searchByWord").value == null
       )
         return showSearchedTitle(commonThreadData, 0);
-      showSearchedTitle(commonThreadData, 1, searchThread(this.value, 0));
+      else showSearchedTitle(commonThreadData, 1, searchThread(this.value, 0));
     });
   //コメント検索：ワードを入れるたびに動作
   document
@@ -152,7 +152,7 @@ window.onload = function () {
         document.getElementById("searchByComment").value == null
       )
         return showSearchedTitle(commonThreadData, 0);
-      showSearchedTitle(commonThreadData, 2, searchComment(this.value));
+      else showSearchedTitle(commonThreadData, 2, searchComment(this.value));
     });
 };
 
@@ -162,7 +162,8 @@ var threadsStorage = []; //全スレッドのタイトル等が格納されて�
 var trueThreadsStorage = []; //Thread_ID以外の属性が結合されたものが格納されています．
 var thread_data;
 
-thread_data = "https://script.google.com/macros/s/AKfycbyLA7mP7nOgQvvVy9vGLWUmXC-T0wsDMk_bR6mYrHNwhPNh6Rn01pNAR2hQMm8SZgopBw/exec";
+thread_data =
+  "https://script.google.com/macros/s/AKfycbyLA7mP7nOgQvvVy9vGLWUmXC-T0wsDMk_bR6mYrHNwhPNh6Rn01pNAR2hQMm8SZgopBw/exec";
 fetch(thread_data)
   .then((response) => response.json())
   .then((data) => {
@@ -181,7 +182,8 @@ var div = document.getElementById("commentDetail");
 var commentStorage = [];
 //スプレッドシートよりコメント取得   2023/04/14(金) 有田海斗
 var comment_data;
-comment_data = "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
+comment_data =
+  "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
 fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
@@ -193,24 +195,23 @@ fetch(comment_data)
     showError("チャット取得に失敗しました.", error);
   });
 
-
 //コメント再読み込み関数．　2023年6月15日　有田海斗
-var auto_reload = function(){
+var auto_reload = function () {
   commonCommentData = "";
-  comment_data = "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
+  comment_data =
+    "https://script.google.com/macros/s/AKfycbxiadRatS0K87utFoFIK3SACnV7BoSAA8K9AAsDMGCSkEvCi9-z3OtsTE3lB4J4_qsB/exec";
   fetch(comment_data)
     .then((response) => response.json())
     .then((data) => {
-      commonCommentData = data;
+      // commonCommentData = data;
       showThread(data, historyTmp.slice(-1)[0]);
     })
     .catch((error) => {
       showError("チャット取得に失敗しました.", error);
     });
-    console.log("自動更新しました．");
-}
+  console.log("自動更新しました．");
+};
 setInterval(auto_reload, 30000); //30秒ごとに自動更新．
-
 
 //Viewボタンが押された時の動作   2023/04/23(日) 山口慶大
 function vOnly() {
@@ -642,9 +643,6 @@ function searchGrades() {
   });
 }
 
-
-
-
 //送信ボタン
 document.querySelector("#sndIcon").addEventListener("click", function () {
   var now = new Date();
@@ -666,22 +664,20 @@ document.querySelector("#sndIcon").addEventListener("click", function () {
     Undergraduate: userData[i]["Undergraduate"],
     Department: userData[i]["Department"],
     Grade: userData[i]["Grade"],
-    Comment: document.getElementById("input_comment_send").value
+    Comment: document.getElementById("input_comment_send").value,
   }; // POSTするデータを定義
-  var url =
-    "https://script.google.com/macros/s/AKfycbw4SbXs5mCYfAe6AEHK2MMCQNgz4H2fX6KrYVucBHUeiTPMEupYsSOeOdNr-6RADxoRFQ/exec";
-  fetch(url, {
-    method: "POST",
-    body: JSON.stringify(data),
-  }).then((response) => {});
 
+  if (!validationCheck(data.Comment, 0) == false) {
+    var url =
+      "https://script.google.com/macros/s/AKfycbw4SbXs5mCYfAe6AEHK2MMCQNgz4H2fX6KrYVucBHUeiTPMEupYsSOeOdNr-6RADxoRFQ/exec";
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+    }).then((response) => {});
+    showMessageTimer("コメントを送信しました．", 1000);
+  }
   document.getElementById("input_comment_send").value = "";
-  showMessage("コメントを送信しました．");
 });
-
-
-
-
 
 //デバッグボタン
 document.getElementById("debugBtn").addEventListener("click", function () {
@@ -746,7 +742,7 @@ var comment_count;
 function showThread(commentData, thread_ID) {
   var chat_load = "";
   var chat_load2 = "";
-  comment_count = 0
+  comment_count = 0;
   commentData.forEach((e) => {
     commentStorage.push(e);
     if (e["Thread_ID"] == thread_ID) {

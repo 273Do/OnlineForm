@@ -22,7 +22,6 @@
       </div>
       <nav>
         <ul>
-          <span class="navIcon"><li>Reload<i class="bi bi-arrow-clockwise"></i></li></span>
           <!-- デバッグボタン -->
           <!-- <li id="debugBtn" style="color: red">debugBtn</li> -->
           <span tooltip="閲覧モード" id="view" flow="down" id="view">
@@ -74,6 +73,7 @@
         </section>
         <section id="chatArea">
           <div id="mainChatSpace">
+            <div id="page1IconArea">
             <span
               tooltip="スレッド関連"
               flow="down"
@@ -83,6 +83,32 @@
                 <ion-icon name="apps-outline"></ion-icon>
               </div>
             </span>
+            <span
+            tooltip="更新"
+            flow="down"
+            style="margin-left: calc(95% - 70px);"
+        >
+          <div id="reloadIcon">
+            <ion-button
+            aria-label="Favorite"
+            class="optionIcon"
+            onclick="auto_reload()"
+          >
+            <ion-icon name="refresh-outline"></ion-icon> </ion-button
+        >
+          </div>
+        </span>
+        <span
+              tooltip="閲覧履歴"
+              flow="down"
+              style="margin-left: calc(95% - 90px);"
+            >
+              <div id="historyIcon">
+                <ion-icon name="time-outline"></ion-icon>
+              </div>
+            </span>
+        </div>
+            
 
             <ul id="chat">
               <!--
@@ -197,6 +223,21 @@
                 <ion-icon name="chatbox-outline"></ion-icon>
               </div>
             </span>
+            <span
+              tooltip="更新"
+              flow="down"
+              style="margin-left: calc(95% - 70px);"
+          >
+            <div id="reloadIcon">
+              <ion-button
+              aria-label="Favorite"
+              class="optionIcon"
+              onclick="auto_reload()"
+            >
+              <ion-icon name="refresh-outline"></ion-icon> </ion-button
+          >
+            </div>
+          </span>
             <span
               tooltip="閲覧履歴"
               flow="down"
