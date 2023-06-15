@@ -184,6 +184,7 @@ fetch(comment_data)
   .then((response) => response.json())
   .then((data) => {
     commonCommentData = data;
+    console.log(commonCommentData);
     showThread(data, historyTmp.slice(-1)[0]);
   })
   .catch((error) => {
@@ -904,6 +905,7 @@ function viewThread(threadID, mode, title) {
   titleHistory.push(title);
   //ここにDBにhistoryTmpを保存するコードを記述
   //ここにDBにtitleHistoryを保存するコードを記述
+  //viewOnlyFlgの時はおDBに保存しない(できない)
   console.log(historyTmp);
   console.log(titleHistory);
 
