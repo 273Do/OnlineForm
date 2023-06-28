@@ -61,7 +61,6 @@ function info1() {
     confirmButtonText: "◀",
     denyButtonText: "▶",
     html: BGDisc,
-    // footer: "2022_情報工学実践Ⅳ<ｂ>",
   }).then((result) => {
     if (result.isConfirmed) info0();
     else if (result.isDenied) info2();
@@ -69,12 +68,10 @@ function info1() {
 }
 function info2() {
   Swal.fire({
-    // icon: "info",
     title: "大学ページ",
     backdrop: "none",
     showDenyButton: true,
     showCancelButton: true,
-    // toast: true,
     width: "47rem",
     confirmButtonText: "◀",
     denyButtonText: "▶",
