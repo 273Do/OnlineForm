@@ -494,7 +494,6 @@ function searchDate() {
     showCancelButton: true,
     showDenyButton: true,
     denyButtonText: "back",
-    // focusConfirm: false,
     toast: true,
     preDeny: () => {
       searchFilter();
@@ -985,7 +984,7 @@ function viewThread(threadID, mode, title) {
       //連続で使用すると正常に動作しない．
       const chat = document.getElementById("chat");
       const target = document.getElementById("chat" + String(mode - 1));
-      const duration = 1000; // スクロールを完了するまでの時間（ミリ秒）
+      const duration = 1000;
       const targetTop = target.getBoundingClientRect().top + window.pageYOffset;
       const currentTop = chat.scrollTop;
       const distance = targetTop - currentTop;
