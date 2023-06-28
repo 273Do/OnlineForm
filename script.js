@@ -286,10 +286,6 @@ document.querySelector("#page1Icon").addEventListener("click", function () {
 
 //historyIconボタンが押された時の動作
 //閲覧履歴
-
-// document.querySelector(".historyIcon").addEventListener("click", function () {
-//   showThreadHistory();
-// });
 var showHistoryFlg = 0;
 var showThreadHistory = function () {
   var showHistory = "";
@@ -386,7 +382,6 @@ function option() {
 }
 //アカウント情報の変更　　2023/04/23(日) 山口慶大
 //バリデーションチェックはまだ
-//'<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="changeUsername">Username</option><option value="changePassword">Password</option></select><input type="text" class="swal2-input" id="changeUsername" style="align-items: center"><input type="password" class="swal2-input" id="changePassword" style="  display:flex, flex-direction: column,align-items:center">'
 function changeAccountData() {
   let tmp = "";
   Swal.fire({
