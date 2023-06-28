@@ -45,13 +45,8 @@ function info0() {
     backdrop: "none",
     showDenyButton: true,
     showCancelButton: true,
-    // toast: true,
-    // width: "47rem",
     confirmButtonText: "◀",
     denyButtonText: "▶",
-    // html:,
-    // footer:
-    //   '<a href="https://goo.gl/maps/C4BHkpzHDBdJTVZc9">〒607-8175 京都市山科区大宅山田町34</a>　TEL:075-571-111',
   }).then((result) => {
     if (result.isConfirmed) info2();
     else if (result.isDenied) info1();
