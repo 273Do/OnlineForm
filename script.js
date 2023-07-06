@@ -248,7 +248,7 @@ document.querySelector("#Account").addEventListener("click", function () {
     });
   else {
     Swal.fire({
-      title: "YourAccount",
+      title: "アカウント",
       text: "現在，閲覧モードです．",
       backdrop: "none",
     });
@@ -351,12 +351,12 @@ document.querySelector("#sortingIcon").addEventListener("click", function () {
 //optionボタンが押された時の動作
 function option() {
   const inputOptions = {
-    0: "TitleSearch",
-    1: "CommentSearch",
-    2: "CreateThread",
+    0: "タイトル検索",
+    1: "コメント検索",
+    2: "スレッド作成",
   };
   Swal.fire({
-    title: "About threads",
+    title: "スレッド",
     input: "radio",
     backdrop: "none",
     width: "600px",
@@ -385,11 +385,11 @@ function option() {
 function changeAccountData() {
   let tmp = "";
   Swal.fire({
-    title: "Change Account Data",
+    title: "アカウントの変更",
     input: "checkbox",
     html: '<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
     backdrop: "none",
-    inputPlaceholder: "Change Your Account Data?",
+    inputPlaceholder: "アカウントを変更しますか?",
     showCancelButton: true,
     inputValidator: (value) => {
       if (!value) return "You need to agree.";
@@ -425,7 +425,7 @@ function changeAccountData() {
           );
         } else {
           Swal.fire({
-            title: "ReEnter New Password",
+            title: "パスワードを再入力してください．",
             input: "password",
             showCancelButton: true,
             inputValidator: (value) => {
@@ -465,14 +465,14 @@ function searchFilter() {
     "#grade": "学年",
   };
   Swal.fire({
-    title: "searchFilter",
-    text: "Please select a filter.",
+    title: "検索フィルター",
+    text: "フィルターを選択してください.",
     input: "radio",
     backdrop: "none",
     showCancelButton: true,
     inputOptions: inputOptions,
     inputValidator: (value) => {
-      if (!value) return "Please select a filter.";
+      if (!value) return "フィルターを選択してください.";
       else if (value == "#date") searchDate();
       else if (value == "#Undergraduate") searchUndergraduate();
       else if (value == "#Department") searchDepartment();
@@ -484,7 +484,7 @@ function searchFilter() {
 //日付検索
 function searchDate() {
   Swal.fire({
-    title: "Please choose a date.",
+    title: "日付を選択してください.",
     html: '<input type="date" class="swal2-input" name="selectTime" id="date">',
     showCancelButton: true,
     showDenyButton: true,
@@ -511,7 +511,7 @@ function searchDate() {
           )
         : Swal.fire({
             icon: "error",
-            title: "Please choose a date.",
+            title: "日付を選択してください.",
             toast: "true",
             width: "400px",
             showCancelButton: true,
@@ -537,7 +537,7 @@ function searchUndergraduate() {
     健康科学部: "健康科学部",
   };
   Swal.fire({
-    title: "Please select a undergraduate.",
+    title: "学部を選択してください．",
     input: "select",
     showCancelButton: true,
     showDenyButton: true,
@@ -550,7 +550,7 @@ function searchUndergraduate() {
       searchFilter();
     },
     inputValidator: (result) => {
-      if (!result) return "Please select a undergraduate.";
+      if (!result) return "学部を選択してください．";
       else {
         showSearchedTitle(
           commonThreadData,
@@ -584,7 +584,7 @@ function searchDepartment() {
     臨床検査学科: "臨床検査学科",
   };
   Swal.fire({
-    title: "Please select a department.",
+    title: "学科を選択してください．",
     input: "select",
     showCancelButton: true,
     showDenyButton: true,
@@ -597,7 +597,7 @@ function searchDepartment() {
       searchFilter();
     },
     inputValidator: (result) => {
-      if (!result) return "Please select a department.";
+      if (!result) return "学科を選択してください．";
       else
         showSearchedTitle(
           commonThreadData,
@@ -618,7 +618,7 @@ function searchGrades() {
     "４": "４回生",
   };
   Swal.fire({
-    title: "Please select a grade.",
+    title: "学年を選択してください．",
     input: "select",
     showCancelButton: true,
     showDenyButton: true,
@@ -631,7 +631,7 @@ function searchGrades() {
       searchFilter();
     },
     inputValidator: (result) => {
-      if (!result) return "Please select a grade.";
+      if (!result) return "学年を選択してください．";
       else
         showSearchedTitle(commonThreadData, 1, searchThread(result, "Grade"));
     },
