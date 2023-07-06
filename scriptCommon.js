@@ -131,7 +131,7 @@ function BGImageAndPE(value, Flg) {
 //developerボタンが押された時の動作  更新：2023/04/15(土) 山口慶大
 //管理者がログインしている場合のみ，押せるようにし，それ以外のユーザーが押すとエラーが出るようにする，フラグで管理．
 document.querySelector("#developerIcon").addEventListener("click", function () {
-  window.location.href = "./developer/developer-index.html";
+  window.location.href = ("./developer/developer-index.html","_blank");
   // Swal.fire({
   //   icon: "warning",
   //   title: "DeveloperToolLogin",
