@@ -389,10 +389,10 @@ function changeAccountData() {
     input: "checkbox",
     html: '<select name="example" class="swal2-input" id="changeContents" onchange="selectInputType()"><option value="select" selected disabled>Select contents▼</option><option value="Username">Username</option><option value="Password">Password</option></select><input type="text" class="swal2-input" id="changeAccount">',
     backdrop: "none",
-    inputPlaceholder: "アカウントを変更しますか?",
+    inputPlaceholder: "名前を変更しますか?",
     showCancelButton: true,
     inputValidator: (value) => {
-      if (!value) return "You need to agree.";
+      if (!value) return "同意する必要があります.";
       else if (
         validationCheck(document.getElementById("changeAccount").value, 1) ==
         false
