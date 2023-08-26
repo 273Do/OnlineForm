@@ -806,12 +806,6 @@ function showTitle(threadData, thread_ID) {
     }
     i++;
   });
-
-  // ScrollReveal().reveal("#threadTitle", {
-  //   delay: 200,
-  //   origin: "left",
-  //   distance: "60px",
-  // });
 }
 
 //スレッドタイトル一覧を表示する関数
