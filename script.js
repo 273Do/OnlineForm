@@ -677,10 +677,6 @@ document.querySelector("#sndIcon").addEventListener("click", function () {
 //デバッグボタン
 document.getElementById("debugBtn").addEventListener("click", function () {
   console.log("デバッグボタン");
-  // showMessageTimer("test", 2000);
-  // showErrorTimer("errorTest", 2000);
-  // let str = "";
-  // validationCheck(str);
 });
 //スレッドの検索関数   2023.04.22(土)　山口慶大
 function searchThread(words, fnc) {
